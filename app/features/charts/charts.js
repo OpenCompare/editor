@@ -6,6 +6,6 @@ angular
   .module('openCompareEditor')
   .directive('openCompareCharts', function() {
         return {
-            templateUrl: '/assets/editor/templates/charts.html'
+            templateUrl: '/templates/charts.html'
         };
     });

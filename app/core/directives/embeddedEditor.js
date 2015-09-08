@@ -6,7 +6,7 @@ angular
   .module('openCompareEditor')
   .directive('openCompareEditor', function() {
         return {
-            templateUrl: '/assets/editor/templates/pcmEditor.html'
+            templateUrl: '/templates/pcmEditor.html'
         };
     });
 

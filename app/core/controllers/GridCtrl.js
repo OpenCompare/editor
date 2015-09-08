@@ -23,7 +23,7 @@ angular
     $scope.FeaturGroupIndex = 1;
 
     $scope.gridOptions = {
-        headerTemplate: '/assets/editor/templates/featureGroupHeader.html',
+        headerTemplate: '/templates/featureGroupHeader.html',
         superColDefs: [],
         columnDefs: [],
         data: 'pcmData',

@@ -31,6 +31,12 @@ module.exports = function(config) {
       'bower_components/angular-translate/angular-translate.js',
       'bower_components/angular-utf8-base64/angular-utf8-base64.js',
       'bower_components/angular-base64-upload/src/angular-base64-upload.js',
+      'bower_components/arrive/src/arrive.js',
+      'bower_components/bootstrap-material-design/dist/js/material.js',
+      'bower_components/bootstrap-material-design/dist/js/ripples.js',
+      'bower_components/d3/d3.js',
+      'bower_components/c3/c3.js',
+      'bower_components/angular-chart/angular-chart.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
