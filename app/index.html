@@ -17,7 +17,8 @@
   <body ng-app="openCompareEditorApp">
 
 
-    <div open-compare-editor></div>
+    <h1>OpenCompare editor</h1>
+    <div open-compare-editor ng-controller="EditorCtrl"></div>
 
     <!-- OpenCompare editor dependencies -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -31,7 +32,27 @@
     <script src="bower_components/angular-translate/angular-translate.min.js"></script>
     <script src="bower_components/angular-utf8-base64/angular-utf8-base64.min.js"></script>
     <script src="bower_components/angular-base64-upload/dist/angular-base64-upload.min.js"></script>
+
+
     <script src="openCompareEditor.js"></script>
+    <script src="core/controllers/EditorCtrl.js"></script>
+    <script src="core/services/ExpandEditorService.js"></script>
+    <script src="core/services/PCMAPIService.js"></script>
+    <script src="core/services/EditorUtilService.js"></script>
+    <script src="core/controllers/GridCtrl.js"></script>
+    <script src="core/services/TypeService.js"></script>
+    <script src="core/services/EditorOptionsService.js"></script>
+    <script src="core/services/SortFeaturesService.js"></script>
+    <script src="features/charts/ChartService.js"></script>
+    <script src="core/controllers/UndoRedoCtrl.js"></script>
+    <script src="core/controllers/CommandsCtrl.js"></script>
+    <script src="core/services/FeatureGroupService.js"></script>
+    <script src="core/controllers/FiltersCtrl.js"></script>
+    <script src="core/controllers/TypesCtrl.js"></script>
+    <script src="core/controllers/ShareCtrl.js"></script>
+    <script src="core/controllers/FeatureGroupCtrl.js"></script>
+
+    <script src="kmf/pcm.min.js"></script>
 
     <!-- Test app script -->
     <script src="openCompareEditorApp.js"></script>

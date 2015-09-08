@@ -8,7 +8,9 @@
 * EditorCtrl.js
 * Main controller for OpenCompare Editor
 */
-pcmApp.controller("EditorCtrl", function($controller, $rootScope, $scope, $http, $timeout, uiGridConstants, $compile, $modal, expandeditor,  $location, pcmApi, editorUtil) {
+angular
+  .module('openCompareEditor')
+  .controller("EditorCtrl", function($controller, $rootScope, $scope, $http, $timeout, uiGridConstants, $compile, $modal, expandeditor,  $location, pcmApi, editorUtil) {
 
     /* Load material design */
     if($.material) {
@@ -64,9 +66,32 @@ pcmApp.controller("EditorCtrl", function($controller, $rootScope, $scope, $http,
 
     // Main entry of the editor
 
+
+
     if (typeof id === 'undefined' && typeof data === 'undefined') {
         /* Create an empty PCM */
-        $scope.pcm = factory.createPCM();
+      $scope.pcm = factory.createPCM();
+      var feature = factory.createFeature();
+      feature.name = "F";
+
+      var product = factory.createProduct();
+      product.name = "P";
+
+
+      var cell = factory.createCell();
+      cell.content = "C";
+      cell.feature = feature;
+      product.addCells(cell);
+
+      $scope.pcm.addFeatures(feature);
+      $scope.pcm.addProducts(product);
+
+      $scope.metadata = {
+        productPositions: [],
+        featurePositions: []
+      };
+
+      $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
     }
     else if (typeof data != 'undefined')  {
         /* Load PCM from import */

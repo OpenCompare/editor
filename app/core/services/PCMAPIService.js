@@ -1,4 +1,6 @@
-pcmApp.service('pcmApi', function(base64) {
+angular
+  .module('openCompareEditor')
+  .service('pcmApi', function(base64) {
     /**
      * Sort two elements by their names (accessed with x.name)
      * @param a

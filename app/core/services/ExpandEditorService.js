@@ -2,7 +2,9 @@
  * Created by hvallee on 7/3/15.
  */
 
-pcmApp.service('expandeditor', function() {
+angular
+  .module('openCompareEditor')
+  .service('expandeditor', function() {
 
     var afterCellEditFunctions = [];
     this.expandAfterCellEdit = function(functionToAdd) {

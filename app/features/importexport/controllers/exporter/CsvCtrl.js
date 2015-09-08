@@ -3,7 +3,9 @@
  */
 
 
-pcmApp.controller("CsvExportController", function($rootScope, $scope, $http, $modal, $modalInstance) {
+angular
+  .module('openCompareEditor')
+  .controller("CsvExportController", function($rootScope, $scope, $http, $modal, $modalInstance) {
 
     $scope.loading = false;
     $scope.cancel = function() {

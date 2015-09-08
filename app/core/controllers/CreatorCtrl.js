@@ -7,7 +7,9 @@
  * CreatorCtrl.js
  * Use to create a pcm based on a number of rows and columns
  */
-pcmApp.controller("CreatorCtrl", function($rootScope, $scope) {
+angular
+  .module('openCompareEditor')
+  .controller("CreatorCtrl", function($rootScope, $scope) {
 
     $scope.title = "";
     $scope.rows = 1;

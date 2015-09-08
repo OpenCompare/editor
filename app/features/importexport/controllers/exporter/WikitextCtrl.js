@@ -2,7 +2,9 @@
  * Created by smangin on 19/05/15.
  */
 
-pcmApp.controller("WikitextExportController", function($rootScope, $scope, $http, $modal, $modalInstance) {
+angular
+  .module('openCompareEditor')
+  .controller("WikitextExportController", function($rootScope, $scope, $http, $modal, $modalInstance) {
     $scope.loading = false;
     $scope.cancel = function() {
         $modalInstance.close();

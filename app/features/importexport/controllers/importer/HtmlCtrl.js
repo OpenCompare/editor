@@ -3,7 +3,9 @@
  */
 
 
-pcmApp.controller("HtmlImportController", function($rootScope, $scope, $http, $modalInstance) {
+angular
+  .module('openCompareEditor')
+  .controller("HtmlImportController", function($rootScope, $scope, $http, $modalInstance) {
 
     $scope.loading = false;
     $scope.cancel = function() {

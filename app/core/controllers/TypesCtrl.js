@@ -7,7 +7,9 @@
  * TypesCtrl.js
  * Manage types in editor
  */
-pcmApp.controller("TypesCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, $compile, $modal, typeService) {
+angular
+  .module('openCompareEditor')
+  .controller("TypesCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, $compile, $modal, typeService) {
 
     // Validate pcm type
     $scope.featureType = 'string';

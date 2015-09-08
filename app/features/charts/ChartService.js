@@ -6,7 +6,9 @@
  * chartService
  * Keep trace of columns in chart for the main controller
  */
-pcmApp.service('chartService', function(editorUtil) {
+angular
+  .module('openCompareEditor')
+  .service('chartService', function(editorUtil) {
 
     this.initArrays = function() {
         columnsInLineChart = [];

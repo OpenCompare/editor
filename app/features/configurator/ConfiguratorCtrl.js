@@ -2,7 +2,9 @@
  * Created by hvallee on 6/19/15.
  */
 
-pcmApp.controller("ConfiguratorCtrl", function($rootScope, $scope, editorUtil, typeService) {
+angular
+  .module('openCompareEditor')
+  .controller("ConfiguratorCtrl", function($rootScope, $scope, editorUtil, typeService) {
 
     $scope.data = {};
     $scope.currentPage = 0;

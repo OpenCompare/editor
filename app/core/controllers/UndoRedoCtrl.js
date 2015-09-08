@@ -7,7 +7,9 @@
  * UndoRedoCtrl.js
  * Manage undo/redo
  */
-pcmApp.controller("UndoRedoCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, sortFeaturesService, editorUtil) {
+angular
+  .module('openCompareEditor')
+  .controller("UndoRedoCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, sortFeaturesService, editorUtil) {
 
     //Undo-redo
     $scope.commands = [];

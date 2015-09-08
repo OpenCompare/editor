@@ -7,7 +7,9 @@
  * ShareCtrl.js
  * Manage share options
  */
-pcmApp.controller("ShareCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, $compile, $modal) {
+angular
+  .module('openCompareEditor')
+  .controller("ShareCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, $compile, $modal) {
 
     $scope.activeShareButton = false;
 

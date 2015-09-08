@@ -2,7 +2,9 @@
  * Created by smangin on 19/05/15.
  */
 
-pcmApp.controller("WikipediaImportController", function($rootScope, $scope, $http, $modalInstance, base64) {
+angular
+  .module('openCompareEditor')
+  .controller("WikipediaImportController", function($rootScope, $scope, $http, $modalInstance, base64) {
 
     $scope.pcmContainers = [];
     $scope.pcmContainerNames = [];

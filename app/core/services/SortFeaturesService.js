@@ -2,7 +2,9 @@
  * Created by hvallee on 7/8/15.
  */
 
-pcmApp.service('sortFeaturesService', function() {
+angular
+  .module('openCompareEditor')
+  .service('sortFeaturesService', function() {
 
     this.sortByType = function(features, featuresTypes) {
         var sortedFeatures = [];

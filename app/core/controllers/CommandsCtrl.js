@@ -2,7 +2,9 @@
  * Created by hvallee on 6/19/15.
  */
 
-pcmApp.controller("CommandsCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, featureGroupService, sortFeaturesService, editorUtil, $modal) {
+angular
+  .module('openCompareEditor')
+  .controller("CommandsCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, featureGroupService, sortFeaturesService, editorUtil, $modal) {
 
 
     /**

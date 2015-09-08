@@ -8,5 +8,4 @@
  *
  * Main module of the application.
  */
-angular
-  .module('openCompareEditorApp', ['openCompareEditor']);
+angular.module('openCompareEditorApp', ['openCompareEditor']);

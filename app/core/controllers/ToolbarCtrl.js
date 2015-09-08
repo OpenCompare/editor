@@ -7,7 +7,9 @@
  * ToolbarCtrl.js
  * Manage editor toolbar
  */
-pcmApp.controller("ToolbarCtrl", function($rootScope, $scope, $modal) {
+angular
+  .module('openCompareEditor')
+  .controller("ToolbarCtrl", function($rootScope, $scope, $modal) {
 
     $scope.saved = false;
     $scope.isInDatabase = false;

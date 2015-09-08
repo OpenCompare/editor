@@ -7,7 +7,9 @@
  * GridCtrl.js
  * Manage grid configuration
  */
-pcmApp.controller("GridCtrl", function($rootScope, $scope, $window, $http, $timeout, uiGridConstants, $location, pcmApi,
+angular
+  .module('openCompareEditor')
+  .controller("GridCtrl", function($rootScope, $scope, $window, $http, $timeout, uiGridConstants, $location, pcmApi,
                                               expandeditor, typeService, editorOptions, editorUtil, sortFeaturesService, chartService) {
 
     $scope.height = 300;

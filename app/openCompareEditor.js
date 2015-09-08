@@ -8,8 +8,7 @@
  *
  * Main module of the application.
  */
-angular
-  .module('openCompareEditor', [
+angular.module('openCompareEditor', [
     'ui.grid',
     'ui.grid.edit',
     'ui.grid.selection',

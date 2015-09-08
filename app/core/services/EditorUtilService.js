@@ -3,7 +3,9 @@
  */
 
 
-pcmApp.service('editorUtil', function() {
+angular
+  .module('openCompareEditor')
+  .service('editorUtil', function() {
 
     this.getCellClass = function (value, featureType) {
         if(value && featureType == 'bool') {

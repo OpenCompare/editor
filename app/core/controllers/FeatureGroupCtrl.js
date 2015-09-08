@@ -8,7 +8,9 @@
  * FeatureGroupCtrl.js
  * Managed feature groups
  */
-pcmApp.controller("FeatureGroupCtrl", function($rootScope, $scope, $window, $http, $timeout, featureGroupService, editorUtil, $modal) {
+angular
+  .module('openCompareEditor')
+  .controller("FeatureGroupCtrl", function($rootScope, $scope, $window, $http, $timeout, featureGroupService, editorUtil, $modal) {
 
     $scope.edit = false;
 

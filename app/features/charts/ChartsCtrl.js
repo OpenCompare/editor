@@ -2,7 +2,9 @@
  * Created by hvallee on 8/4/15.
  */
 
-pcmApp.controller("ChartsCtrl", function($rootScope, $scope, chartService, typeService, editorUtil) {
+angular
+  .module('openCompareEditor')
+  .controller("ChartsCtrl", function($rootScope, $scope, chartService, typeService, editorUtil) {
 
     $scope.showChartPanel = false;
 

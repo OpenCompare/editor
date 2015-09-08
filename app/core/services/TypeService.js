@@ -3,7 +3,9 @@
  */
 
 
-pcmApp.service('typeService', function(editorUtil) {
+angular
+  .module('openCompareEditor')
+  .service('typeService', function(editorUtil) {
 
     this.getType = function(featureName, data) {
         var rowIndex = 0;

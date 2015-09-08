@@ -3,7 +3,9 @@
  */
 
 
-pcmApp.directive('fileModel', ['$parse', function ($parse) {
+angular
+  .module('openCompareEditor')
+  .directive('fileModel', ['$parse', function ($parse) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {

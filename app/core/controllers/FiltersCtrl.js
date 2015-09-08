@@ -7,7 +7,9 @@
  * FiltersCtrl.js
  * Manage all grid filters
  */
-pcmApp.controller("FiltersCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, editorUtil, chartService) {
+angular
+  .module('openCompareEditor')
+  .controller("FiltersCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, editorUtil, chartService) {
 
     //Custom filters
     var $elm;

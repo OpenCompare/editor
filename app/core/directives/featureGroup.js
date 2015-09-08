@@ -3,7 +3,9 @@
  * Updated by hvallee on 8/17/15
  */
 
-pcmApp.directive('superColWidthUpdate', ['$timeout', '$rootScope', function ($timeout, $rootScope) {
+angular
+  .module('openCompareEditor')
+  .directive('superColWidthUpdate', ['$timeout', '$rootScope', function ($timeout, $rootScope) {
         return {
             'restrict': 'A',
             'link': function (scope, element) {
