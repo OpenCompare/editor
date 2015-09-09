@@ -2,7 +2,9 @@
  * Created by gbecan on 6/23/15.
  */
 
-pcmApp.config(function ($translateProvider) {
+angular
+  .module('openCompareEditor')
+  .config(function ($translateProvider) {
     $translateProvider.translations('embedded', {
 
         'view.button.edit':'Edit',
@@ -67,27 +69,25 @@ pcmApp.config(function ($translateProvider) {
     $translateProvider.useSanitizeValueStrategy('escaped');
     $translateProvider.useLoader('i18nLoader');
     $translateProvider.preferredLanguage('oc');
-});
-
-pcmApp.factory('i18nLoader', function($http, $q, $translate) {
+})
+  .factory('i18nLoader', function($http, $q, $translate) {
 
     return function(options) {
         var deferred = $q.defer();
 
-        $http.get("/api/i18n").success(function (data) {
+        $http.get("/api/i18n")
+          .success(function (data) {
             $translate.use('oc');
             return deferred.resolve(data);
-        }).
-        error(function(data, status, headers, config) {
-                $translate.use('embedded');
+        })
+          .error(function(data, status, headers, config) {
+            $translate.use('embedded');
         });
 
         return deferred.promise;
     }
-});
-
-
-pcmApp.controller("I18nCtrl", function($scope, $http) {
+})
+  .controller("I18nCtrl", function($scope, $http) {
 
     $scope.changeLanguage = function(langKey) {
         $http.get("/api/i18n/" + langKey).success(function (data) {

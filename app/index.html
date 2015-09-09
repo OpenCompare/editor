@@ -7,13 +7,18 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- OpenCompare editor dependencies -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css">
-    <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
-    <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
-    <link rel='stylesheet' href='bower_components/fontawesome/css/font-awesome.min.css'>
-    <link rel="stylesheet" href='bower_components/bootstrap-material-design/dist/css/material.min.css'>
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />
+    <link rel='stylesheet' href='bower_components/angular-ui-grid/ui-grid.css' />
+    <link rel='stylesheet' href='bower_components/angular-chart.js/dist/angular-chart.css' />
+    <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/material.css' />
+    <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/ripples.css' />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
     <link rel='stylesheet' href='main/stylesheets/main.css'>
+    <!-- endbuild -->
 
 
   </head>
@@ -23,25 +28,35 @@
     <div open-compare-editor ng-controller="EditorCtrl"></div>
 
     <!-- OpenCompare editor dependencies -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/jquery-ui/ui/minified/jquery-ui.min.js"></script>
-    <script src="bower_components/angular/angular.min.js"></script>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
     <script src="bower_components/angular-ui-slider/src/slider.js"></script>
-    <script src="bower_components/Chart.js/Chart.min.js"></script>
-    <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
-    <script src="bower_components/angular-translate/angular-translate.min.js"></script>
-    <script src="bower_components/angular-utf8-base64/angular-utf8-base64.min.js"></script>
-    <script src="bower_components/angular-base64-upload/dist/angular-base64-upload.min.js"></script>
-    <script src="bower_components/arrive/minified/arrive.min.js"></script>
+    <script src="bower_components/Chart.js/Chart.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-utf8-base64/angular-utf8-base64.js"></script>
+    <script src="bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <script src="bower_components/arrive/src/arrive.js"></script>
+    <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
+    <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
 
-
-
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="openCompareEditor.js"></script>
 
+    <script src="kmf/pcm.min.js"></script>
+
     <script src="core/directives/embeddedEditor.js"></script>
+    <script src="core/directives/toolbar.js"></script>
+
+    <script src="core/directives/featureGroup.js"></script>
 
     <script src="core/controllers/ToolbarCtrl.js"></script>
     <script src="core/controllers/EditorCtrl.js"></script>
@@ -62,9 +77,27 @@
     <script src="core/services/TypeService.js"></script>
 
     <script src="features/charts/ChartService.js"></script>
-    <script src="features/configurator/ConfiguratorCtrl.js"></script>
+    <script src="features/charts/ChartsCtrl.js"></script>
+    <script src="features/charts/charts.js"></script>
 
-    <script src="kmf/pcm.min.js"></script>
+    <script src="features/configurator/ConfiguratorCtrl.js"></script>
+    <!--<script src="features/configurator/configurator.js"></script>-->
+
+    <script src="core/controllers/CreatorCtrl.js"></script>
+    <script src="core/directives/creator.js"></script>
+
+    <script src="features/importexport/controllers/exporter/CsvCtrl.js"></script>
+    <script src="features/importexport/controllers/exporter/WikitextCtrl.js"></script>
+    <script src="features/importexport/controllers/exporter/HtmlCtrl.js"></script>
+
+
+
+
+
+
+    <!-- endbuild -->
+
+    <script src="main/I18nCtrl.js"></script> <!-- Not required -->
 
     <!-- Test app script -->
     <script src="openCompareEditorApp.js"></script>
