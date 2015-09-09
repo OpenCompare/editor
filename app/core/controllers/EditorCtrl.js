@@ -121,7 +121,7 @@ angular
         $scope.setEdit(false, false);
         // Open the given modal
         $modal.open({
-            templateUrl: modalTemplatePath + "modal" + modal + ".html",
+            templateUrl: "/templates/modal" + modal + ".html",
             controller: modal + "Controller",
             scope: $scope
         })
@@ -482,7 +482,7 @@ angular
 
         var ctrlArg = args.toUpperCase().charAt(0) + args.substring(1);
         $modal.open({
-            templateUrl: modalTemplatePath + "modal" + ctrlArg + "Export.html",
+            templateUrl: "/templates/modal" + ctrlArg + "Export.html",
             controller: ctrlArg + "ExportController",
             scope: $scope,
             size: "lg"
