@@ -24,7 +24,7 @@ module.exports = function(config) {
       'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/angular-ui-grid/ui-grid.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'bower_components/jquery-ui/ui/jquery-ui.js',
+      'bower_components/jquery-ui/jquery-ui.js',
       'bower_components/angular-ui-slider/src/slider.js',
       'bower_components/Chart.js/Chart.js',
       'bower_components/angular-chart.js/dist/angular-chart.js',
