@@ -6,7 +6,7 @@ angular
   .module('openCompareEditor')
   .controller("ConfiguratorCtrl", function($rootScope, $scope, editorUtil, typeService) {
 
-    $scope.data = {};
+    $scope.data = []; // FIXME : I replaced {} by []. Not sure it will work at the end.
     $scope.currentPage = 0;
     $scope.pageSize = 5;
 

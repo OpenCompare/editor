@@ -24,8 +24,11 @@
   </head>
   <body ng-app="openCompareEditorApp">
 
-    <h1>OpenCompare editor</h1>
-    <div open-compare-editor ng-controller="EditorCtrl"></div>
+    <div class="container">
+      <h1>OpenCompare editor</h1>
+      <div open-compare-editor ng-controller="EditorCtrl"></div>
+    </div>
+
 
     <!-- OpenCompare editor dependencies -->
     <!-- build:js(.) scripts/vendor.js -->
@@ -81,7 +84,7 @@
     <script src="features/charts/charts.js"></script>
 
     <script src="features/configurator/ConfiguratorCtrl.js"></script>
-    <!--<script src="features/configurator/configurator.js"></script>-->
+    <script src="features/configurator/configurator.js"></script>
 
     <script src="core/controllers/CreatorCtrl.js"></script>
     <script src="core/directives/creator.js"></script>
