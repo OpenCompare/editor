@@ -1,26 +1,27 @@
 <!doctype html>
 <html>
   <head>
+    <title>OpenCompare editor</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
     <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
 
     <!-- OpenCompare editor dependencies -->
     <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />
-    <link rel='stylesheet' href='bower_components/angular-ui-grid/ui-grid.css' />
+    <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='bower_components/fontawesome/css/font-awesome.min.css' />
+    <link rel='stylesheet' href='bower_components/angular-ui-grid/ui-grid.min.css' />
+    <link rel='stylesheet' href='bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css' />
+    <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/material.min.css' />
     <link rel='stylesheet' href='bower_components/angular-chart.js/dist/angular-chart.css' />
-    <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/material.css' />
-    <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/ripples.css' />
-    <!-- endbower -->
+    <link rel='stylesheet' href='main/stylesheets/main.css'>
     <!-- endbuild -->
 
-    <link rel='stylesheet' href='main/stylesheets/main.css'>
+
+
 
     <!-- build:css(.tmp) styles/main.css -->
     <link rel='stylesheet' href='core/stylesheets/editor.css'>
+    <!--<link rel='stylesheet' href='features/importexport/stylesheets/importer.css'>-->
     <!-- endbuild -->
 
 
@@ -29,35 +30,37 @@
 
     <div class="container">
       <h1>OpenCompare editor</h1>
-      <open-compare-editor></open-compare-editor>
 
       <div class="row">
-        <open-compare-charts class="col-md-8 col-md-offset-2">
-        </open-compare-charts>
+        <open-compare-editor></open-compare-editor>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <open-compare-charts ></open-compare-charts>
+        </div>
       </div>
     </div>
 
 
     <!-- OpenCompare editor dependencies -->
     <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.min.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/arrive/minified/arrive.min.js"></script>
+    <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
     <script src="bower_components/angular-ui-slider/src/slider.js"></script>
+    <script src="bower_components/angular-utf8-base64/angular-utf8-base64.min.js"></script>
     <script src="bower_components/Chart.js/Chart.js"></script>
     <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
-    <script src="bower_components/angular-translate/angular-translate.js"></script>
-    <script src="bower_components/angular-utf8-base64/angular-utf8-base64.js"></script>
     <script src="bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
-    <script src="bower_components/arrive/src/arrive.js"></script>
-    <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
-    <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
+    <!-- endbuild -->
 
 
     <!-- build:js({.tmp,app}) scripts/opencompare-editor.js -->
@@ -108,10 +111,11 @@
     <script src="features/importexport/directives/fileModel.js"></script>
     <!-- endbuild -->
 
-    <script src="main/I18nCtrl.js"></script> <!-- Not required -->
-
     <!-- Test app script -->
     <script src="openCompareEditorApp.js"></script>
+    <script src="main/I18nCtrl.js"></script> <!-- Not required -->
+
+
 
     <!-- Data source -->
     <!--<script src="examples/grammar.js"></script>-->
