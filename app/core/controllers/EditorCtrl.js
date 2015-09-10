@@ -101,7 +101,7 @@ angular
         $scope.loading = true;
         $scope.setEdit(false, false);
         $scope.updateShareLinks();
-        $http.get("http://localhost:9001/api/get/" + id).// FIXME : remove "http://localhost:9001"
+        $http.get("/api/get/" + id).
             success(function (data) {
                 $scope.pcm = loader.loadModelFromString(JSON.stringify(data.pcm)).get(0);
                 pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
