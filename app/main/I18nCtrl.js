@@ -34,6 +34,7 @@ angular
         'edit.button.remove':'Remove',
         'edit.button.addfeature':'Add feature',
         'edit.button.addproduct':'Add product',
+        'edit.button.addfeaturegroup':'Add feature group',
         'edit.button.cancel':'Cancel',
         'edit.button.apply':'Apply',
         'edit.button.confirm':'Are you sure?',
@@ -75,14 +76,14 @@ angular
     return function(options) {
         var deferred = $q.defer();
 
-        $http.get("/api/i18n")
-          .success(function (data) {
-            $translate.use('oc');
-            return deferred.resolve(data);
-        })
-          .error(function(data, status, headers, config) {
+        //$http.get("/api/i18n")
+        //  .success(function (data) {
+        //    $translate.use('oc');
+        //    return deferred.resolve(data);
+        //})
+        //  .error(function(data, status, headers, config) {
             $translate.use('embedded');
-        });
+        //});
 
         return deferred.promise;
     }

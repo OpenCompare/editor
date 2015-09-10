@@ -65,14 +65,6 @@ angular
     };
 
     // Main entry of the editor
-
-
-    $scope.dump = function() {
-      console.log($scope.pcmData);
-      console.log($scope.pcmDataRaw);
-    };
-
-
     if (typeof id === 'undefined' && typeof data === 'undefined') {
         /* Create an empty PCM */
       $scope.pcm = factory.createPCM();
