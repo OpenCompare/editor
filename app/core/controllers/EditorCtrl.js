@@ -67,6 +67,11 @@ angular
     // Main entry of the editor
 
 
+    $scope.dump = function() {
+      console.log($scope.pcmData);
+      console.log($scope.pcmDataRaw);
+    };
+
 
     if (typeof id === 'undefined' && typeof data === 'undefined') {
         /* Create an empty PCM */
@@ -104,7 +109,7 @@ angular
         $scope.loading = true;
         $scope.setEdit(false, false);
         $scope.updateShareLinks();
-        $http.get("/api/get/" + id).
+        $http.get("http://localhost:9001/api/get/" + id).// FIXME : remove "http://localhost:9001"
             success(function (data) {
                 $scope.pcm = loader.loadModelFromString(JSON.stringify(data.pcm)).get(0);
                 pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64

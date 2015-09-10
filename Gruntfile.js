@@ -317,18 +317,18 @@ module.exports = function (grunt) {
       }
     },
 
-    //ngtemplates: {
-    //  dist: {
-    //    options: {
-    //      module: 'openCompareEditor',
-    //      htmlmin: '<%= htmlmin.dist.options %>',
-    //      usemin: 'scripts/scripts.js'
-    //    },
-    //    cwd: '<%= yeoman.app %>',
-    //    src: 'templates/{,*/}*.html',
-    //    dest: '.tmp/templateCache.js'
-    //  }
-    //},
+    ngtemplates: {
+      dist: {
+        options: {
+          module: 'openCompareEditor',
+          htmlmin: '<%= htmlmin.dist.options %>',
+          usemin: 'scripts/opencompare-editor.js'
+        },
+        cwd: '<%= yeoman.app %>',
+        src: 'templates/{,*/}*.html',
+        dest: '.tmp/templateCache.js'
+      }
+    },
 
     // ng-annotate tries to make the code safe for minification automatically
     // by using the Angular long form for dependency injection.
@@ -445,7 +445,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
-    //'ngtemplates',
+    'ngtemplates',
     'concat',
     'ngAnnotate',
     'copy:dist',
