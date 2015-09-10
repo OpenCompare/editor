@@ -12,6 +12,10 @@ angular
   .controller("GridCtrl", function($rootScope, $scope, $window, $http, $timeout, uiGridConstants, $location, pcmApi,
                                               expandeditor, typeService, editorOptions, editorUtil, sortFeaturesService, chartService) {
 
+    $scope.debug = function () {
+      console.table($scope.pcmData);
+    };
+
     $scope.height = 300;
     $scope.minWidth = 130;
     $scope.enableEdit = editorOptions.enableEdit;
@@ -218,8 +222,7 @@ angular
             superCol: featureGroupName,
             filter: {term: ''},
             minWidth: $scope.minWidth,
-            cellTemplate: '<div ng-if="grid.appScope.gridOptions.rowHeight < 40" class="ngCellText" ng-class="col.colIndex()" style="overflow:hidden; text-overflow: ellipsis;white-space: nowrap;"><span ng-cell-text  translate="{{COL_FIELD}}" translate-values="{param_1: row.entity.param_1, param_2: row.entity.param_2, param_3: row.entity.param_3, param_4: row.entity.param_4}"></span></div>' +
-            '<div ng-if="grid.appScope.gridOptions.rowHeight > 40" class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text  translate="{{COL_FIELD}}" translate-values="{param_1: row.entity.param_1, param_2: row.entity.param_2, param_3: row.entity.param_3, param_4: row.entity.param_4}"></span></div>',
+            cellTemplate: "/templates/cellTemplate.html",
             menuItems: [
                 {
                     title: 'Hide',
@@ -591,9 +594,7 @@ angular
 
         var toolsColumn = {
             name: ' ',
-            cellTemplate: '<div class="buttonsCell" ng-show="grid.appScope.edit">' +
-            '<button role="button" class="btn btn-flat btn-default" ng-click="grid.appScope.removeProduct(row)"><i class="fa fa-times"></i></button>'+
-            '</div>',
+            cellTemplate: "/templates/toolCellTemplate.html",
             enableCellEdit: false,
             enableFiltering: false,
             enableColumnResizing: false,
