@@ -158,6 +158,9 @@ angular
         $scope.setGridHeight();
     });
 
+    $scope.$on('goToCell', function(event, args) {
+      $scope.scrollToFocus(args.row, args.col);
+    });
 
     $scope.setGridHeight = function() {
 

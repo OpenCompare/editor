@@ -5,7 +5,7 @@
 
 angular
   .module('openCompareEditor')
-  .service('editorUtil', function() {
+  .service('editorUtil', function($rootScope) {
 
     this.getCellClass = function (value, featureType) {
         if(value && featureType == 'bool') {
@@ -209,4 +209,10 @@ angular
         return count;
     };
 
-});
+
+    this.goToCell = function(row, col)
+    {
+      $rootScope.$broadcast('goToCell', {row: row, col: col});
+    }
+
+  });
