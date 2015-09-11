@@ -12,10 +12,6 @@ angular
   .controller("GridCtrl", function($rootScope, $scope, $window, $http, $timeout, uiGridConstants, $location, pcmApi,
                                               expandeditor, typeService, editorOptions, editorUtil, sortFeaturesService, chartService) {
 
-    $scope.debug = function () {
-      console.table($scope.pcmData);
-    };
-
     $scope.height = 300;
     $scope.minWidth = 130;
     $scope.enableEdit = editorOptions.enableEdit;
