@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Created by gbecan on 6/23/15.
  */
@@ -25,6 +26,9 @@ angular
         'edit.title.allowExportation':'Allow exportation',
         'edit.title.allowSharing':'Allow sharing',
         'edit.title.confirm':'Confirm',
+
+        'edit.source.placeholder': 'Source',
+        'edit.license.placeholder': 'License',
 
         'edit.button.edit':'Edit',
         'edit.button.export':'Export',
@@ -73,7 +77,7 @@ angular
 })
   .factory('i18nLoader', function($http, $q, $translate) {
 
-    return function(options) {
+    return function() {
         var deferred = $q.defer();
 
         //$http.get("/api/i18n")
@@ -86,12 +90,12 @@ angular
         //});
 
         return deferred.promise;
-    }
+    };
 })
   .controller("I18nCtrl", function($scope, $http) {
 
     $scope.changeLanguage = function(langKey) {
-        $http.get("/api/i18n/" + langKey).success(function (data) {
+        $http.get("/api/i18n/" + langKey).success(function () {
             window.location.reload();
         });
     };

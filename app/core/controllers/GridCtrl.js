@@ -479,58 +479,83 @@ angular
      */
     $scope.initializeEditor = function(pcm, metadata, decode, loadFeatureGroups) {
 
-        if(decode) {
-            pcm = pcmApi.decodePCM(pcm); // Decode PCM from Base64
+      if(decode) {
+          pcm = pcmApi.decodePCM(pcm); // Decode PCM from Base64
+      }
+
+      /* Convert PCM model to editor format */
+      var features = pcmApi.getConcreteFeatures(pcm);
+
+      $scope.pcmData = pcm.products.array.map(function(product) {
+          var productData = {};
+          features.map(function(feature) {
+              var featureName = editorUtil.convertStringToEditorFormat(feature.name);
+              if(!feature.name){
+                  featureName = " ";
+              }
+              var cell = pcmApi.findCell(product, feature);
+              productData.name = product.name; // FIXME : may conflict with feature name
+              productData[featureName] = cell.content;
+          });
+          return productData;
+      });
+
+      // Return rawcontent
+      $scope.pcmDataRaw = pcm.products.array.map(function(product) {
+          var productDataRaw = {};
+          features.map(function(feature) {
+              var featureName =  editorUtil.convertStringToEditorFormat(feature.name);
+              if(!feature.name){
+                  featureName = " ";
+              }
+              var cell = pcmApi.findCell(product, feature);
+              productDataRaw.name = product.name; // FIXME : may conflict with feature name
+              if(cell.rawContent && cell.rawContent != "") {
+                  productDataRaw[featureName] = cell.rawContent;
+              }
+              else {
+                  productDataRaw[featureName] = cell.content;// TODO: replace content with rawcontent when implemented
+              }
+          });
+          return productDataRaw;
+      });
+
+
+      $rootScope.$broadcast('setPcmName', $scope.pcm.name);
+
+      $scope.source = "";
+      $scope.license = "";
+
+      if ((typeof metadata  !== 'undefined')) {
+        if (typeof metadata.source  === 'undefined') {
+          $scope.source = metadata.source;
         }
-
-        /* Convert PCM model to editor format */
-        var features = pcmApi.getConcreteFeatures(pcm);
-
-        $scope.pcmData = pcm.products.array.map(function(product) {
-            var productData = {};
-            features.map(function(feature) {
-                var featureName = editorUtil.convertStringToEditorFormat(feature.name);
-                if(!feature.name){
-                    featureName = " ";
-                }
-                var cell = pcmApi.findCell(product, feature);
-                productData.name = product.name; // FIXME : may conflict with feature name
-                productData[featureName] = cell.content;
-            });
-            return productData;
-        });
-
-        // Return rawcontent
-        $scope.pcmDataRaw = pcm.products.array.map(function(product) {
-            var productDataRaw = {};
-            features.map(function(feature) {
-                var featureName =  editorUtil.convertStringToEditorFormat(feature.name);
-                if(!feature.name){
-                    featureName = " ";
-                }
-                var cell = pcmApi.findCell(product, feature);
-                productDataRaw.name = product.name; // FIXME : may conflict with feature name
-                if(cell.rawContent && cell.rawContent != "") {
-                    productDataRaw[featureName] = cell.rawContent;
-                }
-                else {
-                    productDataRaw[featureName] = cell.content;// TODO: replace content with rawcontent when implemented
-                }
-            });
-            return productDataRaw;
-        });
-        $rootScope.$broadcast('setPcmName', $scope.pcm.name);
-
-        createColumns(pcm, metadata, features, loadFeatureGroups);
-        setOptions();
-
-        $scope.setGridHeight();
-        if(loadFeatureGroups) {
-            $scope.gridOptions.superColDefs = sortFeaturesService.sortFeatureGroupByName($scope.gridOptions.superColDefs);
-            $timeout(function() {$scope.loadFeatureGroups($scope.gridOptions.columnDefs, $scope.gridOptions.superColDefs);}, 0);
+        if (typeof metadata.license  === 'undefined') {
+          $scope.license = metadata.license;
         }
+      }
+
+      $scope.$watch("source", function() {
+        $rootScope.$broadcast('modified');
+      });
+
+      $scope.$watch("license", function() {
+        $rootScope.$broadcast('modified');
+      });
+
+
+      createColumns(pcm, metadata, features, loadFeatureGroups);
+      setOptions();
+
+      $scope.setGridHeight();
+      if(loadFeatureGroups) {
+          $scope.gridOptions.superColDefs = sortFeaturesService.sortFeatureGroupByName($scope.gridOptions.superColDefs);
+          $timeout(function() {$scope.loadFeatureGroups($scope.gridOptions.columnDefs, $scope.gridOptions.superColDefs);}, 0);
+      }
 
     };
+
+
 
     function createColumns(pcm, metadata, features, loadFeatureGroups) {
         /* Define columns */

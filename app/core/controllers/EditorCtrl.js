@@ -379,26 +379,29 @@ angular
      * @returns {{}}
      */
     function generateMetadata(product, columns) {
-        var metadata = {};
-        metadata.featurePositions = [];
-        metadata.productPositions = [];
-        var index = 0;
-        product.forEach(function (product) {
-            var object = {};
-            object.product = product.name;
-            object.position = index;
-            metadata.productPositions.push(object);
-            index++;
-        });
-        index = 0;
-        columns.forEach(function (column) {
-            var object = {};
-            object.feature = editorUtil.convertStringToPCMFormat(column.name);
-            object.position = index;
-            metadata.featurePositions.push(object);
-            index++;
-        });
-        return metadata;
+      var metadata = {};
+      metadata.featurePositions = [];
+      metadata.productPositions = [];
+      var index = 0;
+      product.forEach(function (product) {
+          var object = {};
+          object.product = product.name;
+          object.position = index;
+          metadata.productPositions.push(object);
+          index++;
+      });
+      index = 0;
+      columns.forEach(function (column) {
+          var object = {};
+          object.feature = editorUtil.convertStringToPCMFormat(column.name);
+          object.position = index;
+          metadata.featurePositions.push(object);
+          index++;
+      });
+
+      metadata.source = ($scope.source === "unspecified") ? "" : $scope.source;
+      metadata.license = ($scope.license === "unspecified") ? "" : $scope.license;
+      return metadata;
     }
 
     /**
