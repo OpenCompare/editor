@@ -34,7 +34,9 @@ module.exports = function(config) {
       'bower_components/angular-base64-upload/src/angular-base64-upload.js',
       'bower_components/angular-ui-slider/src/slider.js',
       'bower_components/arrive/src/arrive.js',
+      'bower_components/angular-mocks/angular-mocks.js',
       // endbower
+      'app/openCompareEditor.js',
       'app/**/*.js',
       'test/mock/**/*.js',
       'test/spec/**/*.js'
