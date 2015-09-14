@@ -1,7 +1,7 @@
 {
   "name": "opencompare-editor",
   "desription": "Editor for product comparison matrices",
-  "keywords" : [
+  "keywords": [
     "opencompare",
     "product comparison matrix"
   ],
@@ -11,17 +11,17 @@
     "type": "git",
     "url": "git://github.com/OpenCompare/editor.git"
   },
-  "ignore" : [],
+  "ignore": [],
   "dependencies": {
     "bootstrap": "3.2.0",
     "angular": "1.3.0",
-    "jquery": "1.11.1",
+    "jquery": "2.1.4",
     "angular-ui-bootstrap-bower": "0.13.0",
     "angular-translate": "2.7.2",
     "fontawesome": "4.4.0",
     "angular-ui-grid": "3.0.1",
     "bootstrap-material-design": "0.3.0",
-    "jquery-ui": "1.11.4",
+    "jquery-ui": "1.10.4",
     "angular-chart.js": "0.7.1",
     "angular-utf8-base64": "0.0.5",
     "angular-base64-upload": "0.1.8",
@@ -29,11 +29,6 @@
     "arrive": "2.2.0"
   },
   "devDependencies": {},
-  "resolutions": {
-    "angular": "1.3.0",
-    "jquery-ui": "1.11.4",
-    "jquery": "1.11.1"
-  },
   "appPath": "app",
   "moduleName": "openCompareEditor",
   "overrides": {
