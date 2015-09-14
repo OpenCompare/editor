@@ -1,6 +1,12 @@
 {
   "name": "opencompare-editor",
-  "version": "0.6.0",
+  "desription": "Editor for product comparison matrices",
+  "main": "dist/scripts/opencompare-editor.js",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/OpenCompare/editor.git"
+  },
   "dependencies": {
     "bootstrap": "3.2.0",
     "angular": "1.3.0",
