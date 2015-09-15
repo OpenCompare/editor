@@ -70,51 +70,28 @@ angular
       }
     });
 
-    // Main entry of the editor
-    if (typeof id === 'undefined' && typeof data === 'undefined') {
-        /* Create an empty PCM */
-      $scope.pcm = pcmApi.factory.createPCM();
-      var feature = pcmApi.factory.createFeature();
-      feature.name = "F";
+    $scope.$watch("pcmId", function(newPCMId) {
+      if (typeof newPCMId !== 'undefined') {
+        $scope.id = newPCMId;
 
-      var product = pcmApi.factory.createProduct();
-      product.name = "P";
-
-
-      var cell = pcmApi.factory.createCell();
-      cell.content = "C";
-      cell.feature = feature;
-      product.addCells(cell);
-
-      $scope.pcm.addFeatures(feature);
-      $scope.pcm.addProducts(product);
-
-      $scope.metadata = {
-        productPositions: [],
-        featurePositions: []
-      };
-
-      $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
-    }
-    else if (typeof data != 'undefined')  {
-
-    } else{
         /* Load a PCM from database */
         $scope.loading = true;
         $scope.setEdit(false, false);
         $scope.updateShareLinks();
-        $http.get("/api/get/" + id).
-            success(function (data) {
-                $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm));
-                pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
-                $scope.metadata = data.metadata;
-                $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
-                $rootScope.$broadcast('saved', id);
-            })
-            .finally(function () {
-                $scope.loading = false;
-            })
-    }
+        $http.get("/api/get/" + $scope.id).
+          success(function (data) {
+            $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm));
+            pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
+            $scope.metadata = data.metadata;
+            $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
+            $rootScope.$broadcast('saved', $scope.id);
+          })
+          .finally(function () {
+            $scope.loading = false;
+          })
+      }
+    });
+
     /* Load modal for import */
     if (typeof modal != 'undefined') {
         $scope.setEdit(false, false);
@@ -167,10 +144,10 @@ angular
     $scope.setGridHeight = function() {
 
         if($scope.pcmData) {
-            if($scope.pcmData.length * $scope.gridOptions.rowHeight + 100 > $(window).height()* 2 / 3 && !editorUtil.GetUrlValue('enableEdit')) {
+            if($scope.pcmData.length * $scope.gridOptions.rowHeight + 100 > $(window).height()* 2 / 3 && !$scope.enableEdit) {
                 $scope.height = $(window).height() * 2 / 3;
             }
-            else if($scope.pcmData.length * $scope.gridOptions.rowHeight + 100 > $(window).height() && editorUtil.GetUrlValue('enableEdit')) {
+            else if($scope.pcmData.length * $scope.gridOptions.rowHeight + 100 > $(window).height() && $scope.enableEdit) {
                 var height = 20;
 
                 if(editorUtil.GetUrlValue('enableExport') == 'true' || editorUtil.GetUrlValue('enableShare') == 'true') {
@@ -186,7 +163,7 @@ angular
                     }
 
                 }
-                if(editorUtil.GetUrlValue('enableEdit') == 'true') {
+                if($scope.enableEdit) {
                     if($scope.edit) {
                         height += 80;
                     }
