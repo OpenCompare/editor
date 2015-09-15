@@ -399,8 +399,8 @@ angular
           index++;
       });
 
-      metadata.source = ($scope.source === "unspecified") ? "" : $scope.source;
-      metadata.license = ($scope.license === "unspecified") ? "" : $scope.license;
+      metadata.source = $scope.source;
+      metadata.license = $scope.license;
       return metadata;
     }
 

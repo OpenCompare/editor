@@ -527,10 +527,10 @@ angular
       $scope.license = "";
 
       if ((typeof metadata  !== 'undefined')) {
-        if (typeof metadata.source  === 'undefined') {
+        if (typeof metadata.source  !== 'undefined') {
           $scope.source = metadata.source;
         }
-        if (typeof metadata.license  === 'undefined') {
+        if (typeof metadata.license  !== 'undefined') {
           $scope.license = metadata.license;
         }
       }
