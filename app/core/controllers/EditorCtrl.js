@@ -12,6 +12,7 @@ angular
   .module('openCompareEditor')
   .controller("EditorCtrl", function($controller, $rootScope, $scope, $http, $timeout, uiGridConstants, $compile, $modal, expandeditor,  $location, pcmApi, editorUtil) {
 
+
     /* Load material design */
     if($.material) {
         $.material.init();
@@ -64,6 +65,17 @@ angular
 
     };
 
+
+    $scope.$watch("pcmContainer", function(newPcmContainer) {
+      if (typeof newPcmContainer !== 'undefined') {
+        /* Load PCM from import */
+        $scope.pcm = loader.loadModelFromString(data).get(0);
+        pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
+        $scope.metadata = data.metadata;
+        $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
+      }
+    });
+
     // Main entry of the editor
     if (typeof id === 'undefined' && typeof data === 'undefined') {
         /* Create an empty PCM */
@@ -91,11 +103,11 @@ angular
       $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
     }
     else if (typeof data != 'undefined')  {
-        /* Load PCM from import */
-        $scope.pcm = loader.loadModelFromString(data).get(0);
-        pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
-        $scope.metadata = data.metadata;
-        $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
+        ///* Load PCM from import */
+        //$scope.pcm = loader.loadModelFromString(data).get(0);
+        //pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
+        //$scope.metadata = data.metadata;
+        //$scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
     } else{
         /* Load a PCM from database */
         $scope.loading = true;

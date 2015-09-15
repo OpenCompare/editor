@@ -14,7 +14,6 @@ angular
 
     $scope.height = 300;
     $scope.minWidth = 130;
-    $scope.enableEdit = editorOptions.enableEdit;
     $scope.enableExport = editorOptions.enableExport;
     $scope.enableTitle = true;
     $scope.enableShare = editorOptions.enableShare;
@@ -156,7 +155,7 @@ angular
     $scope.setGridHeight = function() {
 
         if($scope.pcmData) {
-            if($scope.pcmData.length * 28 + 90 > $(window).height()* 2 / 3 && !editorUtil.GetUrlValue('enableEdit')) {
+            if($scope.pcmData.length * 28 + 90 > $(window).height()* 2 / 3 && !$scope.enableEdit) {
                 $scope.height = $(window).height() * 2 / 3;
             }
             else if($scope.pcmData.length * 28 + 90 > $(window).height()) {
@@ -693,9 +692,6 @@ angular
     }
 
     function setOptions() {
-        if(editorUtil.GetUrlValue('enableEdit') == 'false'){
-            $scope.enableEdit = false;
-        }
         if(editorUtil.GetUrlValue('enableExport') == 'false'){
             $scope.enableExport = false;
         }

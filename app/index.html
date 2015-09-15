@@ -6,7 +6,7 @@
     <meta charset="utf-8">
 
     <!-- OpenCompare editor dependencies -->
-    <!-- build:css(.) styles/vendor.css -->
+
     <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.min.css' />
     <link rel='stylesheet' href='bower_components/fontawesome/css/font-awesome.min.css' />
     <link rel='stylesheet' href='bower_components/angular-ui-grid/ui-grid.min.css' />
@@ -14,6 +14,7 @@
     <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/material.min.css' />
     <link rel='stylesheet' href='bower_components/angular-chart.js/dist/angular-chart.css' />
     <link rel='stylesheet' href='main/stylesheets/main.css'>
+    <!-- build:css(.) styles/vendor.css -->
     <!-- endbuild -->
 
 
@@ -32,7 +33,7 @@
       <h1>OpenCompare editor</h1>
 
       <div class="row">
-        <open-compare-editor></open-compare-editor>
+        <open-compare-editor pcm-container="myPCM" edit="true" ng-controller="TestCtrl"></open-compare-editor>
       </div>
 
       <div class="row">
@@ -44,7 +45,7 @@
 
 
     <!-- OpenCompare editor dependencies -->
-    <!-- build:js(.) scripts/vendor.js -->
+
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -53,22 +54,24 @@
     <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
     <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap.js"></script>
     <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/arrive/minified/arrive.js"></script>
+    <script src="bower_components/arrive/minified/arrive.min.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
     <script src="bower_components/angular-ui-slider/src/slider.js"></script>
     <script src="bower_components/angular-utf8-base64/angular-utf8-base64.js"></script>
     <script src="bower_components/Chart.js/Chart.js"></script>
     <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
     <script src="bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <!-- build:js(.) scripts/vendor.js -->
     <!-- endbuild -->
 
+    <script src="core/kmf/pcm.min.js"></script>
 
     <!-- build:js({.tmp,app}) scripts/opencompare-editor.js -->
     <script src="openCompareEditor.js"></script>
 
-    <script src="core/kmf/pcm.min.js"></script>
 
-    <script src="core/directives/embeddedEditor.js"></script>
+
+    <script src="core/directives/openCompareEditor.js"></script>
     <script src="core/directives/toolbar.js"></script>
     <script src="core/directives/featureGroup.js"></script>
 
