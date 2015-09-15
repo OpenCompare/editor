@@ -1,6 +1,13 @@
 angular
   .module('openCompareEditor')
   .service('pcmApi', function(base64) {
+
+    var pcmMM = Kotlin.modules['pcm'].pcm;
+    this.factory = new pcmMM.factory.DefaultPcmFactory();
+    var loader = this.factory.createJSONLoader();
+    var serializer = this.factory.createJSONSerializer();
+
+
     /**
      * Sort two elements by their names (accessed with x.name)
      * @param a
@@ -114,6 +121,14 @@ angular
                 cell.rawContent = encodeToBase64(cell.rawContent, encoding);
             });
         });
+    };
+
+    this.loadPCMModelFromString = function(json) {
+      return loader.loadModelFromString(json).get(0);
+    };
+
+    this.serializePCM = function(pcm) {
+      return serializer.serialize(pcm);
     };
 
 

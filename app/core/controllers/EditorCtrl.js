@@ -33,12 +33,6 @@ angular
     $controller('ShareCtrl', subControllers);
     $controller('FeatureGroupCtrl', subControllers);
 
-    // Load PCM
-    var pcmMM = Kotlin.modules['pcm'].pcm;
-    var factory = new pcmMM.factory.DefaultPcmFactory();
-    var loader = factory.createJSONLoader();
-    var serializer = factory.createJSONSerializer();
-
     //Export
     $scope.export_content = null;
 
@@ -69,7 +63,7 @@ angular
     $scope.$watch("pcmContainer", function(newPcmContainer) {
       if (typeof newPcmContainer !== 'undefined') {
         /* Load PCM from import */
-        $scope.pcm = loader.loadModelFromString(data).get(0);
+        $scope.pcm = pcmApi.loadPCMModelFromString(data);
         pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
         $scope.metadata = data.metadata;
         $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
@@ -79,15 +73,15 @@ angular
     // Main entry of the editor
     if (typeof id === 'undefined' && typeof data === 'undefined') {
         /* Create an empty PCM */
-      $scope.pcm = factory.createPCM();
-      var feature = factory.createFeature();
+      $scope.pcm = pcmApi.factory.createPCM();
+      var feature = pcmApi.factory.createFeature();
       feature.name = "F";
 
-      var product = factory.createProduct();
+      var product = pcmApi.factory.createProduct();
       product.name = "P";
 
 
-      var cell = factory.createCell();
+      var cell = pcmApi.factory.createCell();
       cell.content = "C";
       cell.feature = feature;
       product.addCells(cell);
@@ -103,11 +97,7 @@ angular
       $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
     }
     else if (typeof data != 'undefined')  {
-        ///* Load PCM from import */
-        //$scope.pcm = loader.loadModelFromString(data).get(0);
-        //pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
-        //$scope.metadata = data.metadata;
-        //$scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
+
     } else{
         /* Load a PCM from database */
         $scope.loading = true;
@@ -115,7 +105,7 @@ angular
         $scope.updateShareLinks();
         $http.get("/api/get/" + id).
             success(function (data) {
-                $scope.pcm = loader.loadModelFromString(JSON.stringify(data.pcm)).get(0);
+                $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm));
                 pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
                 $scope.metadata = data.metadata;
                 $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
@@ -136,7 +126,7 @@ angular
         })
     }
     $scope.$on('initializeFromExternalSource', function(event, args) {
-        $scope.pcm = loader.loadModelFromString(JSON.stringify(args.pcm)).get(0);
+        $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(args.pcm));
         pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
         $scope.metadata = args.metadata;
         $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
@@ -214,7 +204,7 @@ angular
 
     /* Convert grid to pcm for mongoDB */
     function convertGridToPCM(pcmData) {
-        var pcm = factory.createPCM();
+        var pcm = pcmApi.factory.createPCM();
         pcm.name = $scope.pcm.name;
 
         var featuresMap = {};
@@ -223,7 +213,7 @@ angular
         var index = 0;
         pcmData.forEach(function(productData) {
             // Create product
-            var product = factory.createProduct();
+            var product = pcmApi.factory.createProduct();
             product.name = productData.name;
             pcm.addProducts(product);
             var featureGroups = $scope.gridOptions.superColDefs;
@@ -237,7 +227,7 @@ angular
 
                     if (!featureGroupsMap.hasOwnProperty(codedFeatureGroupName)) {
                         if (codedFeatureGroupName != 'emptyFeatureGroup') {
-                            var featureGroup = factory.createFeatureGroup();
+                            var featureGroup = pcmApi.factory.createFeatureGroup();
                             featureGroup.name = decodedFeatureGroupName;
                             featureGroupsMap[decodedFeatureGroupName] = featureGroup;
 
@@ -247,7 +237,7 @@ angular
                                 if (!featuresMap.hasOwnProperty(editorUtil.convertStringToPCMFormat(featuresWithThisFeatureGroup[j]))
                                     && featuresWithThisFeatureGroup[j] !== " "
                                     && featuresWithThisFeatureGroup[j] !== "Product") {
-                                    var featureToAdd = factory.createFeature();
+                                    var featureToAdd = pcmApi.factory.createFeature();
                                     featureToAdd.name = editorUtil.convertStringToPCMFormat(featuresWithThisFeatureGroup[j]);
                                     featureGroup.addSubFeatures(featureToAdd);
                                     featuresMap[editorUtil.convertStringToPCMFormat(featuresWithThisFeatureGroup[j])] = featureToAdd;
@@ -262,7 +252,7 @@ angular
                                 && featuresWithThisFeatureGroup[k] !== " "
                                  && featuresWithThisFeatureGroup[k] !== "Product")  {
                                     featureGroupsMap[editorUtil.convertStringToPCMFormat(featureGroups[i].name)] = 'empty';
-                                    var featureToAdd = factory.createFeature();
+                                    var featureToAdd = pcmApi.factory.createFeature();
                                     featureToAdd.name = editorUtil.convertStringToPCMFormat(featuresWithThisFeatureGroup[k]);
                                     featuresMap[editorUtil.convertStringToPCMFormat(featuresWithThisFeatureGroup[k])] = featureToAdd;
                                     pcm.addFeatures(featureToAdd);
@@ -282,7 +272,7 @@ angular
                         var feature = featuresMap[decodedFeatureName];
 
                         // Create cell
-                        var cell = factory.createCell();
+                        var cell = pcmApi.factory.createCell();
 
                         cell.feature = feature;
                         cell.content = productData[codedFeatureName];
@@ -301,7 +291,7 @@ angular
                         && codedFeatureName !== "Product") {
                         // Create feature if not existing
                         if (!featuresMap.hasOwnProperty(decodedFeatureName)) {
-                            var feature = factory.createFeature();
+                            var feature = pcmApi.factory.createFeature();
                             feature.name = decodedFeatureName;
                             pcm.addFeatures(feature);
                             featuresMap[decodedFeatureName] = feature;
@@ -309,7 +299,7 @@ angular
                         var feature = featuresMap[decodedFeatureName];
 
                         // Create cell
-                        var cell = factory.createCell();
+                        var cell = pcmApi.factory.createCell();
                         cell.feature = feature;
                         cell.content = productData[codedFeatureName];
                         cell.rawContent = $scope.pcmDataRaw[index][codedFeatureName];
@@ -342,7 +332,7 @@ angular
 
         var pcmToSave = convertGridToPCM($scope.pcmData);
         $scope.metadata = generateMetadata($scope.pcmData, $scope.gridOptions.columnDefs);
-        var jsonModel = JSON.parse(serializer.serialize(pcmToSave));
+        var jsonModel = JSON.parse(pcmApi.serializePCM(pcmToSave));
 
         var pcmObject = {};
         pcmObject.metadata = $scope.metadata;
@@ -432,7 +422,7 @@ angular
     $scope.$on('launchCreation', function(event, args) {
 
         $rootScope.$broadcast('launchFromCreator');
-        $scope.pcm = factory.createPCM();
+        $scope.pcm = pcmApi.factory.createPCM();
         $scope.setEdit(true, false);
         $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
         $scope.pcm.name = args.title;
@@ -477,7 +467,7 @@ angular
      * Launch initialization when importing
      */
     $scope.$on('import', function(event, args) {
-        $scope.pcm = loader.loadModelFromString(JSON.stringify(args.pcm)).get(0);
+        $scope.pcm = pcmApi.loadModelFromString(JSON.stringify(args.pcm));
         pcmApi.decodePCM($scope.pcm);
         $scope.metadata = args.metadata;
         $scope.initializeEditor($scope.pcm, $scope.metadata);
@@ -490,7 +480,7 @@ angular
     $scope.$on('export', function (event, args) {
         var pcmToExport = convertGridToPCM($scope.pcmData);
         $scope.metadata = generateMetadata($scope.pcmData, $scope.gridOptions.columnDefs);
-        var jsonModel = JSON.parse(serializer.serialize(pcmToExport));
+        var jsonModel = JSON.parse(pcmApi.serializePCM(pcmToExport));
         $scope.pcmObject = {};
         $scope.pcmObject.metadata = $scope.metadata;
         $scope.pcmObject.pcm = jsonModel;
