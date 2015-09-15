@@ -17,11 +17,11 @@ angular
       scope: {
         pcmContainer: '=pcmContainer',
         pcmId: '=pcmId',
-        enableEdit: "=edit",
-        activeEditor: "=activeEditor",
-        enableConfigurator: "=configurator",
-        enableExport: "=export",
-        enableShare: "=share"
+        enableEdit: "=edit"
+        //activeEditor: "=activeEditor",
+        //enableConfigurator: "=configurator",
+        //enableExport: "=export",
+        //enableShare: "=share"
       },
       link : link,
       controller: controller,

@@ -63,9 +63,9 @@ angular
     $scope.$watch("pcmContainer", function(newPcmContainer) {
       if (typeof newPcmContainer !== 'undefined') {
         /* Load PCM from import */
-        $scope.pcm = pcmApi.loadPCMModelFromString(data);
+        $scope.pcm = pcmApi.loadPCMModelFromString(newPcmContainer);
         pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
-        $scope.metadata = data.metadata;
+        $scope.metadata = newPcmContainer.metadata;
         $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
       }
     });
@@ -111,6 +111,7 @@ angular
 
     $scope.$on('setConfiguratorMode', function(event, arg) {
         $scope.configurator = arg;
+      $rootScope.$broadcast("initConfigurator", {features: $scope.gridOptions.columnDefs, pcmData: $scope.pcmData});
     });
 
     $scope.$on('setLineView', function(event, arg) {
