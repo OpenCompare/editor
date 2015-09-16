@@ -67,9 +67,7 @@
     <script src="core/kmf/pcm.min.js"></script>
 
     <!-- build:js({.tmp,app}) scripts/opencompare-editor.js -->
-    <script src="openCompareEditor.js"></script>
-
-
+    <script src="core/openCompareEditor.js"></script>
 
     <script src="core/directives/openCompareEditor.js"></script>
     <script src="core/directives/toolbar.js"></script>
@@ -100,19 +98,30 @@
     <script src="features/configurator/ConfiguratorCtrl.js"></script>
     <script src="features/configurator/configurator.js"></script>
 
-    <script src="core/controllers/CreatorCtrl.js"></script>
-    <script src="core/directives/creator.js"></script>
-
     <script src="features/importexport/controllers/exporter/CsvCtrl.js"></script>
     <script src="features/importexport/controllers/exporter/WikitextCtrl.js"></script>
     <script src="features/importexport/controllers/exporter/HtmlCtrl.js"></script>
 
+    <script src="features/importexport/directives/fileModel.js"></script>
+
+    <!-- File : opencompare-editor-creator.js -->
+    <script src="features/creator/CreatorCtrl.js"></script>
+    <script src="features/creator/creator.js"></script>
+
+    <!-- File : opencompare-editor-csv.js -->
     <script src="features/importexport/controllers/importer/CsvCtrl.js"></script>
+
+    <!-- File : opencompare-editor-wikipedia.js -->
     <script src="features/importexport/controllers/importer/WikipediaCtrl.js"></script>
+
+    <!-- File : opencompare-editor-html.js -->
     <script src="features/importexport/controllers/importer/HtmlCtrl.js"></script>
 
-    <script src="features/importexport/directives/fileModel.js"></script>
     <!-- endbuild -->
+
+
+
+
 
     <!-- Test app script -->
     <script src="openCompareEditorApp.js"></script>
