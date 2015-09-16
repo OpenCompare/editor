@@ -58,7 +58,7 @@ angular
 
 
     };
-
+    $scope.setEdit(false, false);
 
     $scope.$watch("pcmContainer", function(newPcmContainer) {
       if (typeof newPcmContainer !== 'undefined') {
@@ -92,16 +92,6 @@ angular
       }
     });
 
-    /* Load modal for import */
-    if (typeof modal != 'undefined') {
-        $scope.setEdit(false, false);
-        // Open the given modal
-        $modal.open({
-            templateUrl: "/templates/modal" + modal + ".html",
-            controller: modal + "Controller",
-            scope: $scope
-        })
-    }
     $scope.$on('initializeFromExternalSource', function(event, args) {
         $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(args.pcm));
         pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
@@ -445,7 +435,7 @@ angular
      * Launch initialization when importing
      */
     $scope.$on('import', function(event, args) {
-        $scope.pcm = pcmApi.loadModelFromString(JSON.stringify(args.pcm));
+        $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(args.pcm));
         pcmApi.decodePCM($scope.pcm);
         $scope.metadata = args.metadata;
         $scope.initializeEditor($scope.pcm, $scope.metadata);
