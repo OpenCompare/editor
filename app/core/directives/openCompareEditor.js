@@ -4,12 +4,27 @@
 
 angular
   .module('openCompareEditor')
-  .directive('openCompareEditor', function() {
+  .directive('openCompareEditor', function(openCompareServer) {
 
     function link(scope) {
+
+
     }
 
-    function controller($scope) {
+    function controller($scope, openCompareServer) {
+      $scope.$watch("serverMode", function(newServerMode) {
+        switch (newServerMode) {
+          case "client":
+            openCompareServer.useClient();
+            break;
+          case "local":
+            openCompareServer.useLocalServer();
+            break;
+          case "remote":
+            openCompareServer.useRemoteServer($scope.serverAddress);
+            break;
+        }
+      });
     }
 
     return {
@@ -17,11 +32,13 @@ angular
       scope: {
         pcmContainer: '=pcmContainer',
         pcmId: '=pcmId',
-        enableEdit: "=edit"
+        enableEdit: "=edit",
         //activeEditor: "=activeEditor",
         //enableConfigurator: "=configurator",
         //enableExport: "=export",
         //enableShare: "=share"
+        serverMode: '@',
+        serverAddress: '@'
       },
       link : link,
       controller: controller,

@@ -30,7 +30,7 @@ angular
 
     this.useRemoteServer = function (newServerAddress) {
       mode = remote;
-      serverAddress = newServerAddress;
+      remoteServerAddress = newServerAddress;
     };
 
 
@@ -40,6 +40,8 @@ angular
         if (mode === remote) {
           requestAddress = remoteServerAddress + '/' + address
         }
+
+        console.log(requestAddress)
 
         if (type === "get") {
           return $http.get(requestAddress, data);
