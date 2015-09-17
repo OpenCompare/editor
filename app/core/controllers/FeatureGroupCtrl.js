@@ -38,7 +38,7 @@ angular
 
         $scope.currentFeatureGroup = featureGroup;
         $scope.$modalInstance = $modal.open({
-            templateUrl: '/templates/modalAssignFeatureGroup.html',
+            templateUrl: '/templates/modal/modalAssignFeatureGroup.html',
             scope: $scope,
             controller: 'FeatureGroupCtrl'
         });
@@ -49,7 +49,7 @@ angular
         $scope.newFeatureGroup = featureGroup;
         $scope.currentFeatureGroup = featureGroup;
         $scope.$modalInstance = $modal.open({
-            templateUrl: '/templates/modalRenameFeatureGroup.html',
+            templateUrl: '/templates/modal/modalRenameFeatureGroup.html',
             scope: $scope,
             controller: 'FeatureGroupCtrl'
         });
