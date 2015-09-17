@@ -4,7 +4,7 @@
 
 angular
   .module('openCompareEditor')
-  .controller("WikitextExportController", function($rootScope, $scope, $http, $modal, $modalInstance) {
+  .controller("WikitextExportController", function($rootScope, $scope, $modal, $modalInstance, openCompareServer) {
     $scope.loading = false;
     $scope.cancel = function() {
         $modalInstance.close();
@@ -20,7 +20,7 @@ angular
         $scope.export_content = "";
         $scope.loading = true;
 
-        $http.post(
+      openCompareServer.post(
             "/api/export/wikitext",
             {
                 file: JSON.stringify($scope.pcmObject),

@@ -5,7 +5,7 @@
 
 angular
   .module('openCompareEditor')
-  .controller("HtmlExportController", function($rootScope, $scope, $http, $modal, $modalInstance) {
+  .controller("HtmlExportController", function($rootScope, $scope, $modal, $modalInstance, openCompareServer) {
 
     $scope.loading = false;
     $scope.cancel = function() {
@@ -21,7 +21,7 @@ angular
         $scope.export_content = "";
         $scope.loading = true;
 
-        $http.post(
+      openCompareServer.post(
             "/api/export/html",
             {
                 file: JSON.stringify($scope.pcmObject),

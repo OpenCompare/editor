@@ -9,7 +9,7 @@
  */
 angular
   .module('openCompareEditor')
-  .controller("FiltersCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, editorUtil, chartService) {
+  .controller("FiltersCtrl", function($rootScope, $scope, $timeout, uiGridConstants, editorUtil, chartService, openCompareServer) {
 
     //Custom filters
     var $elm;

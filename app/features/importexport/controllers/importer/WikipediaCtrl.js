@@ -4,7 +4,7 @@
 
 angular
   .module('openCompareEditor')
-  .controller("WikipediaImportController", function($rootScope, $scope, $http, $modalInstance, base64) {
+  .controller("WikipediaImportController", function($rootScope, $scope, $modalInstance, base64, openCompareServer) {
 
     $scope.pcmContainers = [];
     $scope.pcmContainerNames = [];
@@ -20,7 +20,7 @@ angular
 
         $scope.loading = true;
 
-        $http.post(
+      openCompareServer.post(
             "/api/import/wikipedia",
             {
                 url: $scope.url

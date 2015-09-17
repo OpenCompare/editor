@@ -5,7 +5,7 @@
 
 angular
   .module('openCompareEditor')
-  .controller("CsvImportController", function($rootScope, $scope, $http, $modalInstance) {
+  .controller("CsvImportController", function($rootScope, $scope, $modalInstance, openCompareServer) {
 
     $scope.loading = false;
     $scope.cancel = function() {
@@ -30,7 +30,7 @@ angular
 
         $scope.loading = true;
 
-        $http.post(
+      openCompareServer.post(
             "/api/import/csv",
             fd,
             {

@@ -5,7 +5,7 @@
 
 angular
   .module('openCompareEditor')
-  .controller("CsvExportController", function($rootScope, $scope, $http, $modal, $modalInstance) {
+  .controller("CsvExportController", function($rootScope, $scope, $modal, $modalInstance, openCompareServer) {
 
     $scope.loading = false;
     $scope.cancel = function() {
@@ -23,7 +23,7 @@ angular
         $scope.export_content = "";
         $scope.loading = true;
 
-        $http.post(
+      openCompareServer.post(
             "/api/export/csv",
             {
                 file: JSON.stringify($scope.pcmObject),

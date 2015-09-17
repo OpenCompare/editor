@@ -5,7 +5,7 @@
 
 angular
   .module('openCompareEditor')
-  .controller("HtmlImportController", function($rootScope, $scope, $http, $modalInstance) {
+  .controller("HtmlImportController", function($rootScope, $scope, $modalInstance, openCompareServer) {
 
     $scope.loading = false;
     $scope.cancel = function() {
@@ -27,7 +27,7 @@ angular
 
         $scope.loading = true;
 
-        $http.post(
+      openCompareServer.post(
             "/api/import/html",
             fd,
             {

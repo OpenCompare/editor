@@ -10,7 +10,7 @@
  */
 angular
   .module('openCompareEditor')
-  .controller("FeatureGroupCtrl", function($rootScope, $scope, $window, $http, $timeout, featureGroupService, editorUtil, $modal) {
+  .controller("FeatureGroupCtrl", function($rootScope, $scope, $window, $timeout, featureGroupService, editorUtil, $modal) {
 
     $scope.edit = false;
 

@@ -4,7 +4,7 @@
 
 angular
   .module('openCompareEditor')
-  .controller("CommandsCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, featureGroupService, sortFeaturesService, editorUtil, $modal) {
+  .controller("CommandsCtrl", function($rootScope, $scope, $timeout, uiGridConstants, featureGroupService, sortFeaturesService, editorUtil) {
 
 
     /**

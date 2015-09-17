@@ -10,7 +10,7 @@
 */
 angular
   .module('openCompareEditor')
-  .controller("EditorCtrl", function($controller, $rootScope, $scope, $http, $timeout, uiGridConstants, $compile, $modal, expandeditor,  $location, pcmApi, editorUtil) {
+  .controller("EditorCtrl", function($controller, $rootScope, $scope, $timeout, uiGridConstants, $compile, $modal, expandeditor,  $location, pcmApi, editorUtil, openCompareServer) {
 
 
     /* Load material design */
@@ -78,7 +78,7 @@ angular
         $scope.loading = true;
         $scope.setEdit(false, false);
         $scope.updateShareLinks();
-        $http.get("/api/get/" + $scope.id).
+        openCompareServer.get("/api/get/" + $scope.id).
           success(function (data) {
             $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm));
             pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
@@ -307,14 +307,14 @@ angular
         pcmObject.pcm = jsonModel;
 
         if (typeof id === 'undefined') {
-            $http.post("/api/create", pcmObject).success(function(data) {
+          openCompareServer.post("/api/create", pcmObject).success(function(data) {
                 id = data;
                 $scope.updateShareLinks();
                 console.log("model created with id=" + id);
                 $rootScope.$broadcast('savedFromCreator', id);
             });
         } else {
-            $http.post("/api/save/" + id, pcmObject).success(function(data) {
+          openCompareServer.post("/api/save/" + id, pcmObject).success(function(data) {
                 console.log("model saved");
                 $rootScope.$broadcast('saved');
             });
@@ -327,7 +327,7 @@ angular
     $scope.remove = function() {
 
         if (typeof id !== 'undefined') {
-            $http.get("/api/remove/" + id).success(function(data) {
+          openCompareServer.get("/api/remove/" + id).success(function(data) {
                 window.location.href = "/";
                 console.log("model removed");
             });

@@ -9,8 +9,8 @@
  */
 angular
   .module('openCompareEditor')
-  .controller("GridCtrl", function($rootScope, $scope, $window, $http, $timeout, uiGridConstants, $location, pcmApi,
-                                              expandeditor, typeService, editorOptions, editorUtil, sortFeaturesService, chartService) {
+  .controller("GridCtrl", function($rootScope, $scope, $window, $timeout, uiGridConstants, $location, pcmApi,
+                                              expandeditor, typeService, editorOptions, editorUtil, sortFeaturesService, chartService, openCompareServer) {
 
     $scope.height = 300;
     $scope.minWidth = 130;
@@ -703,7 +703,7 @@ angular
         }
         if(editorUtil.GetUrlValue('deleteAfterLoaded') == 'true'){
             if (typeof id !== 'undefined') {
-                $http.get("/api/remove/" + id);
+              openCompareServer.get("/api/remove/" + id);
             }
         }
         if(!$scope.edit) {//Todo: replace by configuratorMode == true
@@ -719,7 +719,7 @@ angular
      * @returns {Array.<T>|string|Blob|ArrayBuffer|*}
      */
     function getVisualRepresentation(cellValue, index, colName) {
-        $http.post("/api/extract-content", {
+      openCompareServer.post("/api/extract-content", {
             type: 'wikipedia',
             rawContent: cellValue,
             responseType: "text/plain",

@@ -9,7 +9,7 @@
  */
 angular
   .module('openCompareEditor')
-  .controller("UndoRedoCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, sortFeaturesService, editorUtil) {
+  .controller("UndoRedoCtrl", function($rootScope, $scope, $timeout, uiGridConstants, sortFeaturesService, editorUtil) {
 
     //Undo-redo
     $scope.commands = [];
@@ -140,7 +140,7 @@ angular
         for(var i = 0; i < $scope.pcmData.length; i++) {
             if ($scope.pcmData[i].$$hashKey == productHashKey) {
 
-                $http.post("/api/extract-content", {
+              openCompareServer.post("/api/extract-content", {
                     type: 'wikipedia',
                     rawContent: oldValue,
                     responseType: "text/plain",
@@ -162,7 +162,7 @@ angular
         for(var i = 0; i < $scope.pcmData.length; i++) {
             if ($scope.pcmData[i].$$hashKey == productHashKey) {
 
-                $http.post("/api/extract-content", {
+              openCompareServer.post("/api/extract-content", {
                     type: 'wikipedia',
                     rawContent: newValue,
                     responseType: "text/plain",

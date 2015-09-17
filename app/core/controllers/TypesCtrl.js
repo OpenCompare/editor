@@ -9,7 +9,7 @@
  */
 angular
   .module('openCompareEditor')
-  .controller("TypesCtrl", function($rootScope, $scope, $http, $timeout, uiGridConstants, $compile, $modal, typeService) {
+  .controller("TypesCtrl", function($rootScope, $scope, $timeout, uiGridConstants, $compile, $modal, typeService) {
 
     // Validate pcm type
     $scope.featureType = 'string';

@@ -75,27 +75,27 @@ angular
     $translateProvider.useLoader('i18nLoader');
     $translateProvider.preferredLanguage('oc');
 })
-  .factory('i18nLoader', function($http, $q, $translate) {
+  .factory('i18nLoader', function($q, $translate, openCompareServer) {
 
     return function() {
         var deferred = $q.defer();
 
-        //$http.get("/api/i18n")
-        //  .success(function (data) {
-        //    $translate.use('oc');
-        //    return deferred.resolve(data);
-        //})
-        //  .error(function(data, status, headers, config) {
+      openCompareServer.get("/api/i18n")
+          .success(function (data) {
+            $translate.use('oc');
+            return deferred.resolve(data);
+        })
+          .error(function(data, status, headers, config) {
             $translate.use('embedded');
-        //});
+        });
 
         return deferred.promise;
     };
 })
-  .controller("I18nCtrl", function($scope, $http) {
+  .controller("I18nCtrl", function($scope, openCompareServer) {
 
     $scope.changeLanguage = function(langKey) {
-        $http.get("/api/i18n/" + langKey).success(function () {
+      openCompareServer.get("/api/i18n/" + langKey).success(function () {
             window.location.reload();
         });
     };
