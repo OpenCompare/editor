@@ -25,11 +25,11 @@ angular
             {
                 url: $scope.url
             })
-            .then(function(response, status, headers, config) {
+            .then(function(response) {
                 $scope.loading = false;
-                $scope.pcmContainers = response;
+                $scope.pcmContainers = response.data;
 
-                if (response.length === 1) {
+                if (response.data.length === 1) {
                     $scope.selectPCM(0);
                 } else {
                     $scope.pcmContainers.forEach(function (pcmContainer, containerIndex){
@@ -40,9 +40,9 @@ angular
                     });
                 }
 
-            }, function(data, status, headers, config) {
+            }, function(response) {
                 $scope.loading = false;
-                $scope.message = data
+                $scope.message = response.data;
             });
     };
 

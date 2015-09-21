@@ -21,11 +21,11 @@ angular
           transformResponse: function(d, e) { // Needed to not interpret matrix as json (begin with '{|')
             return d;
           }
-        }).then(function(response, status, headers, config) {
+        }).then(function(response) {
           $scope.loading = false;
-          $scope.export_content = response;
+          $scope.export_content = response.data;
         },
-        function(data, status, headers, config) {
+        function() {
           $scope.loading = false;
         });
     }

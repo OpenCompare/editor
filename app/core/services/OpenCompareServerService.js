@@ -27,7 +27,6 @@ angular
 
 
     function processRequest(type, address, data, config) {
-      return $q(function(resolve, reject) {
         if (mode !== client) {
           var requestAddress = address;
           if (mode === remote) {
@@ -35,14 +34,16 @@ angular
           }
 
           if (type === "get") {
-            resolve($http.get(requestAddress, data));
+            return $http.get(requestAddress, config);
           } else {
-            resolve($http.post(requestAddress, data));
+            return $http.post(requestAddress, data, config);
           }
         } else {
-          reject("Cannot request server in client mode.");
+          var defered = $q.defer();
+          defered.reject("Cannot request server in client mode.");
+          return defered.promise;
         }
-      });
+
     }
 
     this.get = function (address, data, config) {

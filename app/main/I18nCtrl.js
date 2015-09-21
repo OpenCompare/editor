@@ -81,11 +81,11 @@ angular
         var deferred = $q.defer();
 
       openCompareServer.get("/api/i18n").then(
-        function (data) {
+        function (response) {
           $translate.use('oc');
-          return deferred.resolve(data);
+          return deferred.resolve(response.data);
         },
-        function(data, status, headers, config) {
+        function() {
           $translate.use('embedded');
         }
       );

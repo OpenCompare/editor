@@ -726,9 +726,9 @@ angular
             transformResponse: function(d, e) { // Needed to not interpret matrix as json (begin with '{|')
                 return d;
             }
-        }).then(function(data) {
+        }).then(function(response) {
             var commandParameters = [];
-            $scope.pcmData[index][colName] = data;
+            $scope.pcmData[index][colName] = response.data;
 
             $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
         });
