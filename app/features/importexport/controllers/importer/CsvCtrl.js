@@ -37,12 +37,12 @@ angular
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             })
-            .success(function(response, status, headers, config) {
+            .then(function(response, status, headers, config) {
                 $scope.loading = false;
                 var pcmContainer = response[0];
                 $rootScope.$broadcast('import', pcmContainer);
                 $modalInstance.close();
-            }).error(function(data, status, headers, config) {
+            }, function(data, status, headers, config) {
                 $scope.loading = false;
                 $scope.message = data
             });

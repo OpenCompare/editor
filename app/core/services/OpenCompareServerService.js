@@ -3,7 +3,7 @@
  */
 angular
   .module('openCompareEditor')
-  .service('openCompareServer', function($http) {
+  .service('openCompareServer', function($http, $q) {
 
     var client = "client";
     var local = "local";
@@ -11,14 +11,6 @@ angular
     var mode = client;
     var remoteServerAddress = "";
 
-
-    var clientResponse = {
-      success : function() { return this; },
-      error : function(callback) {
-        callback("Cannot request server in client mode.");
-        return this;
-      }
-    };
 
     this.useClient = function() {
       mode = client;
@@ -35,22 +27,22 @@ angular
 
 
     function processRequest(type, address, data, config) {
-      if (mode !== client) {
-        var requestAddress = address;
-        if (mode === remote) {
-          requestAddress = remoteServerAddress + '/' + address
-        }
+      return $q(function(resolve, reject) {
+        if (mode !== client) {
+          var requestAddress = address;
+          if (mode === remote) {
+            requestAddress = remoteServerAddress + '/' + address
+          }
 
-        console.log(requestAddress)
-
-        if (type === "get") {
-          return $http.get(requestAddress, data);
+          if (type === "get") {
+            resolve($http.get(requestAddress, data));
+          } else {
+            resolve($http.post(requestAddress, data));
+          }
         } else {
-          return $http.post(requestAddress, data);
+          reject("Cannot request server in client mode.");
         }
-      } else {
-        return clientResponse;
-      }
+      });
     }
 
     this.get = function (address, data, config) {

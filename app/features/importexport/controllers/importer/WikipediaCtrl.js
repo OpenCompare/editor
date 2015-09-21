@@ -25,7 +25,7 @@ angular
             {
                 url: $scope.url
             })
-            .success(function(response, status, headers, config) {
+            .then(function(response, status, headers, config) {
                 $scope.loading = false;
                 $scope.pcmContainers = response;
 
@@ -40,7 +40,7 @@ angular
                     });
                 }
 
-            }).error(function(data, status, headers, config) {
+            }, function(data, status, headers, config) {
                 $scope.loading = false;
                 $scope.message = data
             });

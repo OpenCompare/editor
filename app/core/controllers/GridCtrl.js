@@ -726,7 +726,7 @@ angular
             transformResponse: function(d, e) { // Needed to not interpret matrix as json (begin with '{|')
                 return d;
             }
-        }).success(function(data) {
+        }).then(function(data) {
             var commandParameters = [];
             $scope.pcmData[index][colName] = data;
 

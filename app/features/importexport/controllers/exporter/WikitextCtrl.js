@@ -30,11 +30,10 @@ angular
                 transformResponse: function(d, e) { // Needed to not interpret matrix as json (begin with '{|')
                     return d;
                 }
-            })
-            .success(function(response, status, headers, config) {
+            }).then(function(response, status, headers, config) {
                 $scope.loading = false;
                 $scope.export_content = response;
-            }).error(function(data, status, headers, config) {
+            }, function(data, status, headers, config) {
                 $scope.loading = false;
                 console.log(data)
             });

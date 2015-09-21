@@ -80,22 +80,23 @@ angular
     return function() {
         var deferred = $q.defer();
 
-      openCompareServer.get("/api/i18n")
-          .success(function (data) {
-            $translate.use('oc');
-            return deferred.resolve(data);
-        })
-          .error(function(data, status, headers, config) {
-            $translate.use('embedded');
-        });
+      openCompareServer.get("/api/i18n").then(
+        function (data) {
+          $translate.use('oc');
+          return deferred.resolve(data);
+        },
+        function(data, status, headers, config) {
+          $translate.use('embedded');
+        }
+      );
 
-        return deferred.promise;
+      return deferred.promise;
     };
 })
   .controller("I18nCtrl", function($scope, openCompareServer) {
 
     $scope.changeLanguage = function(langKey) {
-      openCompareServer.get("/api/i18n/" + langKey).success(function () {
+      openCompareServer.get("/api/i18n/" + langKey).then(function () {
             window.location.reload();
         });
     };

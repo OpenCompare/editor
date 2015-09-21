@@ -147,7 +147,7 @@ angular
                     transformResponse: function(d, e) { // Needed to not interpret matrix as json (begin with '{|')
                         return d;
                     }
-                }).success(function(data) {
+                }).then(function(data) {
                     $scope.pcmData[i][featureName] = data;
                 });
                 $scope.pcmDataRaw[i][featureName] = oldValue;
@@ -169,7 +169,7 @@ angular
                     transformResponse: function(d, e) { // Needed to not interpret matrix as json (begin with '{|')
                         return d;
                     }
-                }).success(function(data) {
+                }).then(function(data) {
                     $scope.pcmData[i][featureName] = data;
                 });
                 $scope.pcmDataRaw[i][featureName] = newValue;
