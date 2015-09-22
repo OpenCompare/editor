@@ -23,7 +23,7 @@ angular
 
     $scope.updateShareLinks = function() {
         $scope.activeShareButton = true;
-        $scope.embedLink = '<iframe src="http://'+window.location.hostname+':'+window.location.port+'/embedPCM/'+ $scope.id
+        $scope.embedLink = '<iframe src="http://'+window.location.hostname+':'+window.location.port+'/embed/pcm/'+ $scope.id
             +'?enableEdit='+$scope.enableEditOption+'&enableExport='+$scope.enableExportOption+'&enableTitle='+$scope.enableTitleOption+'&enableShare='+$scope.enableShareOption
             +'&enableShare='+$scope.enableConfiguratorOption +'&enableShare='+$scope.enableChartsOption
             +'" scrolling="no"  width="100%" height="700px" style="border:none;"></iframe>';
@@ -35,7 +35,7 @@ angular
     };
 
     $scope.updateEmbedLink = function() {
-        $scope.embedLink = '<iframe src="http://'+window.location.hostname+':'+window.location.port+'/embedPCM/'+ $scope.id
+        $scope.embedLink = '<iframe src="http://'+window.location.hostname+':'+window.location.port+'/embed/pcm/'+ $scope.id
             +'?enableEdit='+$scope.enableEditOption+'&enableExport='+$scope.enableExportOption+'&enableTitle='+$scope.enableTitleOption+'&enableShare='+$scope.enableShareOption
             +'&enableShare='+$scope.enableConfiguratorOption +'&enableShare='+$scope.enableChartsOption
             +'" scrolling="no"  width="100%" height="700px" style="border:none;"></iframe>';
