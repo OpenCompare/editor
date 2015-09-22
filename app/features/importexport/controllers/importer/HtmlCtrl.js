@@ -19,11 +19,7 @@ angular
 
     $scope.valid = function(){
         // Request must be a multipart form data !
-        var fd = new FormData();
-        var blob = new Blob([$scope.content], {type: "text/html"});
-        fd.append("file", blob);
-        fd.append('title', $scope.title);
-        fd.append('productAsLines', $scope.productAsLines);
+        var fd = new FormData(document.querySelector("#importHTML"));
 
         $scope.loading = true;
 
