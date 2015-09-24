@@ -22,7 +22,7 @@ angular
     $scope.FeaturGroupIndex = 1;
 
     $scope.gridOptions = {
-        headerTemplate: '/templates/featureGroupHeader.html',
+        headerTemplate: 'templates/featureGroupHeader.html',
         superColDefs: [],
         columnDefs: [],
         data: 'pcmData',
@@ -217,7 +217,7 @@ angular
             superCol: featureGroupName,
             filter: {term: ''},
             minWidth: $scope.minWidth,
-            cellTemplate: "/templates/cellTemplate.html",
+            cellTemplate: "templates/cellTemplate.html",
             menuItems: [
                 {
                     title: 'Hide',
@@ -614,7 +614,7 @@ angular
 
         var toolsColumn = {
             name: ' ',
-            cellTemplate: "/templates/toolCellTemplate.html",
+            cellTemplate: "templates/toolCellTemplate.html",
             enableCellEdit: false,
             enableFiltering: false,
             enableColumnResizing: false,

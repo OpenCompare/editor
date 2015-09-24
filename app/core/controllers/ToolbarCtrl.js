@@ -49,7 +49,7 @@ angular
     $scope.openCreateFeatureGroupModal = function() {
 
         $scope.$modalInstance = $modal.open({
-            templateUrl: '/templates/modal/modalCreateFeatureGroup.html',
+            templateUrl: 'templates/modal/modalCreateFeatureGroup.html',
             scope: $scope,
             controller: 'ToolbarCtrl'
         });

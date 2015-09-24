@@ -50,6 +50,6 @@ angular
       },
       link : link,
       controller: controller,
-      templateUrl: '/templates/pcmEditor.html'
+      templateUrl: 'templates/pcmEditor.html'
     };
   });
