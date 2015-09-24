@@ -176,3 +176,7 @@
     margin-top: 20px;
     height: 35px
 }
+
+.form-horizontal .form-group {
+  margin-left: 0px;
+}
