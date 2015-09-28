@@ -36,5 +36,6 @@ angular.module('openCompareEditor', [
     'chart.js',
     'pascalprecht.translate',
     'ab-base64',
-    'naif.base64'
+    'naif.base64',
+    'angular-clipboard'
   ]);
