@@ -27,7 +27,7 @@ angular
             "/api/export/csv",
             {
                 file: JSON.stringify($scope.pcmObject),
-                title: $scope.pcm.title,
+                title: $scope.pcm.name,
                 productAsLines: $scope.productAsLines,
                 separator: $scope.separator,
                 quote: $scope.quote
@@ -39,6 +39,13 @@ angular
             }).then(function(response) {
                 $scope.loading = false;
                 $scope.export_content = response.data;
+
+                // Prepare button for download
+                var data = new Blob([$scope.export_content], {type: 'text/plain'});
+                var file = window.URL.createObjectURL(data);
+                var saveToFileButton = document.getElementById("saveToFile");
+                saveToFileButton.href = file;
+                saveToFileButton.download = $scope.pcm.name + ".csv";
             }, function() {
                 $scope.loading = false;
             });
