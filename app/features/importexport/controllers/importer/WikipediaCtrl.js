@@ -8,6 +8,7 @@ angular
 
     $scope.pcmContainers = [];
     $scope.pcmContainerNames = [];
+    $scope.message = "";
 
     $scope.loading = false;
     $scope.cancel = function() {
@@ -18,7 +19,8 @@ angular
     $scope.url = "";
     $scope.valid = function(){
 
-        $scope.loading = true;
+      $scope.loading = true;
+      $scope.message = "";
 
       openCompareServer.post(
             "/api/import/wikipedia",

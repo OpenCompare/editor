@@ -16,12 +16,14 @@ angular
     $scope.file = null;
     $scope.title = "";
     $scope.productAsLines = true;
+    $scope.message = "";
 
     $scope.valid = function(){
-        // Request must be a multipart form data !
-        var fd = new FormData(document.querySelector("#importHTML"));
+      // Request must be a multipart form data !
+      var fd = new FormData(document.querySelector("#importHTML"));
 
-        $scope.loading = true;
+      $scope.loading = true;
+      $scope.message = "";
 
       openCompareServer.post(
             "/api/import/html",

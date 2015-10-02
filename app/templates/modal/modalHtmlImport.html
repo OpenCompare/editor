@@ -3,7 +3,7 @@
     <h4 class="modal-title" id="myModalLabel">Import a PCM from HTML</h4>
 </div>
 <div class="modal-body">
-    <div ng-model="message" style="color:orangered;"></div>
+  <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
     <form name="importHTML" id="importHTML" class="form-horizontal" method="post">
         <div class="form-group">
             <label class="col-md-4 control-label">Title</label>

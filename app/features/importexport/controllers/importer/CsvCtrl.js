@@ -18,6 +18,7 @@ angular
     $scope.productAsLines = true;
     $scope.separator = ',';
     $scope.quote = '"';
+    $scope.message = "";
 
     $scope.valid = function(){
         // Request must be a multipart form data !
@@ -28,6 +29,7 @@ angular
         fd.append('separator', $scope.separator);
         fd.append('quote', $scope.quote);
 
+        $scope.message = "";
         $scope.loading = true;
 
       openCompareServer.post(
