@@ -13,7 +13,7 @@ angular
 
     function controller($scope, openCompareServer) {
 
-      $scope.$watch("serverMode", function(newServerMode) {
+      $scope.$watch("data.configuration.serverMode", function(newServerMode) {
         switch (newServerMode) {
           case "client":
             openCompareServer.useClient();
@@ -31,15 +31,16 @@ angular
     return {
       restrict: 'E',
       scope: {
-        pcmContainer: '=pcmContainer',
-        pcmId: '=pcmId',
-        enableEdit: "=?edit",
-        //activeEditor: "=activeEditor",
-        //enableConfigurator: "=configurator",
-        //enableExport: "=export",
-        //enableShare: "=share"
-        serverMode: '@',
-        serverAddress: '@'
+        data: "="
+        //pcmContainer: '=pcmContainer',
+        //pcmId: '=pcmId',
+        //enableEdit: "=?edit",
+        ////activeEditor: "=activeEditor",
+        ////enableConfigurator: "=configurator",
+        ////enableExport: "=export",
+        ////enableShare: "=share"
+        //serverMode: '@',
+        //serverAddress: '@'
       },
       link : link,
       controller: controller,

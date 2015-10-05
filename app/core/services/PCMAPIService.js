@@ -7,7 +7,6 @@ angular
     var loader = this.factory.createJSONLoader();
     var serializer = this.factory.createJSONSerializer();
 
-
     /**
      * Sort two elements by their names (accessed with x.name)
      * @param a

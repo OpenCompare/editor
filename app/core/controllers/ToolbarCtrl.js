@@ -12,6 +12,7 @@ angular
   .controller("ToolbarCtrl", function($rootScope, $scope, $modal) {
 
     $scope.pcm = $scope.data.pcm;
+    $scope.state = $scope.data.state;
 
     // Configuration
     var config = $scope.data.configuration;
@@ -30,7 +31,6 @@ angular
     $scope.saved = false;
     $scope.isInDatabase = false;
     $scope.validating = false;
-    $scope.edit = false;
     $scope.configurator = false;
     $scope.lineView = true;
     $scope.isTitleSet = false;
@@ -47,14 +47,11 @@ angular
      * Remove PCM from server
      */
     $scope.remove = function() {
-        $rootScope.$broadcast('remove');
-    };
-
-    /**
-     * Cancel edition
-     */
-    $scope.cancel = function() {
-        $rootScope.$broadcast('cancel');
+      if (typeof $scope.data.id !== 'undefined') {
+        openCompareServer.get("/api/remove/" + id).then(function() {
+          window.location.href = "/";
+        });
+      }
     };
 
     $scope.setConfigurator = function(bool) {
@@ -104,7 +101,7 @@ angular
     };
 
     $scope.setEdit = function(bool, reload) {
-        $scope.edit = bool;
+        $scope.state.edit = bool;
         $rootScope.$broadcast('setGridEdit', [bool, reload]);
     };
 
@@ -138,12 +135,8 @@ angular
         $scope.id = args;
     });
 
-    $scope.$on('setToolbarEdit', function(event, args) {
-        $scope.edit = args;
-    });
-
     $scope.$on('launchCreation', function(event, args) {
-        $scope.edit = true;
+        $scope.state.edit = true;
         $scope.isTitleSet = true;
         $scope.pcmName = args.title;
 

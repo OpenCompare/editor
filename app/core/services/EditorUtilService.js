@@ -67,9 +67,9 @@ angular
 
     };
 
-    this.sortProducts = function(products, position) {
+    this.sortProducts = function(products, positions) {
         var sortedProducts = [];
-        position.sort(function (a, b) {
+        positions.sort(function (a, b) {
             if(a.position == -1) {
                 return 1;
             }
@@ -80,9 +80,9 @@ angular
                 return a.position - b.position;
             }
         });
-        for(var i = 0; i < position.length; i++) {
+        for(var i = 0; i < positions.length; i++) {
             products.forEach(function (product) {
-                if(position[i].product == product.name) {
+                if(positions[i].product == product.name) {
                     sortedProducts.push(product);
                 }
             });

@@ -19,6 +19,8 @@ angular
     }
 
 
+    $scope.state = $scope.data.state;
+
     /* Define subControllers, because we're in the grid, we can't create new controller on sub div */
     var subControllers = {
         $scope: $scope,
@@ -48,57 +50,50 @@ angular
 
         $scope.gridOptions.columnDefs = [];
         $scope.gridOptions.rowHeight = 35;
-        $scope.edit = bool;
+        $scope.state.edit = bool;
         if(reload) {
             $timeout(function(){
                 $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
             }, 100);
         }
-        $rootScope.$broadcast('setToolbarEdit', bool);
-
-
     };
     $scope.setEdit(false, false);
 
-    $scope.$watch("pcmContainer", function(newPcmContainer) {
-      if (typeof newPcmContainer !== 'undefined') {
-        /* Load PCM from import */
-        $scope.pcm = pcmApi.loadPCMModelFromString(newPcmContainer);
-        pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
-        $scope.metadata = newPcmContainer.metadata;
-        $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
-      }
-    });
 
-    $scope.$watch("pcmId", function(newPCMId) {
-      if (typeof newPCMId !== 'undefined') {
-        $scope.id = newPCMId;
+    // Load PCM
+    $scope.pcm = $scope.data.pcm;
+    $scope.metadata = $scope.data.metadata;
+    $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
 
-        /* Load a PCM from database */
-        $scope.loading = true;
-        $scope.setEdit(false, false);
-        $scope.updateShareLinks();
-        openCompareServer.get("/api/get/" + $scope.id).
-          then(function (response) {
-            var data = response.data;
-            $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm));
-            pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
-            $scope.metadata = data.metadata;
-            $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
-            $rootScope.$broadcast('saved', $scope.id);
-          })
-          .finally(function () {
-            $scope.loading = false;
-          })
-      }
-    });
+    //$scope.$watch("pcmId", function(newPCMId) {
+    //  if (typeof newPCMId !== 'undefined') {
+    //    $scope.id = newPCMId;
+    //
+    //    /* Load a PCM from database */
+    //    $scope.loading = true;
+    //    $scope.setEdit(false, false);
+    //    $scope.updateShareLinks();
+    //    openCompareServer.get("/api/get/" + $scope.id).
+    //      then(function (response) {
+    //        var data = response.data;
+    //        $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm));
+    //        pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
+    //        $scope.metadata = data.metadata;
+    //        $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
+    //        $rootScope.$broadcast('saved', $scope.id);
+    //      })
+    //      .finally(function () {
+    //        $scope.loading = false;
+    //      })
+    //  }
+    //});
 
-    $scope.$on('initializeFromExternalSource', function(event, args) {
-        $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(args.pcm));
-        pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
-        $scope.metadata = args.metadata;
-        $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
-    });
+    //$scope.$on('initializeFromExternalSource', function(event, args) {
+    //    $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(args.pcm));
+    //    pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
+    //    $scope.metadata = args.metadata;
+    //    $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
+    //});
 
     $scope.$on('setConfiguratorMode', function(event, arg) {
         $scope.configurator = arg;
@@ -156,7 +151,7 @@ angular
 
                 }
                 if($scope.enableEdit) {
-                    if($scope.edit) {
+                    if($scope.state.edit) {
                         height += 80;
                     }
                     else {
@@ -297,50 +292,31 @@ angular
     /**
      * Save PCM on the server
      */
-    $scope.save = function() {
+    $scope.$on('save', function(event, args) {
+      var pcmToSave = convertGridToPCM($scope.pcmData);
+      $scope.metadata = generateMetadata($scope.pcmData, $scope.gridOptions.columnDefs);
+      var jsonModel = JSON.parse(pcmApi.serializePCM(pcmToSave));
 
-        var pcmToSave = convertGridToPCM($scope.pcmData);
-        $scope.metadata = generateMetadata($scope.pcmData, $scope.gridOptions.columnDefs);
-        var jsonModel = JSON.parse(pcmApi.serializePCM(pcmToSave));
+      var pcmObject = {};
+      pcmObject.metadata = $scope.metadata;
+      pcmObject.pcm = jsonModel;
 
-        var pcmObject = {};
-        pcmObject.metadata = $scope.metadata;
-        pcmObject.pcm = jsonModel;
-
-        if (typeof id === 'undefined') {
-          openCompareServer.post("/api/create", pcmObject).then(function(response) {
-                id = response.data;
-                $scope.updateShareLinks();
-                console.log("model created with id=" + id);
-                $rootScope.$broadcast('savedFromCreator', id);
-            });
-        } else {
-          openCompareServer.post("/api/save/" + id, pcmObject).then(function() {
-                console.log("model saved");
-                $rootScope.$broadcast('saved');
-            });
-        }
-    };
-
-    /**
-     * Remove PCM from server
-     */
-    $scope.remove = function() {
-
-        if (typeof id !== 'undefined') {
-          openCompareServer.get("/api/remove/" + id).then(function() {
-                window.location.href = "/";
-            });
-        }
-    };
-
-    /**
-     * Cancel edition
-     */
-    $scope.cancel = function() {
-
-        window.location = "/view/" + id;
-    };
+      if (typeof $scope.data.id === 'undefined') {
+        openCompareServer.post("/api/create", pcmObject).then(function(response) {
+          $scope.data.id = response.data;
+          $scope.updateShareLinks();
+          console.log("model created with id=" + $scope.data.id);
+          $rootScope.$broadcast('savedFromCreator', $scope.data.id);
+        }, function(error) {
+          console.error(error);
+        });
+      } else {
+        openCompareServer.post("/api/save/" + $scope.data.id, pcmObject).then(function() {
+          console.log("model saved");
+          $rootScope.$broadcast('saved');
+        });
+      }
+    });
 
     /**
      * Generate metadata like products and features positions
@@ -376,16 +352,6 @@ angular
     }
 
     /**
-     * Check for name modification, if so, update the toolbar
-     */
-    $scope.$watch('pcm.name', function() {
-
-        if($scope.edit) {
-            $rootScope.$broadcast('setPcmName', $scope.pcm.name);
-        }
-    });
-
-    /**
      * Launch creation when in creator mode
      */
     $scope.$on('launchCreation', function(event, args) {
@@ -395,6 +361,7 @@ angular
         $scope.setEdit(true, false);
         $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
         $scope.pcm.name = args.title;
+        $rootScope.$broadcast('setPcmName', $scope.pcm.name);
 
         for(var i = 0; i < args.rows; i++) {
             var productName = "Product " + (i + 1);
@@ -411,18 +378,6 @@ angular
     /**
      * Bind events from toolbar to functions of the editor
       */
-
-    $scope.$on('save', function(event, args) {
-        $scope.save();
-    });
-
-    $scope.$on('remove', function(event, args) {
-        $scope.remove();
-    });
-
-    $scope.$on('cancel', function(event, args) {
-        $scope.cancel();
-    });
 
     $scope.$on('validate', function(event, args) {
         $scope.validate();

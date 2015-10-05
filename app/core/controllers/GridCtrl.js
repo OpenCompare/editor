@@ -211,8 +211,8 @@ angular
             enableColumnResizing: true,
             enableColumnMoving: false,
             enablePinning: false,
-            enableCellEdit: $scope.edit,
-            enableCellEditOnFocus: $scope.edit,
+            enableCellEdit: $scope.state.edit,
+            enableCellEditOnFocus: $scope.state.edit,
             allowCellFocus: true,
             superCol: featureGroupName,
             filter: {term: ''},
@@ -235,7 +235,7 @@ angular
                 {
                     title: 'Rename Feature',
                     shown: function () {
-                        return $scope.edit;
+                        return $scope.state.edit;
                     },
                     icon: 'fa fa-pencil',
                     action: function($event) {
@@ -261,7 +261,7 @@ angular
                 {
                     title: 'Delete Feature',
                     shown: function () {
-                        return $scope.edit;
+                        return $scope.state.edit;
                     },
                     icon: 'fa fa-trash-o',
                     action: function($event) {
@@ -630,7 +630,7 @@ angular
             allowCellFocus: false,
             enableColumnMoving: false
         };
-        switch($scope.edit) {
+        switch($scope.state.edit) {
             case true:
                 toolsColumn.width = 30;
                 break;
@@ -649,8 +649,8 @@ angular
             enableSorting: true,
             enableHiding: false,
             enableColumnMoving: false,
-            enableCellEdit: $scope.edit,
-            enableCellEditOnFocus: $scope.edit,
+            enableCellEdit: $scope.state.edit,
+            enableCellEditOnFocus: $scope.state.edit,
             pinnedLeft:true,
             allowCellFocus: true,
             minWidth: 150,
@@ -711,7 +711,7 @@ angular
               openCompareServer.get("/api/remove/" + id);
             }
         }
-        if(!$scope.edit) {//Todo: replace by configuratorMode == true
+        if(!$scope.state.edit) {//Todo: replace by configuratorMode == true
             $rootScope.$broadcast("initConfigurator", {features: $scope.gridOptions.columnDefs, pcmData: $scope.pcmData});
         }
     }

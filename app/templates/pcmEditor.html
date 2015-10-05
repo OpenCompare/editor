@@ -192,11 +192,11 @@
     </div>
     <div class="row">
       <p ng-if="creator"><strong>Creator:</strong> {{creator}}</p>
-      <div ng-show="!edit">
+      <div ng-show="!state.edit">
         <p ng-if="source"><strong>Source:</strong> {{source}}</p>
         <p ng-if="license"><strong>License:</strong> {{license}}</p>
       </div>
-      <form class="form-horizontal" ng-show="edit">
+      <form class="form-horizontal" ng-show="state.edit">
           <div class="form-group">
             <label for="pcm-source" class="control-label">{{ "edit.source.placeholder" | translate }}:</label>
             <input id="pcm-source" class="form-control" type="text" ng-model="source" placeholder='{{ "edit.source.placeholder" | translate }}'>

@@ -12,7 +12,6 @@ angular
   .module('openCompareEditor')
   .controller("FeatureGroupCtrl", function($rootScope, $scope, $window, $timeout, featureGroupService, editorUtil, $modal) {
 
-    $scope.edit = false;
 
     $scope.isAFeature = function(col) {
         return col.name != ' ' && col.name != 'Product';
@@ -168,7 +167,7 @@ angular
     });
 
     $scope.$on('setGridEdit', function(event, args) {
-        $scope.edit = args[0];
+        $scope.state.edit = args[0];
 
     });
 
