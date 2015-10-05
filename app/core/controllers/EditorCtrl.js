@@ -325,7 +325,11 @@ angular
      * @returns {{}}
      */
     function generateMetadata(product, columns) {
-      var metadata = {};
+      if (typeof $scope.data.metadata === 'undefined') {
+        $scope.data.metadata = {};
+      }
+
+      var metadata = $scope.data.metadata;
       metadata.featurePositions = [];
       metadata.productPositions = [];
       var index = 0;
@@ -345,9 +349,6 @@ angular
           index++;
       });
 
-      metadata.source = $scope.source;
-      metadata.license = $scope.license;
-      metadata.creator = $scope.creator;
       return metadata;
     }
 
