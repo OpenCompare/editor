@@ -10,6 +10,6 @@ angular
           scope: {
             data: '='
           },
-          templateUrl: 'templates/toolbar.html'
+          templateUrl: 'toolbar/toolbar.html'
         };
     });

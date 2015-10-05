@@ -4,8 +4,8 @@
 
 angular
   .module('openCompareEditor')
-  .directive('openCompareCharts', function() {
+  .directive('openCompareCreator', function() {
         return {
-            templateUrl: 'templates/charts.html'
+            templateUrl: 'creator/creator.html'
         };
     });

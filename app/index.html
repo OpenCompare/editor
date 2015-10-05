@@ -13,7 +13,7 @@
     <link rel='stylesheet' href='bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css' />
     <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/material.min.css' />
     <link rel='stylesheet' href='bower_components/angular-chart.js/dist/angular-chart.css' />
-    <link rel='stylesheet' href='main/stylesheets/main.css'>
+    <link rel='stylesheet' href='index.css'>
     <!-- build:css(.) styles/vendor.css -->
     <!-- endbuild -->
 
@@ -73,10 +73,11 @@
     <script src="core/openCompareEditor.js"></script>
 
     <script src="core/directives/editor.js"></script>
-    <script src="core/directives/toolbar.js"></script>
     <script src="core/directives/featureGroup.js"></script>
 
-    <script src="core/controllers/ToolbarCtrl.js"></script>
+    <script src="toolbar/toolbar.js"></script>
+    <script src="toolbar/ToolbarCtrl.js"></script>
+
     <script src="core/controllers/EditorCtrl.js"></script>
     <script src="core/controllers/UndoRedoCtrl.js"></script>
     <script src="core/controllers/CommandsCtrl.js"></script>
@@ -96,33 +97,26 @@
     <script src="core/services/EditorUtilService.js"></script>
     <script src="core/services/TypeService.js"></script>
 
-    <script src="features/charts/ChartService.js"></script>
-    <script src="features/charts/ChartsCtrl.js"></script>
-    <script src="features/charts/charts.js"></script>
+    <script src="charts/ChartService.js"></script>
+    <script src="charts/ChartsCtrl.js"></script>
+    <script src="charts/charts.js"></script>
 
-    <script src="features/configurator/ConfiguratorCtrl.js"></script>
-    <script src="features/configurator/configurator.js"></script>
+    <script src="configurator/ConfiguratorCtrl.js"></script>
+    <script src="configurator/configurator.js"></script>
 
-    <script src="features/importexport/controllers/exporter/CsvCtrl.js"></script>
-    <script src="features/importexport/controllers/exporter/WikitextCtrl.js"></script>
-    <script src="features/importexport/controllers/exporter/HtmlCtrl.js"></script>
-    <script src="features/importexport/controllers/exporter/JsonCtrl.js"></script>
+    <script src="io/fileModel.js"></script>
+    <script src="io/csv/CsvExportCtrl.js"></script>
+    <script src="io/mediawiki/MediaWikiExportCtrl.js"></script>
+    <script src="io/html/HtmlExportCtrl.js"></script>
+    <script src="io/json/JsonExportCtrl.js"></script>
 
-    <script src="features/importexport/directives/fileModel.js"></script>
 
+    <script src="creator/CreatorCtrl.js"></script>
+    <script src="creator/creator.js"></script>
 
-    <!-- File : opencompare-editor-creator.js -->
-    <script src="features/creator/CreatorCtrl.js"></script>
-    <script src="features/creator/creator.js"></script>
-
-    <!-- File : opencompare-editor-csv.js -->
-    <script src="features/importexport/controllers/importer/CsvCtrl.js"></script>
-
-    <!-- File : opencompare-editor-wikipedia.js -->
-    <script src="features/importexport/controllers/importer/WikipediaCtrl.js"></script>
-
-    <!-- File : opencompare-editor-html.js -->
-    <script src="features/importexport/controllers/importer/HtmlCtrl.js"></script>
+    <script src="io/csv/CsvImportCtrl.js"></script>
+    <script src="io/mediawiki/MediaWikiImportCtrl.js"></script>
+    <script src="io/html/HtmlImportCtrl.js"></script>
 
     <!-- endbuild -->
 
@@ -132,7 +126,7 @@
 
     <!-- Test app script -->
     <script src="openCompareEditorApp.js"></script>
-    <script src="main/I18nCtrl.js"></script> <!-- Not required -->
+    <script src="I18nCtrl.js"></script>
 
 
 

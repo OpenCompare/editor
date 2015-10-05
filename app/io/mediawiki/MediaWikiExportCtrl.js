@@ -4,7 +4,7 @@
 
 angular
   .module('openCompareEditor')
-  .controller("WikitextExportController", function($rootScope, $scope, $modal, $modalInstance, openCompareServer) {
+  .controller("MediaWikiExportController", function($rootScope, $scope, $modal, $modalInstance, openCompareServer) {
     $scope.loading = false;
     $scope.cancel = function() {
         $modalInstance.close();

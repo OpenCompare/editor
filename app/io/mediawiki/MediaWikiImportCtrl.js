@@ -4,7 +4,7 @@
 
 angular
   .module('openCompareEditor')
-  .controller("WikipediaImportController", function($rootScope, $scope, $modalInstance, base64, openCompareServer) {
+  .controller("MediaWikiImportController", function($rootScope, $scope, $modalInstance, base64, openCompareServer) {
 
     $scope.pcmContainers = [];
     $scope.pcmContainerNames = [];
