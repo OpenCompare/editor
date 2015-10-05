@@ -11,6 +11,22 @@ angular
   .module('openCompareEditor')
   .controller("ToolbarCtrl", function($rootScope, $scope, $modal) {
 
+    $scope.pcm = $scope.data.pcm;
+
+    // Configuration
+    var config = $scope.data.configuration;
+
+    // Default configuration
+    if (typeof config.enableToolbar === 'undefined') { config.enableToolbar = true; }
+    if (typeof config.enableTitle === 'undefined') { config.enableTitle = true; }
+    if (typeof config.enableEdit === 'undefined') { config.enableEdit = true; }
+    if (typeof config.enableExport === 'undefined') { config.enableExport = true; }
+    if (typeof config.enableShare === 'undefined') { config.enableShare = true; }
+
+    $scope.config = config;
+
+    // End configuration
+
     $scope.saved = false;
     $scope.isInDatabase = false;
     $scope.validating = false;

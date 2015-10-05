@@ -11,7 +11,7 @@
 angular
   .module('openCompareEditorApp', ['openCompareEditor'])
   .controller('TestCtrl', function($scope) {
-    $scope.myPCM = JSON.stringify({"class":"pcm.PCM@2684530441437554316923","name":"Q29tcGFyaXNvbl8oZ3JhbW1hcikgLSBDb21wYXJpc29uIGluIEVuZ2xpc2g=","generated_KMF_ID":"2684530441437554316923","products":[
+    var pcm = {"class":"pcm.PCM@2684530441437554316923","name":"Q29tcGFyaXNvbl8oZ3JhbW1hcikgLSBDb21wYXJpc29uIGluIEVuZ2xpc2g=","generated_KMF_ID":"2684530441437554316923","products":[
       {"class":"pcm.Product@13911264501437554316923","name":"bWFueSwgbXVjaA==","generated_KMF_ID":"13911264501437554316923","cells":[
         {"class":"pcm.Cell@15854244811437554316923","content":"bW9yZQ==","rawContent":"bW9yZQ==","generated_KMF_ID":"15854244811437554316923","feature":["features[2329332351437554316923]"],"product":["products[13911264501437554316923]"],"interpretation":[
           {"class":"pcm.StringValue@11274448671437554396237","value":"bW9yZQ==","generated_KMF_ID":"11274448671437554396237"}
@@ -101,16 +101,16 @@ angular
     ],"features":[
       {"class":"pcm.Feature@423279221437554316923","name":"U3VwZXJsYXRpdmU=","generated_KMF_ID":"423279221437554316923","parentGroup":[],"cells":["products[13838490261437554316923]/cells[9416598181437554316923]","products[13911264501437554316923]/cells[5311042921437554316923]","products[3268613211437554316923]/cells[10448251981437554316923]","products[4672922721437554316923]/cells[15113970821437554316923]","products[16455116791437554316923]/cells[2544065591437554316923]","products[15035405821437554316923]/cells[14081584601437554316923]","products[16083524341437554316923]/cells[13786375921437554316923]","products[21222185921437554316923]/cells[13789169181437554316923]"]},
       {"class":"pcm.Feature@2329332351437554316923","name":"Q29tcGFyYXRpdmU=","generated_KMF_ID":"2329332351437554316923","parentGroup":[],"cells":["products[16455116791437554316923]/cells[18709500491437554316923]","products[4672922721437554316923]/cells[14259944401437554316923]","products[13911264501437554316923]/cells[15854244811437554316923]","products[21222185921437554316923]/cells[13006092951437554316923]","products[3268613211437554316923]/cells[9965813811437554316923]","products[15035405821437554316923]/cells[5255574571437554316923]","products[16083524341437554316923]/cells[12988150011437554316923]","products[13838490261437554316923]/cells[4684061891437554316923]"]}
-    ]});
+    ]};
 
-  }).controller('TotoCtrl', function($scope) {
+    $scope.myPCM = JSON.stringify(pcm);
 
-    $scope.success = function() {
-      console.log("youpi");
-    };
+    $scope.data = {
+      pcm: pcm,
+      metadata: {},
+      configuration: {
+        enableTitle: true
+      }
+    }
 
-    $scope.fail = function(err) {
-      console.log("owwwwww");
-      console.log(err);
-    };
   });

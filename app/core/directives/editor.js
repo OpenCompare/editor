@@ -13,12 +13,6 @@ angular
 
     function controller($scope, openCompareServer) {
 
-      $scope.$watch("enableToolbar", function(newEnableToolbar) {
-        if (typeof newEnableToolbar === 'undefined') {
-          $scope.enableToolbar = true;
-        }
-      });
-
       $scope.$watch("serverMode", function(newServerMode) {
         switch (newServerMode) {
           case "client":
@@ -39,7 +33,6 @@ angular
       scope: {
         pcmContainer: '=pcmContainer',
         pcmId: '=pcmId',
-        enableToolbar: "=?toolbar",
         enableEdit: "=?edit",
         //activeEditor: "=activeEditor",
         //enableConfigurator: "=configurator",

@@ -6,6 +6,10 @@ angular
   .module('openCompareEditor')
   .directive('openCompareToolbar', function() {
         return {
-            templateUrl: 'templates/toolbar.html'
+          restrict: 'E',
+          scope: {
+            data: '='
+          },
+          templateUrl: 'templates/toolbar.html'
         };
     });

@@ -32,8 +32,9 @@
     <div class="container">
       <h1>OpenCompare editor</h1>
 
-      <div class="row">
-        <open-compare-editor pcm-container="myPCM" edit="true" server-mode="client" ng-controller="TestCtrl"></open-compare-editor>
+      <div class="row" ng-controller="TestCtrl">
+        <open-compare-toolbar data="data"></open-compare-toolbar>
+        <open-compare-editor pcm-container="myPCM" edit="true" server-mode="client"></open-compare-editor>
       </div>
 
       <div class="row">
@@ -71,7 +72,7 @@
     <!-- build:js({.tmp,app}) scripts/opencompare-editor.js -->
     <script src="core/openCompareEditor.js"></script>
 
-    <script src="core/directives/openCompareEditor.js"></script>
+    <script src="core/directives/editor.js"></script>
     <script src="core/directives/toolbar.js"></script>
     <script src="core/directives/featureGroup.js"></script>
 
