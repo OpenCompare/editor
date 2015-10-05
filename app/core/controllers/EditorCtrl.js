@@ -371,6 +371,7 @@ angular
 
       metadata.source = $scope.source;
       metadata.license = $scope.license;
+      metadata.creator = $scope.creator;
       return metadata;
     }
 

@@ -522,10 +522,15 @@ angular
 
       $rootScope.$broadcast('setPcmName', $scope.pcm.name);
 
+      $scope.creator = "";
       $scope.source = "";
       $scope.license = "";
 
+
       if ((typeof metadata  !== 'undefined')) {
+        if (typeof metadata.creator  !== 'undefined') {
+          $scope.creator = metadata.creator;
+        }
         if (typeof metadata.source  !== 'undefined') {
           $scope.source = metadata.source;
         }
