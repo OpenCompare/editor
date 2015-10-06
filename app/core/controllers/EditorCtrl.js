@@ -1,16 +1,10 @@
 /**
- * Created by gbecan on 12/17/14.
- * Updated by hvalle on 8/17/15
- */
-
-
-/**
 * EditorCtrl.js
 * Main controller for OpenCompare Editor
 */
 angular
   .module('openCompareEditor')
-  .controller("EditorCtrl", function($controller, $rootScope, $scope, $timeout, uiGridConstants, $compile, $modal, expandeditor,  $location, pcmApi, editorUtil, openCompareServer) {
+  .controller("EditorCtrl", function($controller, $rootScope, $scope, $timeout, uiGridConstants, $compile, $modal, expandeditor,  $location, pcmApi, editorUtil, openCompareServer, componentUtils) {
 
 
     /* Load material design */
@@ -19,12 +13,10 @@ angular
     }
 
 
-    $scope.state = $scope.data.state;
-
     /* Define subControllers, because we're in the grid, we can't create new controller on sub div */
     var subControllers = {
-        $scope: $scope,
-        $location: $location
+      $scope: $scope,
+      $location: $location
     };
 
     $controller('GridCtrl', subControllers);
@@ -34,6 +26,33 @@ angular
     $controller('TypesCtrl', subControllers);
     $controller('ShareCtrl', subControllers);
     $controller('FeatureGroupCtrl', subControllers);
+
+
+    // ----- Start init ------ //
+
+    if (typeof $scope.data === 'undefined') {
+      $scope.data = {};
+    }
+
+    componentUtils.defineOption($scope.data, ["state"], {});
+    $scope.state = $scope.data.state;
+
+
+    componentUtils.defineOption($scope.data, ["state", "edit"], false);
+    $scope.$watch("data.state.edit", function(newVal) {
+      console.log("edit=" + newVal);
+      setEdit($scope.data.state.edit, true);
+    });
+
+    // Load PCM
+    $scope.$watch("data.pcm", function(pcm) {
+      if (typeof pcm !== 'undefined') {
+        $scope.pcm = pcm;
+        $scope.metadata = $scope.data.metadata;
+        $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
+        $scope.updateShareLinks();
+      }
+    });
 
     //Export
     $scope.export_content = null;
@@ -45,55 +64,27 @@ angular
     $scope.loaded = false;
     $scope.lineView = true;
 
+    // ----- End init ------ //
+
+
     // Set grid in edit/view mode
+    function setEdit(bool, reload) {
+
+      $scope.gridOptions.columnDefs = [];
+      $scope.gridOptions.rowHeight = 35;
+      $scope.state.edit = bool;
+      if(reload) {
+        $timeout(function(){
+          $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
+        }, 100);
+      }
+    }
+
     $scope.setEdit = function(bool, reload) {
-
-        $scope.gridOptions.columnDefs = [];
-        $scope.gridOptions.rowHeight = 35;
-        $scope.state.edit = bool;
-        if(reload) {
-            $timeout(function(){
-                $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
-            }, 100);
-        }
+      setEdit(bool, reload);
     };
-    $scope.setEdit(false, false);
 
 
-    // Load PCM
-    $scope.pcm = $scope.data.pcm;
-    $scope.metadata = $scope.data.metadata;
-    $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
-
-    //$scope.$watch("pcmId", function(newPCMId) {
-    //  if (typeof newPCMId !== 'undefined') {
-    //    $scope.id = newPCMId;
-    //
-    //    /* Load a PCM from database */
-    //    $scope.loading = true;
-    //    $scope.setEdit(false, false);
-    //    $scope.updateShareLinks();
-    //    openCompareServer.get("/api/get/" + $scope.id).
-    //      then(function (response) {
-    //        var data = response.data;
-    //        $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm));
-    //        pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
-    //        $scope.metadata = data.metadata;
-    //        $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
-    //        $rootScope.$broadcast('saved', $scope.id);
-    //      })
-    //      .finally(function () {
-    //        $scope.loading = false;
-    //      })
-    //  }
-    //});
-
-    //$scope.$on('initializeFromExternalSource', function(event, args) {
-    //    $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(args.pcm));
-    //    pcmApi.decodePCM($scope.pcm); // Decode PCM from Base64
-    //    $scope.metadata = args.metadata;
-    //    $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
-    //});
 
     $scope.$on('setConfiguratorMode', function(event, arg) {
         $scope.configurator = arg;
@@ -359,7 +350,7 @@ angular
 
         $rootScope.$broadcast('launchFromCreator');
         $scope.pcm = pcmApi.factory.createPCM();
-        $scope.setEdit(true, false);
+        setEdit(true, false);
         $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
         $scope.pcm.name = args.title;
         $rootScope.$broadcast('setPcmName', $scope.pcm.name);
@@ -385,7 +376,7 @@ angular
     });
 
     $scope.$on('setGridEdit', function(event, args) {
-        $scope.setEdit(args[0], args[1]);
+        setEdit(args[0], args[1]);
     });
 
     /**

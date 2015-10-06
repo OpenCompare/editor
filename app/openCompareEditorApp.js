@@ -103,8 +103,6 @@ angular
       {"class":"pcm.Feature@2329332351437554316923","name":"Q29tcGFyYXRpdmU=","generated_KMF_ID":"2329332351437554316923","parentGroup":[],"cells":["products[16455116791437554316923]/cells[18709500491437554316923]","products[4672922721437554316923]/cells[14259944401437554316923]","products[13911264501437554316923]/cells[15854244811437554316923]","products[21222185921437554316923]/cells[13006092951437554316923]","products[3268613211437554316923]/cells[9965813811437554316923]","products[15035405821437554316923]/cells[5255574571437554316923]","products[16083524341437554316923]/cells[12988150011437554316923]","products[13838490261437554316923]/cells[4684061891437554316923]"]}
     ]});
 
-    $scope.myPCM = pcm;
-
     var loadedPCM = pcmApi.loadPCMModelFromString(pcm);
     pcmApi.decodePCM(loadedPCM);
 
@@ -112,9 +110,6 @@ angular
       pcm: loadedPCM,
       configuration: {
         serverMode: "client"
-      },
-      state: {
-
       }
     }
 

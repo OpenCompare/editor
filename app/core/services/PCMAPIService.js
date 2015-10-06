@@ -43,30 +43,34 @@ angular
 
     this.getConcreteFeatures = function (pcm) {
 
-        function getConcreteFeaturesRec(aFeature) {
-            var features = [];
+      function getConcreteFeaturesRec(aFeature) {
+          var features = [];
 
-            if (typeof aFeature.subFeatures !== 'undefined') {
-                var subFeatures = aFeature.subFeatures.array;
-                for (var i = 0; i < subFeatures.length; i++) {
-                    var subFeature = subFeatures[i];
-                    features = features.concat(getConcreteFeaturesRec(subFeature));
-                }
-            } else {
-                features.push(aFeature);
-            }
+          if (typeof aFeature.subFeatures !== 'undefined') {
+              var subFeatures = aFeature.subFeatures.array;
+              for (var i = 0; i < subFeatures.length; i++) {
+                  var subFeature = subFeatures[i];
+                  features = features.concat(getConcreteFeaturesRec(subFeature));
+              }
+          } else {
+              features.push(aFeature);
+          }
 
-            return features;
-        }
+          return features;
+      }
 
+      var features = [];
+
+      if (typeof pcm.features !== 'undefined') {
         var aFeatures = pcm.features.array;
-        var features = [];
-        for (var i = 0; i < aFeatures.length; i++) {
-            var aFeature = aFeatures[i];
-            features = features.concat(getConcreteFeaturesRec(aFeature))
-        }
 
-        return features;
+        for (var i = 0; i < aFeatures.length; i++) {
+          var aFeature = aFeatures[i];
+          features = features.concat(getConcreteFeaturesRec(aFeature))
+        }
+      }
+
+      return features;
     };
 
     this.findCell = function (product, feature) {
