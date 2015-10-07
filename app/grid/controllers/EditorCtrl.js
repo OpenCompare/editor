@@ -30,9 +30,7 @@ angular
 
     // ----- Start init ------ //
 
-    if (typeof $scope.data === 'undefined') {
-      $scope.data = {};
-    }
+
 
     componentUtils.defineOption($scope.data, ["state"], {});
     $scope.state = $scope.data.state;

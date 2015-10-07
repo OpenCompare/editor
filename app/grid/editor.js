@@ -7,8 +7,9 @@ angular
   .directive('openCompareEditor', function(openCompareServer) {
 
     function link(scope) {
-
-
+      if (typeof scope.data === 'undefined') {
+        scope.data = {};
+      }
     }
 
     function controller($scope, openCompareServer) {
@@ -32,15 +33,6 @@ angular
       restrict: 'E',
       scope: {
         data: "="
-        //pcmContainer: '=pcmContainer',
-        //pcmId: '=pcmId',
-        //enableEdit: "=?edit",
-        ////activeEditor: "=activeEditor",
-        ////enableConfigurator: "=configurator",
-        ////enableExport: "=export",
-        ////enableShare: "=share"
-        //serverMode: '@',
-        //serverAddress: '@'
       },
       link : link,
       controller: controller,
