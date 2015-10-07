@@ -2,8 +2,8 @@ angular
   .module('openCompareEditor')
   .service('componentUtils', function() {
 
-    this.defineOption = function(data, optionPath, defaultValue) {
-      var currentObj = data;
+    this.defineOption = function(config, optionPath, defaultValue) {
+      var currentObj = config;
 
       // Define structure if necessary
       for (var i = 0; i < optionPath.length - 1; i++) {
@@ -21,7 +21,6 @@ angular
         currentObj[option] = defaultValue;
       }
 
-      return data;
     }
 
 

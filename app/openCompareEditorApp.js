@@ -106,11 +106,12 @@ angular
     var loadedPCM = pcmApi.loadPCMModelFromString(pcm);
     pcmApi.decodePCM(loadedPCM);
 
-    $scope.data = {
-      pcm: loadedPCM,
-      configuration: {
-        serverMode: "client"
-      }
+    $scope.myPCMContainer = {
+      pcm: loadedPCM
+    };
+
+    $scope.myConfig = {
+      serverMode: "client"
     }
 
   });

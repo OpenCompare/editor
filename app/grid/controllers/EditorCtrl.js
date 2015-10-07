@@ -29,23 +29,9 @@ angular
 
 
     // ----- Start init ------ //
-
-
-
-    componentUtils.defineOption($scope.data, ["state"], {});
-    $scope.state = $scope.data.state;
-
-
-    componentUtils.defineOption($scope.data, ["state", "edit"], false);
-    $scope.$watch("data.state.edit", function(newVal) {
-      setEdit($scope.data.state.edit, true);
-    });
-
     // Load PCM
-    $scope.$watch("data.pcm", function(pcm) {
-      if (typeof pcm !== 'undefined') {
-        $scope.pcm = pcm;
-        $scope.metadata = $scope.data.metadata;
+    $scope.$watch("pcm", function() {
+      if (typeof $scope.pcm !== 'undefined') {
         $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
         $scope.updateShareLinks();
       }

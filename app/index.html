@@ -33,8 +33,10 @@
       <h1>OpenCompare editor</h1>
 
       <div class="row" ng-controller="TestCtrl">
-        <open-compare-toolbar data="data"></open-compare-toolbar>
-        <open-compare-editor data="data"></open-compare-editor>
+        <oc-editor pcm-container="myPCMContainer" config="myConfig">
+          <open-compare-toolbar></open-compare-toolbar>
+          <open-compare-editor></open-compare-editor>
+        </oc-editor>
       </div>
 
       <div class="row">
@@ -71,10 +73,11 @@
 
     <!-- build:js({.tmp,app}) scripts/opencompare-editor.js -->
     <script src="editor/openCompareEditor.js"></script>
+    <script src="editor/editor.js"></script>
 
     <script src="grid/services/ComponentUtilsService.js"></script>
 
-    <script src="grid/editor.js"></script>
+    <script src="grid/grid.js"></script>
     <script src="grid/featureGroup.js"></script>
 
     <script src="toolbar/toolbar.js"></script>

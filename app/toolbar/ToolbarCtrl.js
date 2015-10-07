@@ -11,22 +11,6 @@ angular
   .module('openCompareEditor')
   .controller("ToolbarCtrl", function($rootScope, $scope, $modal, componentUtils) {
 
-    if (typeof $scope.data === 'undefined') {
-      $scope.data = {};
-    }
-
-    // Default configuration
-    componentUtils.defineOption($scope.data, ["configuration", "enableToolbar"], true);
-    componentUtils.defineOption($scope.data, ["configuration", "enableTitle"], true);
-    componentUtils.defineOption($scope.data, ["configuration", "enableEdit"], true);
-    componentUtils.defineOption($scope.data, ["configuration", "enableExport"], true);
-    componentUtils.defineOption($scope.data, ["configuration", "enableShare"], true);
-
-    componentUtils.defineOption($scope.data, ["state", "edit"], false);
-
-    $scope.config = $scope.data.configuration;
-
-    // End configuration
 
     $scope.saved = false;
     $scope.isInDatabase = false;
@@ -104,7 +88,7 @@ angular
     };
 
     $scope.setEdit = function(bool, reload) {
-        $scope.data.state.edit = bool;
+        $scope.state.edit = bool;
     };
 
     $scope.increaseHeight = function(height) {
@@ -138,7 +122,7 @@ angular
     });
 
     $scope.$on('launchCreation', function(event, args) {
-        $scope.data.state.edit = true;
+        $scope.state.edit = true;
         $scope.isTitleSet = true;
         $scope.pcmName = args.title;
 
