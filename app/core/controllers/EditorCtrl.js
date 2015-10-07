@@ -40,7 +40,6 @@ angular
 
     componentUtils.defineOption($scope.data, ["state", "edit"], false);
     $scope.$watch("data.state.edit", function(newVal) {
-      console.log("edit=" + newVal);
       setEdit($scope.data.state.edit, true);
     });
 
