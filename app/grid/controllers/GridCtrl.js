@@ -282,7 +282,7 @@ angular
             ],
             cellClass: function(grid, row, col) {
                 var rowValue = $scope.pcmDataRaw[$scope.pcmData.indexOf(row.entity)];
-                if($scope.validating && $scope.validation[col.name] && !$scope.validation[col.name][$scope.pcmData.indexOf(row.entity)]) {
+                if($scope.state.validating && $scope.validation[col.name] && !$scope.validation[col.name][$scope.pcmData.indexOf(row.entity)]) {
                     return 'warningCell';
                 }
                 else if(rowValue) {
@@ -703,20 +703,21 @@ angular
      */
     function getVisualRepresentation(cellValue, index, colName) {
       openCompareServer.post("/api/extract-content", {
-            type: 'wikipedia',
-            rawContent: cellValue,
-            responseType: "text/plain",
-            transformResponse: function(d, e) { // Needed to not interpret matrix as json (begin with '{|')
-                return d;
-            }
-        }).then(function(response) {
-            var commandParameters = [];
-            $scope.pcmData[index][colName] = response.data;
+          type: 'wikipedia',
+          rawContent: cellValue,
+          responseType: "text/plain",
+          transformResponse: function(d, e) { // Needed to not interpret matrix as json (begin with '{|')
+              return d;
+          }
+      }).then(function(response) {
+          $scope.pcmData[index][colName] = response.data;
 
-            $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-        });
+          $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+      }, function (error) {
+        $scope.pcmData[index][colName] = cellValue;
+      });
 
-        return 'Loading value...';
+      return 'Loading value...';
     }
 
 

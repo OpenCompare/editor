@@ -12,8 +12,6 @@ angular
   .controller("ToolbarCtrl", function($rootScope, $scope, $modal, componentUtils) {
 
 
-    $scope.saved = false;
-    $scope.isInDatabase = false;
     $scope.validating = false;
     $scope.configurator = false;
     $scope.lineView = true;
@@ -82,8 +80,8 @@ angular
     /**
      * Validate the type of each columns
      */
-    $scope.validate= function() {
-        $rootScope.$broadcast('validate');
+    $scope.toggleValidation= function() {
+      $scope.state.validating = !$scope.state.validating;
     };
 
     $scope.setEdit = function(bool, reload) {
@@ -93,32 +91,6 @@ angular
     $scope.increaseHeight = function(height) {
         $rootScope.$broadcast('increaseHeight', height);
     };
-
-    $scope.$on('modified', function(event, args) {
-        $scope.saved = false;
-    });
-
-    $scope.$on('validating', function(event, args) {
-        $scope.validating = !$scope.validating;
-    });
-
-    $scope.$on('completelyValidated', function(event, args) {
-        $scope.validated = true;
-    });
-
-    $scope.$on('saved', function(event, args) {
-        $scope.saved = true;
-        $scope.isInDatabase = true;
-        if(args) {
-            $scope.id = args;
-        }
-    });
-
-    $scope.$on('savedFromCreator', function(event, args) {
-        $scope.saved = true;
-        $scope.isInDatabase = true;
-        $scope.id = args;
-    });
 
     $scope.$on('launchCreation', function(event, args) {
         $scope.state.edit = true;

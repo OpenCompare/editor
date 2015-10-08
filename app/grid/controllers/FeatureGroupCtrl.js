@@ -166,9 +166,4 @@ angular
         $rootScope.$broadcast('reloadFeatureGroup');
     });
 
-    $scope.$on('setGridEdit', function(event, args) {
-        $scope.state.edit = args[0];
-
-    });
-
 });

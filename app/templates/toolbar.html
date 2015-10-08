@@ -58,8 +58,8 @@
     <div ng-show="state.edit">
       <div class="btn-group">
         <a role="button" class="btn btn-default btn-sm" ng-class='{"btn btn-flat btn-default " : !state.saved, "btn btn-success": state.saved && isTitleSet}' ng-disabled="!isTitleSet" ng-click="save()"><i class="fa" ng-class='{"mdi-content-save": !state.saved, "mdi-navigation-check": state.saved && isTitleSet}'></i> {{ 'edit.button.save' | translate }}</a>
-        <a ng-show="isInDatabase" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalRemove"><i class="mdi-action-delete"></i> {{ 'edit.button.remove' | translate }}</a>
-        <a role="button" class="btn btn-flat btn-warning btn-sm" ng-class='{"btn btn-warning": validating, "btn btn-default": !validating}' ng-click="validate()"><i class="fa" ng-class='{"mdi-action-search": !validating, "mdi-content-clear": validating}'></i> {{ 'edit.button.validate' | translate }}</a>
+        <a ng-show="saved" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalRemove"><i class="mdi-action-delete"></i> {{ 'edit.button.remove' | translate }}</a>
+        <a role="button" class="btn btn-flat btn-warning btn-sm" ng-class='{"btn btn-warning": state.validating, "btn btn-default": !state.validating}' ng-click="toggleValidation()"><i class="fa" ng-class='{"mdi-action-search": !state.validating, "mdi-content-clear": state.validating}'></i> {{ 'edit.button.validate' | translate }}</a>
       </div>
 
       <div class="btn-group">

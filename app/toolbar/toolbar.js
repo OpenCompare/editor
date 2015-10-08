@@ -4,7 +4,7 @@
 
 angular
   .module('openCompareEditor')
-  .directive('openCompareToolbar', function(componentUtils) {
+  .directive('ocToolbar', function(componentUtils) {
         return {
           restrict: 'E',
           require: "^ocEditor",
@@ -26,6 +26,7 @@ angular
 
             componentUtils.defineOption($scope.state, ["edit"], false);
             componentUtils.defineOption($scope.state, ["configurator"], false);
+            componentUtils.defineOption($scope.state, ["validating"], false);
 
           }
         };

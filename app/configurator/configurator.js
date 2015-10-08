@@ -4,7 +4,7 @@
 
 angular
   .module('openCompareEditor')
-  .directive('openCompareConfigurator', function(componentUtils) {
+  .directive('ocConfigurator', function(componentUtils) {
 
     return {
       restrict: 'E',

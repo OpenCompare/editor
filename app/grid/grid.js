@@ -4,7 +4,7 @@
 
 angular
   .module('openCompareEditor')
-  .directive('openCompareEditor', function(componentUtils) {
+  .directive('ocGrid', function(componentUtils) {
 
 
     return {
@@ -21,6 +21,7 @@ angular
 
         componentUtils.defineOption($scope.state, ["edit"], false);
         componentUtils.defineOption($scope.state, ["configurator"], false);
+        componentUtils.defineOption($scope.state, ["validating"], false);
 
       }
     };

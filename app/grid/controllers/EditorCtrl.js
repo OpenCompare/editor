@@ -32,7 +32,9 @@ angular
     // Load PCM
     $scope.$watch("pcm", function() {
       if (typeof $scope.pcm !== 'undefined') {
-        $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
+        $timeout(function(){
+          $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
+        }, 100);
         $scope.updateShareLinks();
       }
     });
@@ -51,22 +53,19 @@ angular
 
 
     // Set grid in edit/view mode
-    function setEdit(bool, reload) {
-
+    $scope.$watch("state.edit", function setEdit(bool) {
       $scope.gridOptions.columnDefs = [];
       $scope.gridOptions.rowHeight = 35;
       $scope.state.edit = bool;
-      if(reload) {
-        $timeout(function(){
-          $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
-        }, 100);
-      }
-    }
 
-    $scope.setEdit = function(bool, reload) {
-      setEdit(bool, reload);
+      $timeout(function(){
+        $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
+      }, 100)
+    });
+
+    $scope.cancel = function() {
+      $scope.state.edit = false;
     };
-
 
 
     $scope.$on('setLineView', function(event, arg) {
@@ -328,7 +327,7 @@ angular
 
         $rootScope.$broadcast('launchFromCreator');
         $scope.pcm = pcmApi.factory.createPCM();
-        setEdit(true, false);
+        $scope.state.edit = true;
         $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
         $scope.pcm.name = args.title;
         $rootScope.$broadcast('setPcmName', $scope.pcm.name);
@@ -348,14 +347,6 @@ angular
     /**
      * Bind events from toolbar to functions of the editor
       */
-
-    $scope.$on('validate', function(event, args) {
-        $scope.validate();
-    });
-
-    $scope.$on('setGridEdit', function(event, args) {
-        setEdit(args[0], args[1]);
-    });
 
     /**
      * Launch initialization when importing

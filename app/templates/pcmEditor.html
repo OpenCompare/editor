@@ -31,7 +31,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{ "edit.button.no" | translate }}</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="setEdit(false, true)">{{ "edit.button.yes" | translate }}</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="cancel()">{{ "edit.button.yes" | translate }}</button>
                 </div>
             </div>
         </div>
@@ -181,9 +181,9 @@
     <!-- Table editor -->
     <div class="row">
 
-        <open-compare-configurator style="margin-top:20px"  ng-show="state.configurator"></open-compare-configurator>
+        <oc-configurator ng-show="state.configurator"></oc-configurator>
         <div ng-show="!state.configurator || (state.configurator && !lineView)" id="matrix"  class="grid" ng-class="{'col-md-8': state.configurator, 'col-md-12': !state.configurator}" ui-grid="gridOptions"  ng-style="{'height' : height}"  ui-grid-selection ui-grid-edit ui-grid-cellNav ui-grid-resize-columns ui-grid-move-columns ui-grid-auto-resize ui-grid-pinning>
-            <div class="grid-overlay-msg" ng-hide="gridOptions.data.length && !loading">
+            <div class="grid-overlay-msg" ng-show="loading">
                 <div class="msg">
                     <span class="loader"> Loading Data...</span>
                 </div>
