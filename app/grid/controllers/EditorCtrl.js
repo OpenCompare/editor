@@ -58,9 +58,12 @@ angular
       $scope.gridOptions.rowHeight = 35;
       $scope.state.edit = bool;
 
-      $timeout(function(){
-        $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
-      }, 100)
+      if (typeof $scope.pcm !== "undefined") {
+        $timeout(function(){
+          $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
+        }, 100);
+      }
+
     });
 
     $scope.cancel = function() {

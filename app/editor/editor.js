@@ -9,7 +9,6 @@ angular
         config: "="
       },
       controller: function($scope) {
-
         this.pcmContainer = $scope.pcmContainer;
         this.config = $scope.config;
         this.state = {};

@@ -13,11 +13,19 @@ angular
       templateUrl: 'templates/pcmEditor.html',
       scope: {},
       link: function($scope, element, attrs, ctrl) {
-        $scope.pcm = ctrl.pcmContainer.pcm;
-        $scope.metadata = ctrl.pcmContainer.metadata;
-        $scope.id = ctrl.pcmContainer.id;
+
+        $scope.pcmContainer = ctrl.pcmContainer;
         $scope.config = ctrl.config;
         $scope.state = ctrl.state;
+
+        $scope.$watch("pcmContainer.pcm", function(newVal) {
+          $scope.pcm = ctrl.pcmContainer.pcm;
+          $scope.metadata = ctrl.pcmContainer.metadata;
+          $scope.id = ctrl.pcmContainer.id;
+        });
+
+
+
 
         componentUtils.defineOption($scope.state, ["edit"], false);
         componentUtils.defineOption($scope.state, ["configurator"], false);

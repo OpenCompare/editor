@@ -10,7 +10,7 @@
  */
 angular
   .module('openCompareEditorApp', ['openCompareEditor'])
-  .controller('TestCtrl', function($scope, pcmApi) {
+  .controller('TestCtrl', function($scope, pcmApi, $timeout) {
     var pcm = JSON.stringify({"class":"pcm.PCM@2684530441437554316923","name":"Q29tcGFyaXNvbl8oZ3JhbW1hcikgLSBDb21wYXJpc29uIGluIEVuZ2xpc2g=","generated_KMF_ID":"2684530441437554316923","products":[
       {"class":"pcm.Product@13911264501437554316923","name":"bWFueSwgbXVjaA==","generated_KMF_ID":"13911264501437554316923","cells":[
         {"class":"pcm.Cell@15854244811437554316923","content":"bW9yZQ==","rawContent":"bW9yZQ==","generated_KMF_ID":"15854244811437554316923","feature":["features[2329332351437554316923]"],"product":["products[13911264501437554316923]"],"interpretation":[
@@ -107,11 +107,16 @@ angular
     pcmApi.decodePCM(loadedPCM);
 
     $scope.myPCMContainer = {
-      pcm: loadedPCM
+
     };
 
     $scope.myConfig = {
       serverMode: "client"
-    }
+    };
+
+    $timeout(function() {
+      $scope.myPCMContainer.pcm = loadedPCM;
+    }, 1000);
+
 
   });
