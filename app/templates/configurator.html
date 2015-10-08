@@ -42,6 +42,7 @@
             </div>
         </div>
 
+
         <div class="list-group-item" ng-if="stringFeatures.length > 0" ng-repeat="feature in stringFeatures">
             <div class="row-action-primary">
 
@@ -100,8 +101,8 @@
 </div>
 <div class="col-md-8">
     <div class="col-md-1">
-        <button type="button" ng-show="configurator && !lineView" style="padding: 5px" class="btn btn-flat btn-primary btn-sm" ng-click="setLineView(true)"><i class="mdi-action-view-headline"></i></button>
-        <button type="button" ng-show="configurator && lineView" style="padding: 5px" class="btn btn-flat btn-primary btn-sm" ng-click="setLineView(false)"><i class="mdi-image-grid-on"></i></button>
+        <button type="button" ng-show="state.configurator && !lineView" style="padding: 5px" class="btn btn-flat btn-primary btn-sm" ng-click="setLineView(true)"><i class="mdi-action-view-headline"></i></button>
+        <button type="button" ng-show="state.configurator && lineView" style="padding: 5px" class="btn btn-flat btn-primary btn-sm" ng-click="setLineView(false)"><i class="mdi-image-grid-on"></i></button>
     </div>
 </div>
 <div class="col-md-8" ng-show="lineView">

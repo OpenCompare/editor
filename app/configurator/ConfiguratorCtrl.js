@@ -21,7 +21,6 @@ angular
     $scope.stringFilteredFeatures = [];
     $scope.slider = [];
 
-    $scope.conf = false;
     $scope.lineView = true;
 
     $scope.numberOfPages=function(){
@@ -36,10 +35,6 @@ angular
         return Math.ceil($scope.length/$scope.pageSize);
     };
 
-    $scope.$on('setConfiguratorMode', function(event, arg) {
-        $scope.conf = arg;
-    });
-
     $scope.$on('setLineView', function(event, arg) {
         $scope.lineView = arg;
     });
@@ -49,41 +44,53 @@ angular
         $rootScope.$broadcast('setLineView', bool);
     };
 
-    $scope.$on('initConfigurator', function(event, args) {
-        var features = args.features;
-        $scope.data = args.pcmData;
+
+    $scope.$watch("state.configurator", function(newValue) {
+      if (newValue) {
+
+        $scope.booleanFeatures = [];
+        $scope.stringFeatures  = [];
+        $scope.numberFeatures = [];
+
+        $scope.booleanFilteredFeatures = [];
+        $scope.stringFilteredFeatures = [];
+        $scope.slider = [];
+
+        var features = $scope.state.columnDefs;
+        $scope.data = $scope.state.pcmData;
 
         features.forEach(function (feature) {
-            switch(feature.type) {
-                case 'string':
-                    $scope.stringFeatures.push(feature);
-                    break;
-                case 'bool':
-                    $scope.booleanFeatures.push(feature);
-                    break;
-                case 'num':
-                    $scope.numberFeatures.push(feature);
-                    var minAndMax =  editorUtil.findMinAndMax(feature.name, $scope.data);
-                    $scope.slider[feature.name] = {};
-                    $scope.slider[feature.name].values = minAndMax;
+          switch(feature.type) {
+            case 'string':
+              $scope.stringFeatures.push(feature);
+              break;
+            case 'bool':
+              $scope.booleanFeatures.push(feature);
+              break;
+            case 'num':
+              $scope.numberFeatures.push(feature);
+              var minAndMax =  editorUtil.findMinAndMax(feature.name, $scope.data);
+              $scope.slider[feature.name] = {};
+              $scope.slider[feature.name].values = minAndMax;
 
-                    $scope.slider[feature.name].options = {
-                        range: true,
-                        min: minAndMax[0],
-                        max: minAndMax[1],
-                        change: function (ev, ui) {
-                            if($scope.conf) {
-                                $scope.$emit('updateFilterFromConfigurator', {
-                                    "feature": feature.name,
-                                    "type": "num",
-                                    "values": $scope.slider[feature.name].values
-                                });
-                            }
-                        }
-                    };
-                    break;
-            }
+              $scope.slider[feature.name].options = {
+                range: true,
+                min: minAndMax[0],
+                max: minAndMax[1],
+                change: function (ev, ui) {
+                  if($scope.state.configurator) {
+                    $scope.$emit('updateFilterFromConfigurator', {
+                      "feature": feature.name,
+                      "type": "num",
+                      "values": $scope.slider[feature.name].values
+                    });
+                  }
+                }
+              };
+              break;
+          }
         });
+      }
     });
 
     $scope.getUniqueValues = function(colName) {
@@ -184,7 +191,7 @@ angular
   .filter('startFrom', function() {
     return function(input, start) {
         start = +start; //parse to int
-        if(input.length > 0) {
+        if((typeof input !== "undefined") && input.length > 0) {
             return input.slice(start);
         }
         else {

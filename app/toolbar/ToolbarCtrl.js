@@ -34,16 +34,15 @@ angular
      * Remove PCM from server
      */
     $scope.remove = function() {
-      if (typeof $scope.data.id !== 'undefined') {
-        openCompareServer.get("/api/remove/" + id).then(function() {
+      if (typeof $scope.id !== 'undefined') {
+        openCompareServer.get("/api/remove/" + $scope.id).then(function() {
           window.location.href = "/";
         });
       }
     };
 
     $scope.setConfigurator = function(bool) {
-        $scope.configurator = bool;
-        $rootScope.$broadcast('setConfiguratorMode', bool);
+        $scope.state.configurator = bool;
     };
 
     $scope.openCreateFeatureGroupModal = function() {

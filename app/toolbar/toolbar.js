@@ -13,8 +13,10 @@ angular
           link: function($scope, element, attrs, ctrl) {
             $scope.pcm = ctrl.pcmContainer.pcm;
             $scope.metadata = ctrl.pcmContainer.metadata;
+            $scope.id = ctrl.pcmContainer.id;
             $scope.config = ctrl.config;
             $scope.state = ctrl.state;
+
 
             componentUtils.defineOption($scope.config, ["enableToolbar"], true);
             componentUtils.defineOption($scope.config, ["enableTitle"], true);
@@ -23,6 +25,7 @@ angular
             componentUtils.defineOption($scope.config, ["enableShare"], true);
 
             componentUtils.defineOption($scope.state, ["edit"], false);
+            componentUtils.defineOption($scope.state, ["configurator"], false);
 
           }
         };

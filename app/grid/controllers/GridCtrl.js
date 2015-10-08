@@ -532,6 +532,9 @@ angular
           $timeout(function() {$scope.loadFeatureGroups($scope.gridOptions.columnDefs, $scope.gridOptions.superColDefs);}, 0);
       }
 
+
+      $scope.state.columnDefs = $scope.gridOptions.columnDefs;
+      $scope.state.pcmData = $scope.pcmData;
     };
 
 

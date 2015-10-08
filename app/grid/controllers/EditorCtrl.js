@@ -69,11 +69,6 @@ angular
 
 
 
-    $scope.$on('setConfiguratorMode', function(event, arg) {
-        $scope.configurator = arg;
-      $rootScope.$broadcast("initConfigurator", {features: $scope.gridOptions.columnDefs, pcmData: $scope.pcmData});
-    });
-
     $scope.$on('setLineView', function(event, arg) {
         $scope.lineView = arg;
     });
@@ -275,17 +270,17 @@ angular
       pcmObject.metadata = $scope.metadata;
       pcmObject.pcm = jsonModel;
 
-      if (typeof $scope.data.id === 'undefined') {
+      if (typeof $scope.id === 'undefined') {
         openCompareServer.post("/api/create", pcmObject).then(function(response) {
-          $scope.data.id = response.data;
+          $scope.id = response.data;
           $scope.updateShareLinks();
-          console.log("model created with id=" + $scope.data.id);
-          $rootScope.$broadcast('savedFromCreator', $scope.data.id);
+          console.log("model created with id=" + $scope.id);
+          $rootScope.$broadcast('savedFromCreator', $scope.id);
         }, function(error) {
           console.error(error);
         });
       } else {
-        openCompareServer.post("/api/save/" + $scope.data.id, pcmObject).then(function() {
+        openCompareServer.post("/api/save/" + $scope.id, pcmObject).then(function() {
           console.log("model saved");
           $rootScope.$broadcast('saved');
         });
@@ -299,11 +294,11 @@ angular
      * @returns {{}}
      */
     function generateMetadata(product, columns) {
-      if (typeof $scope.data.metadata === 'undefined') {
-        $scope.data.metadata = {};
+      if (typeof $scope.metadata === 'undefined') {
+        $scope.metadata = {};
       }
 
-      var metadata = $scope.data.metadata;
+      var metadata = $scope.metadata;
       metadata.featurePositions = [];
       metadata.productPositions = [];
       var index = 0;

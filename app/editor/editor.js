@@ -13,7 +13,6 @@ angular
         this.pcmContainer = $scope.pcmContainer;
         this.config = $scope.config;
         this.state = {};
-
       },
       link : function($scope, element, attrs) {
         //$scope.$watch("config", function(){
