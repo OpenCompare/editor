@@ -114,9 +114,9 @@ angular
       serverMode: "client"
     };
 
-    $timeout(function() {
-      $scope.myPCMContainer.pcm = loadedPCM;
-    }, 1000);
+    //$timeout(function() {
+    //  $scope.myPCMContainer.pcm = loadedPCM;
+    //}, 1000);
 
 
   });

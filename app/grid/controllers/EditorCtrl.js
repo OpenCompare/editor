@@ -323,29 +323,6 @@ angular
       return metadata;
     }
 
-    /**
-     * Launch creation when in creator mode
-     */
-    $scope.$on('launchCreation', function(event, args) {
-
-        $rootScope.$broadcast('launchFromCreator');
-        $scope.pcm = pcmApi.factory.createPCM();
-        $scope.state.edit = true;
-        $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
-        $scope.pcm.name = args.title;
-        $rootScope.$broadcast('setPcmName', $scope.pcm.name);
-
-        for(var i = 0; i < args.rows; i++) {
-            var productName = "Product " + (i + 1);
-            $scope.addProduct(productName);
-        }
-
-        for(var j = 0; j < args.columns; j++) {
-            var featureName = "Feature " + (j + 1);
-            $scope.addFeature(featureName);
-        }
-    });
-
 
     /**
      * Bind events from toolbar to functions of the editor

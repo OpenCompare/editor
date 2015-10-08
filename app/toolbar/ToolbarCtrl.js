@@ -66,11 +66,6 @@ angular
         $scope.lineView = arg;
     });
 
-    /** Launch grid creation in creator mode */
-    $scope.$on('launchFromCreator', function(event, args) {
-        $scope.launchFromCreator = true;
-    });
-
     /**
      * Export
      */
@@ -91,13 +86,6 @@ angular
     $scope.increaseHeight = function(height) {
         $rootScope.$broadcast('increaseHeight', height);
     };
-
-    $scope.$on('launchCreation', function(event, args) {
-        $scope.state.edit = true;
-        $scope.isTitleSet = true;
-        $scope.pcmName = args.title;
-
-    });
 
     $scope.$on('setPcmName', function(event, args) {
         $scope.isTitleSet = args.length > 0;

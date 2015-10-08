@@ -9,20 +9,46 @@
  */
 angular
   .module('openCompareEditor')
-  .controller("CreatorCtrl", function($rootScope, $scope) {
+  .controller("CreatorCtrl", function($rootScope, $scope, $document, pcmApi) {
 
     $scope.title = "";
     $scope.rows = 1;
     $scope.columns = 1;
     $scope.loading = false;
 
-
-    $(window).load(function() {
-        $('#modalCreator').modal('show');
-    });
-
     $scope.launchCreation = function() {
-        $rootScope.$broadcast('launchCreation', {"title": $scope.title, "rows": $scope.rows, "columns":  $scope.columns});
-    }
+      var features = {};
+      var i,j;
 
+      $scope.state.edit = true;
+      var pcm = pcmApi.factory.createPCM();
+      pcm.name = $scope.title;
+
+      for(j = 0; j < $scope.columns; j++) {
+        var feature = pcmApi.factory.createFeature();
+        feature.name = "Feature " + (j + 1);
+        pcm.addFeatures(feature);
+        features[feature.name] = feature;
+      }
+
+      for(i = 0; i < $scope.rows; i++) {
+        var product = pcmApi.factory.createProduct();
+        product.name = "Product " + (i + 1);
+        pcm.addProducts(product);
+        for(j = 0; j < $scope.columns; j++) {
+          var cell = pcmApi.factory.createCell();
+          cell.content = "";
+          cell.feature = features["Feature " + (j + 1)];
+          product.addCells(cell);
+        }
+
+      }
+
+      $scope.pcmContainer.pcm = pcm;
+    };
+
+
+    $document.ready(function() {
+      $('#modalCreator').modal('show');
+    });
 });

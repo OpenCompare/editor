@@ -5,17 +5,22 @@
 angular
   .module('openCompareEditor')
   .directive('ocConfigurator', function(componentUtils) {
-
     return {
       restrict: 'E',
       require: "^ocEditor",
+      scope: {},
       templateUrl: 'templates/configurator.html',
       controller: "ConfiguratorCtrl",
-      scope: {},
       link: function($scope, element, attrs, ctrl) {
-        $scope.pcm = ctrl.pcmContainer.pcm;
-        $scope.metadata = ctrl.pcmContainer.metadata;
-        $scope.id = ctrl.pcmContainer.id;
+
+        $scope.pcmContainer = ctrl.pcmContainer;
+
+        $scope.$watch("pcmContainer.pcm", function(newVal) {
+          $scope.pcm = ctrl.pcmContainer.pcm;
+          $scope.metadata = ctrl.pcmContainer.metadata;
+          $scope.id = ctrl.pcmContainer.id;
+        });
+
         $scope.config = ctrl.config;
         $scope.state = ctrl.state;
 
@@ -23,4 +28,5 @@ angular
 
       }
     };
+
   });
