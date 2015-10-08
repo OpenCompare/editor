@@ -5,7 +5,7 @@
 
 angular
   .module('openCompareEditor')
-  .controller("CsvExportController", function($rootScope, $scope, $modal, $modalInstance, openCompareServer) {
+  .controller("CsvExportCtrl", function($rootScope, $scope, $modal, $modalInstance, openCompareServer) {
 
     $scope.loading = false;
     $scope.cancel = function() {

@@ -5,7 +5,7 @@
 
 angular
   .module('openCompareEditor')
-  .controller("HtmlImportController", function($rootScope, $scope, $modalInstance, openCompareServer) {
+  .controller("HtmlImportCtrl", function($rootScope, $scope, $modalInstance, openCompareServer) {
 
     $scope.loading = false;
     $scope.cancel = function() {

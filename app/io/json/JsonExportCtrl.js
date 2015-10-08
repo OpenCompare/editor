@@ -1,6 +1,6 @@
 angular
   .module('openCompareEditor')
-  .controller("JsonExportController", function($rootScope, $scope, $modal, $modalInstance, openCompareServer) {
+  .controller("JsonExportCtrl", function($rootScope, $scope, $modal, $modalInstance, openCompareServer) {
 
     $scope.loading = false;
     $scope.cancel = function() {

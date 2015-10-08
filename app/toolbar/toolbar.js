@@ -11,9 +11,15 @@ angular
           scope: {},
           templateUrl: 'templates/toolbar.html',
           link: function($scope, element, attrs, ctrl) {
-            $scope.pcm = ctrl.pcmContainer.pcm;
-            $scope.metadata = ctrl.pcmContainer.metadata;
-            $scope.id = ctrl.pcmContainer.id;
+
+            $scope.pcmContainer = ctrl.pcmContainer;
+
+            $scope.$watch("pcmContainer.pcm", function(newVal) {
+              $scope.pcm = ctrl.pcmContainer.pcm;
+              $scope.metadata = ctrl.pcmContainer.metadata;
+              $scope.id = ctrl.pcmContainer.id;
+            });
+
             $scope.config = ctrl.config;
             $scope.state = ctrl.state;
 
