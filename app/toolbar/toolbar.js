@@ -9,7 +9,7 @@ angular
           restrict: 'E',
           require: "^ocEditor",
           scope: {},
-          templateUrl: 'templates/toolbar.html',
+          templateUrl: 'toolbar/toolbar.html',
           link: function($scope, element, attrs, ctrl) {
 
             $scope.pcmContainer = ctrl.pcmContainer;

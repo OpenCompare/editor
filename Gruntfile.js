@@ -325,7 +325,7 @@ module.exports = function (grunt) {
           usemin: 'opencompare-editor.min.js'
         },
         cwd: '<%= yeoman.app %>',
-        src: 'templates/{,*/}*.html',
+        src: '*/{,*/}*.html',
         dest: '.tmp/templateCache.js'
       }
     },

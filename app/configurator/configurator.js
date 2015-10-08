@@ -9,7 +9,7 @@ angular
       restrict: 'E',
       require: "^ocEditor",
       scope: {},
-      templateUrl: 'templates/configurator.html',
+      templateUrl: 'configurator/configurator.html',
       controller: "ConfiguratorCtrl",
       link: function($scope, element, attrs, ctrl) {
 

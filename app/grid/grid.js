@@ -10,7 +10,7 @@ angular
     return {
       restrict: 'E',
       require: "^ocEditor",
-      templateUrl: 'templates/pcmEditor.html',
+      templateUrl: 'grid/templates/pcmEditor.html',
       scope: {},
       link: function($scope, element, attrs, ctrl) {
 
