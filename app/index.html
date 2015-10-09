@@ -21,7 +21,7 @@
 
 
     <!-- build:css(app) styles/opencompare-editor.min.css -->
-    <link rel='stylesheet' href='grid/stylesheets/editor.css'>
+    <link rel='stylesheet' href='editor/editor.css'>
     <!--<link rel='stylesheet' href='features/importexport/stylesheets/importer.css'>-->
     <!-- endbuild -->
 
@@ -33,7 +33,7 @@
       <h1>OpenCompare editor</h1>
 
       <div class="row" ng-controller="TestCtrl">
-        <oc-editor pcm-container="myPCMContainer" config="myConfig">
+        <oc-editor pcm-container="myPCMContainer" config="myConfig" state="myState">
           <oc-toolbar></oc-toolbar>
           <oc-grid></oc-grid>
         </oc-editor>

@@ -114,6 +114,10 @@ angular
       serverMode: "client"
     };
 
+    $scope.myState = {
+      edit: true
+    };
+
     $timeout(function() {
       $scope.myPCMContainer.pcm = loadedPCM;
     }, 1000);

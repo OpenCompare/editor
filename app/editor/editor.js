@@ -6,12 +6,22 @@ angular
       restrict: 'E',
       scope: {
         pcmContainer: "=",
-        config: "="
+        config: "=?",
+        state: "=?"
       },
       controller: function($scope) {
         this.pcmContainer = $scope.pcmContainer;
+
+        if (typeof $scope.config === "undefined") {
+          $scope.config = {};
+        }
         this.config = $scope.config;
-        this.state = {};
+
+        if (typeof $scope.state === "undefined") {
+          $scope.state = {};
+        }
+        this.state = $scope.state;
+
       },
       link : function($scope, element, attrs) {
         //$scope.$watch("config", function(){

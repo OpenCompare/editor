@@ -129,16 +129,8 @@
 }
 
 /*
-.ui-grid-header-cell-row {
+.ui-grid-header-cell-row, .ui-grid-footer-cell-row, .ui-grid-footer-cell, .ui-grid-header-cell-wrapper{
    background-color: white;
-}
-
-.ui-grid-footer-cell-row {
-  background-color: white;
-}
-
-.ui-grid-footer-cell{
-  background-color: white;
 }
 */
 
