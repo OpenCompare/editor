@@ -73,7 +73,7 @@ angular
                 $scope.canUndo = false;
             }
         }
-        $rootScope.$broadcast('modified');
+        $scope.state.saved=false;
     };
 
     $scope.redo = function() {
@@ -132,7 +132,7 @@ angular
                 $scope.canRedo = false;
             }
         }
-        $rootScope.$broadcast('modified');
+        $scope.state.saved=false;
     };
 
     function undoEdit(productHashKey, featureName, oldValue) {
@@ -232,7 +232,7 @@ angular
             productData[featureName] = "";
         });
         $scope.validation[featureName] = [];
-        $rootScope.$broadcast('modified');
+        $scope.state.saved=false;
     }
 
     function undoRenameFeature(oldFeatureName, featureName, index) {

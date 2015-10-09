@@ -21,16 +21,26 @@ angular
       var i,j;
 
       $scope.state.edit = true;
+
       var pcm = pcmApi.factory.createPCM();
       pcm.name = $scope.title;
+      var metadata = {};
 
+
+      metadata.featurePositions = [];
       for(j = 0; j < $scope.columns; j++) {
         var feature = pcmApi.factory.createFeature();
         feature.name = "Feature " + (j + 1);
         pcm.addFeatures(feature);
         features[feature.name] = feature;
+        metadata.featurePositions.push({
+          feature: feature.name,
+          position: j
+        });
       }
 
+
+      metadata.productPositions = [];
       for(i = 0; i < $scope.rows; i++) {
         var product = pcmApi.factory.createProduct();
         product.name = "Product " + (i + 1);
@@ -42,9 +52,14 @@ angular
           product.addCells(cell);
         }
 
+        metadata.productPositions.push({
+          product: product.name,
+          position: i
+        });
       }
 
       $scope.pcmContainer.pcm = pcm;
+      $scope.pcmContainer.metadata = metadata;
     };
 
 

@@ -278,13 +278,14 @@ angular
           $scope.updateShareLinks();
           console.log("model created with id=" + $scope.id);
           $rootScope.$broadcast('savedFromCreator', $scope.id);
+          $scope.state.saved = true;
         }, function(error) {
           console.error(error);
         });
       } else {
         openCompareServer.post("/api/save/" + $scope.id, pcmObject).then(function() {
           console.log("model saved");
-          $rootScope.$broadcast('saved');
+          $scope.state.saved = true;
         });
       }
     });

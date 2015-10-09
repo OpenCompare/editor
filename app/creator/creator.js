@@ -8,7 +8,9 @@ angular
     return {
       restrict: 'E',
       require: "^ocEditor",
-      scope: {},
+      scope: {
+        user: "="
+      },
       templateUrl: 'creator/creator.html',
       controller: "CreatorCtrl",
       link: function($scope, element, attrs, ctrl) {
@@ -17,7 +19,12 @@ angular
 
         $scope.$watch("pcmContainer.pcm", function(newVal) {
           $scope.pcm = ctrl.pcmContainer.pcm;
+
+          if (typeof ctrl.pcmContainer.metadata === "undefined") {
+            ctrl.pcmContainer.metadata = {};
+          }
           $scope.metadata = ctrl.pcmContainer.metadata;
+          $scope.metadata.creator = $scope.user;
           $scope.id = ctrl.pcmContainer.id;
         });
 

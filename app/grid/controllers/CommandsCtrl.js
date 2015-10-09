@@ -47,7 +47,7 @@ angular
         $scope.newCommand('addFeature', parameters);
 
         /* Modified for save */
-        $rootScope.$broadcast('modified');
+        $scope.state.saved=false;
         $rootScope.$broadcast('reloadFeatureGroup');
     };
 
@@ -99,7 +99,7 @@ angular
         /* Command for undo/redo */
         var parameters = [featureGroup, colsToAssign];
         $scope.newCommand('addFeatureGroup', parameters);
-        $rootScope.$broadcast('modified');
+        $scope.state.saved=false;
         $scope.loadFeatureGroups($scope.gridOptions.columnDefs, $scope.gridOptions.superColDefs);
 
     });
@@ -150,7 +150,7 @@ angular
         $scope.oldFeatureName = "";
 
         /* Modified for save */
-        $rootScope.$broadcast('modified');
+        $scope.state.saved=false;
     };
 
     /**
@@ -184,7 +184,7 @@ angular
         $scope.featureName = "";
 
         /* Modified for save */
-        $rootScope.$broadcast('modified');
+        $scope.state.saved=false;
         $rootScope.$broadcast('reloadFeatureGroup');
     });
 
@@ -213,7 +213,7 @@ angular
 
         $scope.gridOptions.columnDefs = sortFeaturesService.sortByFeatureGroup($scope.gridOptions.columnDefs, $scope.gridOptions.superColDefs);
 
-        $rootScope.$broadcast('modified');
+        $scope.state.saved=false;
         $rootScope.$broadcast('reloadFeatureGroup');
     };
 
@@ -234,7 +234,7 @@ angular
         });
         $scope.deleteUnusedFeatureGroups();
         $scope.gridOptions.columnDefs = sortFeaturesService.sortByFeatureGroup($scope.gridOptions.columnDefs);
-        $rootScope.$broadcast('modified');
+        $scope.state.saved=false;
         $rootScope.$broadcast('reloadFeatureGroup');
 
 
@@ -274,7 +274,7 @@ angular
             index++;
         });
         console.log("Feature is deleted");
-        $rootScope.$broadcast('modified');
+        $scope.state.saved=false;
         $rootScope.$broadcast('reloadFeatureGroup');
     };
 
@@ -331,7 +331,7 @@ angular
         $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
         $timeout(function(){ $scope.scrollToFocus($scope.pcmData.length-1, 1); }, 100);// Not working without a timeout
         console.log("Product added");
-        $rootScope.$broadcast('modified');
+        $scope.state.saved=false;
         var parameters = $scope.pcmData[$scope.pcmData.length-1];
         $scope.newCommand('addProduct', parameters);
         $scope.setGridHeight();
@@ -347,7 +347,7 @@ angular
         var rawData = $scope.pcmDataRaw[index];
         $scope.pcmData.splice(index, 1);
         $scope.pcmDataRaw.splice(index, 1);
-        $rootScope.$broadcast('modified');
+        $scope.state.saved=false;
         var parameters = [row.entity.$$hashKey, row.entity, rawData, index];
         $scope.newCommand('removeProduct', parameters);
         $scope.setGridHeight();

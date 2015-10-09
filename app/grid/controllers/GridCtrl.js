@@ -70,7 +70,7 @@ angular
     $scope.setVisualRepresentation = function(rowEntity, colDef, newValue, oldValue, rawValue) {
 
         if(newValue && rawValue != newValue) {
-            $rootScope.$broadcast('modified');
+            $scope.state.saved=false;
             $scope.pcmData[$scope.pcmData.indexOf(rowEntity)][colDef.name] = getVisualRepresentation(newValue, $scope.pcmData.indexOf(rowEntity),
                 colDef.name);
 
@@ -90,12 +90,11 @@ angular
     };
 
     $scope.moveColumnData = function(colDef, originalPosition, newPosition) {
+      $scope.gridOptions.columnDefs.move(originalPosition, newPosition);
+      var commandParameters = [originalPosition, newPosition];
 
-        $scope.gridOptions.columnDefs.move(originalPosition, newPosition);
-        var commandParameters = [originalPosition, newPosition];
-
-        $scope.newCommand('move', commandParameters);
-        $rootScope.$broadcast('modified');
+      $scope.newCommand('move', commandParameters);
+      $scope.state.saved=false;
     };
     $scope.columnMovedFunctions.push($scope.moveColumnData);
     $scope.beginCellEditFunctions.push($scope.putRawDataInCell);
