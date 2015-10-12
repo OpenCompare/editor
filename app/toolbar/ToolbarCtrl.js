@@ -57,6 +57,10 @@ angular
         $scope.$modalInstance.close();
     };
 
+    $scope.addProduct = function() {
+      $rootScope.$broadcast('addProduct');
+    };
+
     $scope.cancelModal = function() {
         $scope.$modalInstance.close();
     };

@@ -97,6 +97,10 @@ angular
       $scope.scrollToFocus(args.row, args.col);
     });
 
+    $scope.$on('addProduct', function(event, arg) {
+      $scope.addProduct();
+    });
+
     $scope.setGridHeight = function() {
 
         if($scope.pcmData) {
