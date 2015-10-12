@@ -24,7 +24,6 @@ angular
     $controller('CommandsCtrl', subControllers);
     $controller('FiltersCtrl', subControllers);
     $controller('TypesCtrl', subControllers);
-    $controller('ShareCtrl', subControllers);
     $controller('FeatureGroupCtrl', subControllers);
 
 
@@ -35,7 +34,6 @@ angular
         $timeout(function(){
           $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
         }, 100);
-        $scope.updateShareLinks();
       }
     });
 

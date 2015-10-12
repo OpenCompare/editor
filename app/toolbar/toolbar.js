@@ -10,6 +10,7 @@ angular
           require: "^ocEditor",
           scope: {},
           templateUrl: 'toolbar/toolbar.html',
+          controller: "ToolbarCtrl",
           link: function($scope, element, attrs, ctrl) {
 
             $scope.pcmContainer = ctrl.pcmContainer;

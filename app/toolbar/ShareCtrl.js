@@ -9,7 +9,7 @@
  */
 angular
   .module('openCompareEditor')
-  .controller("ShareCtrl", function($rootScope, $scope) {
+  .controller("ShareCtrl", function($scope) {
 
     $scope.activeShareButton = false;
 
