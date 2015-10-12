@@ -51,6 +51,10 @@ angular
             controller: 'ToolbarCtrl'
         });
     };
+    
+    $scope.isAFeature = function(col) {
+      return col.name != ' ' && col.name != 'Product';
+    };
 
     $scope.addFeatureGroup = function(featureGroup, features) {
         $rootScope.$broadcast('addFeatureGroup', {"featureGroup": featureGroup, "features": features});

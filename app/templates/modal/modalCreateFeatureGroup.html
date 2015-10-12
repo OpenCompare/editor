@@ -8,7 +8,7 @@
     <input ng-model="featureName" type="text" id="featureName">
     <br />
     <label for="featuresSelection">{{ "edit.title.featureSelection" | translate }}: </label>
-    <div class="checkbox checkbox-primary"  name="featuresSelection" ng-repeat="col in gridOptions.columnDefs | filter:isAFeature" ng-init="checkbox[col.name] = false">
+    <div class="checkbox checkbox-primary"  name="featuresSelection" ng-repeat="col in state.columnDefs | filter:isAFeature" ng-init="checkbox[col.name] = false">
         <label>
             <input type="checkbox" ng-model="checkbox[col.name]"> {{ col.name }}
         </label>
