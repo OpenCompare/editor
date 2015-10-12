@@ -276,7 +276,6 @@ angular
       if (typeof $scope.id === 'undefined') {
         openCompareServer.post("/api/create", pcmObject).then(function(response) {
           $scope.id = response.data;
-          $scope.updateShareLinks();
           console.log("model created with id=" + $scope.id);
           $rootScope.$broadcast('savedFromCreator', $scope.id);
           $scope.state.saved = true;
