@@ -11,22 +11,17 @@ angular
   .module('openCompareEditor')
   .controller("ShareCtrl", function($scope) {
 
-    $scope.activeShareButton = false;
-
-    $scope.enableEditOption = false;
-    $scope.enableExportOption = false;
-    $scope.enableTitleOption = false;
-    $scope.enableShareOption = false;
-    $scope.enableConfiguratorOption = false;
-    $scope.enableChartsOption = false;
+    $scope.enableEditOption = true;
+    $scope.enableExportOption = true;
+    $scope.enableTitleOption = true;
+    $scope.enableShareOption = true;
+    $scope.enableConfiguratorOption = true;
+    $scope.enableChartsOption = true;
 
 
     $scope.updateShareLinks = function() {
+        $scope.updateEmbedLink();
         $scope.activeShareButton = true;
-        $scope.embedLink = '<iframe src="http://'+window.location.hostname+':'+window.location.port+'/embed/pcm/'+ $scope.id
-            +'?enableEdit='+$scope.enableEditOption+'&enableExport='+$scope.enableExportOption+'&enableTitle='+$scope.enableTitleOption+'&enableShare='+$scope.enableShareOption
-            +'&enableShare='+$scope.enableConfiguratorOption +'&enableShare='+$scope.enableChartsOption
-            +'" scrolling="no"  width="100%" height="700px" style="border:none;"></iframe>';
         $scope.twitterLink = 'https://twitter.com/intent/tweet?text=%23opencompare&url=http://opencompare.org/pcm/'+ $scope.id;
         $scope.facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=http://opencompare.org/pcm/'+ $scope.id;
         $scope.emailLink = 'mailto:?body=http://opencompare.org/pcm/'+ $scope.id;
@@ -37,7 +32,7 @@ angular
     $scope.updateEmbedLink = function() {
         $scope.embedLink = '<iframe src="http://'+window.location.hostname+':'+window.location.port+'/embed/pcm/'+ $scope.id
             +'?enableEdit='+$scope.enableEditOption+'&enableExport='+$scope.enableExportOption+'&enableTitle='+$scope.enableTitleOption+'&enableShare='+$scope.enableShareOption
-            +'&enableShare='+$scope.enableConfiguratorOption +'&enableShare='+$scope.enableChartsOption
+            +'&enableConfigurator='+$scope.enableConfiguratorOption +'&enableCharts='+$scope.enableChartsOption
             +'" scrolling="no"  width="100%" height="700px" style="border:none;"></iframe>';
     }
 });

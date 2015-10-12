@@ -46,12 +46,12 @@ angular
     $scope.openCreateFeatureGroupModal = function() {
 
         $scope.$modalInstance = $modal.open({
-            templateUrl: 'templates/modal/modalCreateFeatureGroup.html',
+            templateUrl: 'toolbar/modalCreateFeatureGroup.html',
             scope: $scope,
             controller: 'ToolbarCtrl'
         });
     };
-    
+
     $scope.isAFeature = function(col) {
       return col.name != ' ' && col.name != 'Product';
     };

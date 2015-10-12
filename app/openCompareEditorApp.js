@@ -115,7 +115,7 @@ angular
     };
 
     $scope.myState = {
-      edit: true
+      //edit: true
     };
 
     $timeout(function() {

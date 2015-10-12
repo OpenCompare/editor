@@ -56,12 +56,12 @@
                 </div>
                 <div class="modal-body">
                   <label>Options:  </label><br />
-                  <input type="checkbox" name="title" value="enableTitle" ng-model="enableTitleOption"  ng-change="updateEmbedLink()"> {{ "edit.title.showTitle" | translate }}<br />
-                  <input type="checkbox" name="edit" value="enableEdit" ng-model="enableEditOption"  ng-change="updateEmbedLink()"> {{ "edit.title.allowEdition" | translate }}<br />
-                  <input type="checkbox" name="export" value="enableExport" ng-model="enableExportOption"  ng-change="updateEmbedLink()"> {{ "edit.title.allowExportation" | translate }}<br />
-                  <input type="checkbox" name="share" value="enableShare" ng-model="enableShareOption"  ng-change="updateEmbedLink()"> {{ "edit.title.allowSharing" | translate }}<br />
-                  <input type="checkbox" name="share" value="enableConfigurator" ng-model="enableConfiguratorOption"  ng-change="updateEmbedLink()"> {{ "edit.title.allowConfigurator" | translate }}<br />
-                  <input type="checkbox" name="share" value="enableCharts" ng-model="enableChartsOption"  ng-change="updateEmbedLink()"> {{ "edit.title.allowCharts" | translate }}<br />
+                  <label><input type="checkbox" name="title" value="enableTitle" ng-model="enableTitleOption"  ng-change="updateEmbedLink()"> {{ "edit.title.showTitle" | translate }}</label><br />
+                  <label><input type="checkbox" name="edit" value="enableEdit" ng-model="enableEditOption"  ng-change="updateEmbedLink()"> {{ "edit.title.allowEdition" | translate }}</label><br />
+                  <label><input type="checkbox" name="export" value="enableExport" ng-model="enableExportOption"  ng-change="updateEmbedLink()"> {{ "edit.title.allowExportation" | translate }}</label><br />
+                  <label><input type="checkbox" name="share" value="enableShare" ng-model="enableShareOption"  ng-change="updateEmbedLink()"> {{ "edit.title.allowSharing" | translate }}</label><br />
+                  <label><input type="checkbox" name="share" value="enableConfigurator" ng-model="enableConfiguratorOption"  ng-change="updateEmbedLink()"> {{ "edit.title.allowConfigurator" | translate }}</label><br />
+                  <label><input type="checkbox" name="share" value="enableCharts" ng-model="enableChartsOption"  ng-change="updateEmbedLink()"> {{ "edit.title.allowCharts" | translate }}</label><br />
                   <br />
                   <label for="code">Code:  </label>
                   <textarea id="code" rows="4" cols="60" ng-model="embedLink">
