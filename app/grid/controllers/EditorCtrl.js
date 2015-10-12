@@ -6,7 +6,6 @@ angular
   .module('openCompareEditor')
   .controller("EditorCtrl", function($controller, $rootScope, $scope, $timeout, uiGridConstants, $compile, $modal, expandeditor,  $location, pcmApi, editorUtil, openCompareServer, componentUtils) {
 
-
     /* Load material design */
     if($.material) {
         $.material.init();

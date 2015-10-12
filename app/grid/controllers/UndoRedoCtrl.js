@@ -14,14 +14,21 @@ angular
     //Undo-redo
     $scope.commands = [];
     $scope.commandsIndex = 0;
-    $scope.canUndo = false;
-    $scope.canRedo = false;
+
+
+    $scope.$on("undo", function() {
+      $scope.undo();
+    });
+
+    $scope.$on("redo", function() {
+      $scope.redo();
+    });
 
     $scope.undo = function() {
 
         if($scope.commandsIndex > 0) {
             $scope.commandsIndex--;
-            $scope.canRedo = true;
+            $scope.state.canRedo = true;
             var command = $scope.commands[$scope.commandsIndex];
             var parameters = command[1];
 
@@ -70,7 +77,7 @@ angular
                     break;
             }
             if($scope.commandsIndex <= 0){
-                $scope.canUndo = false;
+                $scope.state.canUndo = false;
             }
         }
         $scope.state.saved=false;
@@ -127,9 +134,9 @@ angular
                     break;
             }
             $scope.commandsIndex++;
-            $scope.canUndo = true;
+            $scope.state.canUndo = true;
             if($scope.commandsIndex >= $scope.commands.length){
-                $scope.canRedo = false;
+                $scope.state.canRedo = false;
             }
         }
         $scope.state.saved=false;

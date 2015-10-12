@@ -104,8 +104,8 @@
         <a role="button" class="btn btn-flat btn-primary btn-sm" ng-click="addProduct()"><i class="mdi-content-add"></i> {{ 'edit.button.addproduct' | translate }}</a>
       </div>
       <div class="btn-group">
-        <a role="button" class="btn btn-flat btn-default btn-sm" ng-click="undo()" ng-disabled="!canUndo"><i class="mdi-content-undo"></i></a>
-        <a role="button" class="btn btn-flat btn-default btn-sm" ng-click="redo()" ng-disabled="!canRedo"><i class="mdi-content-redo"></i></a>
+        <a role="button" class="btn btn-flat btn-default btn-sm" ng-click="undo()" ng-disabled="!state.canUndo"><i class="mdi-content-undo"></i></a>
+        <a role="button" class="btn btn-flat btn-default btn-sm" ng-click="redo()" ng-disabled="!state.canRedo"><i class="mdi-content-redo"></i></a>
       </div>
     </div>
 

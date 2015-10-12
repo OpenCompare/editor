@@ -17,7 +17,7 @@ angular
         command.push(parameters);
         $scope.commands[$scope.commandsIndex] = command;
         $scope.commandsIndex++;
-        $scope.canUndo = true;
+        $scope.state.canUndo = true;
     };
 
     /**

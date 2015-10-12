@@ -30,6 +30,9 @@ angular
         componentUtils.defineOption($scope.state, ["edit"], false);
         componentUtils.defineOption($scope.state, ["configurator"], false);
         componentUtils.defineOption($scope.state, ["validating"], false);
+        componentUtils.defineOption($scope.state, ["canUndo"], false);
+        componentUtils.defineOption($scope.state, ["canRedo"], false);
+
 
       }
     };

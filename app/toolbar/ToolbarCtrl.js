@@ -100,4 +100,12 @@ angular
         $scope.pcmName = args;
     });
 
+    $scope.undo = function() {
+      $rootScope.$broadcast("undo");
+    };
+
+    $scope.redo = function() {
+      $rootScope.$broadcast("redo");
+    };
+
 });
