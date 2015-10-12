@@ -354,7 +354,7 @@ angular
         var ctrlArg = args.toUpperCase().charAt(0) + args.substring(1);
         $modal.open({
             templateUrl: "templates/modal/modal" + ctrlArg + "Export.html",
-            controller: ctrlArg + "ExportController",
+            controller: ctrlArg + "ExportCtrl",
             scope: $scope,
             size: "lg"
         })
