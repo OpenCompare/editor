@@ -87,7 +87,7 @@ angular
     };
 
     $scope.increaseHeight = function(height) {
-        $rootScope.$broadcast('increaseHeight', height);
+      $scope.state.height = height;
     };
 
     $scope.$on('setPcmName', function(event, args) {

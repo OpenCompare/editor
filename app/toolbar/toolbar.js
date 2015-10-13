@@ -39,6 +39,7 @@ angular
             componentUtils.defineOption($scope.state, ["canRedo"], false);
 
             componentUtils.defineOption($scope.state, ["lineView"], true);
+            componentUtils.defineOption($scope.state, ["height"], 1);
 
           }
         };

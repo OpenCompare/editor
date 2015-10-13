@@ -70,23 +70,9 @@ angular
 
 
     /* Button to increase row height */
-    $scope.$on('increaseHeight', function(event, arg) {
-        switch(arg){
-            case 1:
-                $scope.gridOptions.rowHeight = 35;
-                break;
-            case 2:
-                $scope.gridOptions.rowHeight = 60;
-                break;
-            case 4:
-                $scope.gridOptions.rowHeight = 120;
-                break;
-            case 8:
-                $scope.gridOptions.rowHeight = 240;
-                break;
-        }
-        $scope.initializeEditor($scope.pcm, $scope.metadata, false, true);
-        $scope.setGridHeight();
+    $scope.$watch('state.height', function(newHeight) {
+      $scope.gridOptions.rowHeight = 35 * newHeight;
+      $scope.setGridHeight();
     });
 
     $scope.$on('goToCell', function(event, args) {
