@@ -1,18 +1,4 @@
 <div ng-show="config.enableToolbar">
-  <div class="row">
-      <div class="col-xs-12" ng-show="config.enableTitle">
-          <h3 ng-show="!state.edit">{{pcm.name}}
-          </h3>
-          <form class="form-horizontal" ng-show="state.edit">
-              <fieldset>
-                  <div class="form-group col-lg-5">
-                      <label for="pcm-name" class="control-label">{{ "edit.title.placeholder" | translate }}:</label>
-                      <input id="pcm-name" class="form-control" type="text" ng-model="pcm.name" placeholder='{{ "edit.title.placeholder" | translate }}'>
-                  </div>
-              </fieldset>
-          </form>
-      </div>
-  </div>
   <div class="row" ng-show="config.enableExport || config.enableEdit">
       <a ng-show="!launchFromCreator && !state.saved && state.edit" role="button" class="btn btn-default btn-flat btn-raised btn-sm" data-toggle="modal" data-target="#modalCancel"><i class="mdi-navigation-arrow-back"></i>  {{ 'edit.button.cancel' | translate }}</a>
       <a ng-show="!launchFromCreator && state.saved && state.edit" role="button" class="btn btn-default btn-flat btn-raised btn-sm"  onClick="window.location.href=window.location.href"><i class="mdi-navigation-arrow-back"></i>  {{ 'edit.button.cancel' | translate }}</a>

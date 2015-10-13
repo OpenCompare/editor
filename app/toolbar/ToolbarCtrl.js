@@ -15,10 +15,7 @@ angular
     $scope.validating = false;
     $scope.configurator = false;
     $scope.lineView = true;
-    $scope.isTitleSet = false;
     $scope.launchFromCreator = false;
-
-
 
 
     /**
@@ -89,11 +86,6 @@ angular
     $scope.increaseHeight = function(height) {
       $scope.state.height = height;
     };
-
-    $scope.$on('setPcmName', function(event, args) {
-        $scope.isTitleSet = args.length > 0;
-        $scope.pcmName = args;
-    });
 
     $scope.undo = function() {
       $rootScope.$broadcast("undo");
