@@ -4,16 +4,13 @@
 
 angular
   .module('openCompareEditor')
-  .controller("MediaWikiImportCtrl", function($rootScope, $scope, $modalInstance, base64, openCompareServer) {
+  .controller("MediaWikiImportCtrl", function($rootScope, $scope, base64, openCompareServer, pcmApi) {
 
     $scope.pcmContainers = [];
     $scope.pcmContainerNames = [];
     $scope.message = "";
 
     $scope.loading = false;
-    $scope.cancel = function() {
-        $modalInstance.close();
-    };
 
     // Default values
     $scope.url = "";
@@ -49,9 +46,13 @@ angular
     };
 
     $scope.selectPCM = function(index) {
-        var selectedPCMContainer = $scope.pcmContainers[index];
-        $rootScope.$broadcast('import', selectedPCMContainer);
-        $modalInstance.close();
+      var selectedPCMContainer = $scope.pcmContainers[index];
+
+      $scope.pcmContainer.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(selectedPCMContainer.pcm));
+      pcmApi.decodePCM($scope.pcmContainer.pcm);
+      $scope.pcmContainer.metadata = selectedPCMContainer.metadata;
+
+      $scope.modalInstance.close();
     };
 });
 

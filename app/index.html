@@ -35,6 +35,8 @@
       <div class="row" ng-controller="TestCtrl">
         <oc-editor pcm-container="myPCMContainer" config="myConfig" state="myState">
           <oc-csv-importer api="csvApi"></oc-csv-importer>
+          <oc-html-importer api="htmlApi"></oc-html-importer>
+          <oc-mediawiki-importer api="mediaWikiApi"></oc-mediawiki-importer>
           <oc-toolbar></oc-toolbar>
           <oc-grid></oc-grid>
         </oc-editor>
@@ -119,7 +121,7 @@
     <script src="io/csv/CsvImportCtrl.js"></script>
     <script src="io/csv/CsvExportCtrl.js"></script>
 
-
+    <script src="io/mediawiki/mediawikiImport.js"></script>
     <script src="io/mediawiki/MediaWikiImportCtrl.js"></script>
     <script src="io/mediawiki/MediaWikiExportCtrl.js"></script>
 

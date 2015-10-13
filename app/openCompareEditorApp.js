@@ -120,7 +120,9 @@ angular
 
     $timeout(function() {
       $scope.myPCMContainer.pcm = loadedPCM;
-      $scope.csvApi.open();
+      //$scope.csvApi.open();
+      //$scope.htmlApi.open();
+      $scope.mediaWikiApi.open();
     }, 1000);
 
 
