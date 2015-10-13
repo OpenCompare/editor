@@ -1,12 +1,11 @@
 angular
   .module('openCompareEditor')
-  .directive('ocCsvImporter', function(componentUtils) {
+  .directive('ocHtmlImporter', function(componentUtils) {
 
 
     return {
       restrict: 'E',
       require: "^ocEditor",
-      //templateUrl: 'io/csv/modalCsvImport.html',
       scope: {
         api: "="
       },
@@ -14,9 +13,9 @@ angular
         $scope.api = {
           open : function() {
             $scope.modalInstance = $modal.open({
-              templateUrl: "io/csv/modalCsvImport.html",
+              templateUrl: "io/html/modalHtmlImport.html",
               scope: $scope,
-              controller: "CsvImportCtrl"
+              controller: "HtmlImportCtrl"
             })
           }
         };

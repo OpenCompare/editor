@@ -5,12 +5,9 @@
 
 angular
   .module('openCompareEditor')
-  .controller("HtmlImportCtrl", function($rootScope, $scope, $modalInstance, openCompareServer) {
+  .controller("HtmlImportCtrl", function($rootScope, $scope, $modalInstance, openCompareServer, pcmApi) {
 
     $scope.loading = false;
-    $scope.cancel = function() {
-        $modalInstance.close();
-    };
 
     // Default values
     $scope.file = null;
@@ -54,8 +51,12 @@ angular
     };
 
     $scope.selectPCM = function(index) {
-        var selectedPCMContainer = $scope.pcmContainers[index];
-        $rootScope.$broadcast('import', selectedPCMContainer);
-        $modalInstance.close();
+      var selectedPCMContainer = $scope.pcmContainers[index];
+
+      $scope.pcmContainer.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(selectedPCMContainer.pcm));
+      pcmApi.decodePCM($scope.pcmContainer.pcm);
+      $scope.pcmContainer.metadata = selectedPCMContainer.metadata;
+
+      $scope.modalInstance.close();
     };
 });
