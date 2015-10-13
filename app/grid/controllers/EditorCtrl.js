@@ -333,10 +333,10 @@ angular
      * Launch initialization when importing
      */
     $scope.$on('import', function(event, args) {
-        $scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(args.pcm));
-        pcmApi.decodePCM($scope.pcm);
-        $scope.metadata = args.metadata;
-        $scope.initializeEditor($scope.pcm, $scope.metadata);
+        $scope.pcmContainer.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(args.pcm));
+        pcmApi.decodePCM($scope.pcmContainer.pcm);
+        $scope.pcmContainer.metadata = args.metadata;
+        $scope.initializeEditor($scope.pcmContainer.pcm, $scope.pcmContainer.metadata);
     });
 
 
