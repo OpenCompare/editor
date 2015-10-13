@@ -4,7 +4,7 @@
   <form class="form-horizontal" ng-show="state.edit">
     <div class="form-group col-lg-5">
       <label for="pcm-name" class="control-label">{{ "edit.title.placeholder" | translate }}:</label>
-      <input id="pcm-name" class="form-control" type="text" ng-model="pcm.name" placeholder='{{ "edit.title.placeholder" | translate }}'>
+      <input id="pcm-name" class="form-control" type="text" ng-model="pcm.name" ng-change="state.saved=false" placeholder='{{ "edit.title.placeholder" | translate }}'>
     </div>
   </form>
 </div>

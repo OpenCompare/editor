@@ -23,6 +23,7 @@ angular
         $scope.state = ctrl.state;
 
         componentUtils.defineOption($scope.state, ["edit"], false);
+        componentUtils.defineOption($scope.state, ["saved"], false);
 
       }
     };

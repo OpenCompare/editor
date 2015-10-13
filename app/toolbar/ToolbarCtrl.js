@@ -16,7 +16,7 @@ angular
     $scope.configurator = false;
     $scope.lineView = true;
     $scope.launchFromCreator = false;
-
+    $scope.isTitleSet = false;
 
     /**
      * Save PCM on the server
@@ -94,5 +94,11 @@ angular
     $scope.redo = function() {
       $rootScope.$broadcast("redo");
     };
+
+    $scope.$watch("pcm.name", function(name) {
+      if (typeof name !== "undefined") {
+        $scope.isTitleSet = name.length > 0
+      }
+    });
 
 });
