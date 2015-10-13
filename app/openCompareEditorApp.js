@@ -115,14 +115,14 @@ angular
     };
 
     $scope.myState = {
-      edit: true
+      //edit: true
     };
 
     $timeout(function() {
       $scope.myPCMContainer.pcm = loadedPCM;
       //$scope.csvApi.open();
       //$scope.htmlApi.open();
-      $scope.mediaWikiApi.open();
+      //$scope.mediaWikiApi.open();
     }, 1000);
 
 

@@ -21,8 +21,6 @@ angular
     $scope.stringFilteredFeatures = [];
     $scope.slider = [];
 
-    $scope.lineView = true;
-
     $scope.numberOfPages=function(){
         $scope.length = 0;
         if($scope.data.length > 0) {
@@ -35,13 +33,8 @@ angular
         return Math.ceil($scope.length/$scope.pageSize);
     };
 
-    $scope.$on('setLineView', function(event, arg) {
-        $scope.lineView = arg;
-    });
-
     $scope.setLineView = function(bool) {
-        $scope.lineView = bool;
-        $rootScope.$broadcast('setLineView', bool);
+        $scope.state.lineView = bool;
     };
 
 

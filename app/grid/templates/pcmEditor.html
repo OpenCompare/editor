@@ -154,7 +154,7 @@
     <div class="row">
 
         <oc-configurator ng-show="state.configurator"></oc-configurator>
-        <div ng-show="!state.configurator || (state.configurator && !lineView)" id="matrix"  class="grid" ng-class="{'col-md-8': state.configurator, 'col-md-12': !state.configurator}" ng-style="{'height' : height}"
+        <div ng-show="!state.configurator || (state.configurator && !state.lineView)" id="matrix"  class="grid" ng-class="{'col-md-8': state.configurator, 'col-md-12': !state.configurator}" ng-style="{'height' : height}"
              ui-grid="gridOptions"  ui-grid-selection ui-grid-edit ui-grid-cellNav ui-grid-resize-columns ui-grid-move-columns ui-grid-auto-resize ui-grid-pinning>
             <div class="grid-overlay-msg" ng-show="loading">
                 <div class="msg">

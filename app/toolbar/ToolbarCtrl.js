@@ -69,11 +69,6 @@ angular
         $scope.$modalInstance.close();
     };
 
-    /** Set the line view in configurator mode */
-    $scope.$on('setLineView', function(event, arg) {
-        $scope.lineView = arg;
-    });
-
     /**
      * Export
      */

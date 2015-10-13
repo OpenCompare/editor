@@ -54,6 +54,7 @@ angular
       $scope.gridOptions.columnDefs = [];
       $scope.gridOptions.rowHeight = 35;
       $scope.state.edit = bool;
+      $scope.state.configurator = false;
 
       if (typeof $scope.pcm !== "undefined") {
         $timeout(function(){
@@ -67,10 +68,6 @@ angular
       $scope.state.edit = false;
     };
 
-
-    $scope.$on('setLineView', function(event, arg) {
-        $scope.lineView = arg;
-    });
 
     /* Button to increase row height */
     $scope.$on('increaseHeight', function(event, arg) {
@@ -328,17 +325,6 @@ angular
     /**
      * Bind events from toolbar to functions of the editor
       */
-
-    /**
-     * Launch initialization when importing
-     */
-    $scope.$on('import', function(event, args) {
-        $scope.pcmContainer.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(args.pcm));
-        pcmApi.decodePCM($scope.pcmContainer.pcm);
-        $scope.pcmContainer.metadata = args.metadata;
-        $scope.initializeEditor($scope.pcmContainer.pcm, $scope.pcmContainer.metadata);
-    });
-
 
     /**
      * Launch Exportation

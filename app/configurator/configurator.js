@@ -25,6 +25,7 @@ angular
         $scope.state = ctrl.state;
 
         componentUtils.defineOption($scope.state, ["configurator"], false);
+        componentUtils.defineOption($scope.state, ["lineView"], true);
 
       }
     };

@@ -38,6 +38,8 @@ angular
             componentUtils.defineOption($scope.state, ["canUndo"], false);
             componentUtils.defineOption($scope.state, ["canRedo"], false);
 
+            componentUtils.defineOption($scope.state, ["lineView"], true);
+
           }
         };
     });
