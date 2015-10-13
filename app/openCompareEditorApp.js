@@ -120,7 +120,11 @@ angular
 
     $timeout(function() {
       $scope.myPCMContainer.pcm = loadedPCM;
+      $scope.csvApi.open();
     }, 1000);
+
+
+
 
 
   });

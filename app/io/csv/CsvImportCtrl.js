@@ -5,12 +5,9 @@
 
 angular
   .module('openCompareEditor')
-  .controller("CsvImportCtrl", function($rootScope, $scope, $modalInstance, openCompareServer) {
+  .controller("CsvImportCtrl", function($rootScope, $scope, openCompareServer, pcmApi, $modal) {
 
     $scope.loading = false;
-    $scope.cancel = function() {
-        $modalInstance.close();
-    };
 
     // Default values
     $scope.file = null;
@@ -41,9 +38,13 @@ angular
             })
             .then(function(response) {
                 $scope.loading = false;
-                var pcmContainer = response.data[0];
-                $rootScope.$broadcast('import', pcmContainer);
-                $modalInstance.close();
+                var importedPcmContainer = response.data[0];
+
+                $scope.pcmContainer.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(importedPcmContainer.pcm));
+                pcmApi.decodePCM($scope.pcmContainer.pcm);
+                $scope.pcmContainer.metadata = importedPcmContainer.metadata;
+
+                $scope.modalInstance.close();
             }, function(response) {
                 $scope.loading = false;
                 $scope.message = response.data;
