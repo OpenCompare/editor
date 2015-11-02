@@ -118,7 +118,6 @@ angular
         });
 
         pcm.products.array.forEach(function (product) {
-            product.name = encodeToBase64(product.name, encoding);
             product.cells.array.forEach(function (cell) {
                 cell.content = encodeToBase64(cell.content, encoding);
                 cell.rawContent = encodeToBase64(cell.rawContent, encoding);
