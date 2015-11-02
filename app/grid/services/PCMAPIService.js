@@ -2,7 +2,7 @@ angular
   .module('openCompareEditor')
   .service('pcmApi', function(base64) {
 
-    var pcmMM = Kotlin.modules['pcm'].pcm;
+    var pcmMM = Kotlin.modules['org.opencompare.model.pcm'].org.opencompare.model.pcm;
     this.factory = new pcmMM.factory.DefaultPcmFactory();
     var loader = this.factory.createJSONLoader();
     var serializer = this.factory.createJSONSerializer();
