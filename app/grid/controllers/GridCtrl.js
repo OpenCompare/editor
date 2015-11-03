@@ -481,6 +481,8 @@ angular
           pcm = pcmApi.decodePCM(pcm); // Decode PCM from Base64
       }
 
+      $scope.productsKey = pcm.productsKey.name;
+
       /* Convert PCM model to editor format */
       var features = pcmApi.getConcreteFeatures(pcm);
 

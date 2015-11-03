@@ -133,7 +133,6 @@ angular
         pcmData.forEach(function(productData) {
             // Create product
             var product = pcmApi.factory.createProduct();
-            product.name = productData.name;
             pcm.addProducts(product);
             var featureGroups = $scope.gridOptions.superColDefs;
             var features = $scope.gridOptions.columnDefs;
@@ -199,8 +198,7 @@ angular
                         product.addCells(cell);
                     }
                 });
-            }
-            else {
+            } else {
                 $scope.gridOptions.columnDefs.forEach(function (featureData) {
 
                     var decodedFeatureName = editorUtil.convertStringToPCMFormat(featureData.name);
@@ -230,10 +228,17 @@ angular
             index++;
         });
 
-        // Encode PCM in Base64
-        pcmApi.encodePCM(pcm);
+      // Set products key
+      pcm.features.array.forEach(function (feature) {
+        if (feature.name === $scope.productsKey) {
+          pcm.productsKey = feature;
+        }
+      });
 
-        return pcm;
+      // Encode PCM in Base64
+      pcmApi.encodePCM(pcm);
+
+      return pcm;
     }
 
     /**
@@ -290,7 +295,7 @@ angular
       var index = 0;
       product.forEach(function (product) {
           var object = {};
-          object.product = product.name;
+          object.product = product[$scope.productsKey];
           object.position = index;
           metadata.productPositions.push(object);
           index++;
