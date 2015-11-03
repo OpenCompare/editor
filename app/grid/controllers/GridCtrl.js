@@ -484,7 +484,9 @@ angular
       /* Convert PCM model to editor format */
       var features = pcmApi.getConcreteFeatures(pcm);
 
-      $scope.pcmData = pcm.products.array.map(function(product) {
+      var sortedProducts = pcmApi.getSortedProducts(pcm, metadata);
+
+      $scope.pcmData = sortedProducts.map(function(product) {
           var productData = {};
           features.map(function(feature) {
               var featureName = editorUtil.convertStringToEditorFormat(feature.name);
@@ -499,7 +501,7 @@ angular
       });
 
       // Return rawcontent
-      $scope.pcmDataRaw = pcm.products.array.map(function(product) {
+      $scope.pcmDataRaw = sortedProducts.map(function(product) {
           var productDataRaw = {};
           features.map(function(feature) {
               var featureName =  editorUtil.convertStringToEditorFormat(feature.name);
@@ -518,10 +520,6 @@ angular
           return productDataRaw;
       });
 
-
-      $rootScope.$broadcast('setPcmName', $scope.pcm.name);
-
-
       createColumns(pcm, metadata, features, loadFeatureGroups);
       setOptions();
 
@@ -534,17 +532,18 @@ angular
 
       $scope.state.columnDefs = $scope.gridOptions.columnDefs;
       $scope.state.pcmData = $scope.pcmData;
+
     };
 
 
 
     function createColumns(pcm, metadata, features, loadFeatureGroups) {
-        /* Define columns */
-        var columnDefs = [];
+      /* Define columns */
+      var columnDefs = [];
 
-        var hasFeatureGroups = false;
+      var hasFeatureGroups = false;
 
-
+      // Tools column
       var toolsColumn = {
         name: ' ',
         cellTemplate: "templates/toolCellTemplate.html",
@@ -558,6 +557,7 @@ angular
         allowCellFocus: false,
         enableColumnMoving: false
       };
+
       switch($scope.state.edit) {
         case true:
           toolsColumn.width = 30;
@@ -566,114 +566,113 @@ angular
           toolsColumn.width = 1;
           break;
       }
+
       columnDefs.push(toolsColumn);
 
+      // Feature columns
+      features.map(function(feature) {
 
-        features.map(function(feature) {
+        var featureName = feature.name;
+        if(!feature.name){
+            featureName = " ";
+        }
+        var featureGroupName = "emptyFeatureGroup";
+        if(feature.parentGroup) {
+            featureGroupName = feature.parentGroup.name;
+            hasFeatureGroups = true;
+        }
+        var colDef = $scope.newColumnDef(featureName, featureGroupName, typeService.getType(featureName, $scope.pcmData));
 
-          var featureName = feature.name;
-          if(!feature.name){
-              featureName = " ";
-          }
-          var featureGroupName = "emptyFeatureGroup";
-          if(feature.parentGroup) {
-              featureGroupName = feature.parentGroup.name;
-              hasFeatureGroups = true;
-          }
-          var colDef = $scope.newColumnDef(featureName, featureGroupName, typeService.getType(featureName, $scope.pcmData));
-
-          if (pcm.productsKey === feature) {
-            colDef.pinnedLeft = true;
-          }
-
-          columnDefs.push(colDef);
-        });
-
-        if(hasFeatureGroups && loadFeatureGroups) {
-            $scope.gridOptions.superColDefs = [];
-            var emptyfeatureGroup = {
-                name: 'emptyFeatureGroup',
-                displayName: ' '
-            };
-            $scope.gridOptions.superColDefs.push(emptyfeatureGroup);
-            pcm.features.array.forEach(function (featureGroup) {
-                var isAFeatureNotAFeatureGroup = false;
-                features.map(function(feature) {
-                    if(featureGroup.name == feature.name) {
-                        isAFeatureNotAFeatureGroup = true;
-                    }
-                });
-                if(!isAFeatureNotAFeatureGroup) {
-                    var featureName = featureGroup.name;
-
-                    var newFeatureGroup = {
-                        name: featureName,
-                        displayName: featureName
-                    };
-                    $scope.gridOptions.superColDefs.splice(0, 0, newFeatureGroup);
-                }
-            });
+        if (pcm.productsKey === feature) {
+          colDef.pinnedLeft = true;
         }
 
+        columnDefs.push(colDef);
+      });
 
-        if(metadata) {
-            $scope.pcmData = editorUtil.sortProducts($scope.pcmData, metadata.productPositions);
-            $scope.pcmDataRaw = editorUtil.sortRawProducts($scope.pcmDataRaw, $scope.pcmData);
-            columnDefs = editorUtil.sortFeatures(columnDefs, metadata.featurePositions);
-        }
+      if(hasFeatureGroups && loadFeatureGroups) {
+          $scope.gridOptions.superColDefs = [];
+          var emptyfeatureGroup = {
+              name: 'emptyFeatureGroup',
+              displayName: ' '
+          };
+          $scope.gridOptions.superColDefs.push(emptyfeatureGroup);
+          pcm.features.array.forEach(function (featureGroup) {
+              var isAFeatureNotAFeatureGroup = false;
+              features.map(function(feature) {
+                  if(featureGroup.name == feature.name) {
+                      isAFeatureNotAFeatureGroup = true;
+                  }
+              });
+              if(!isAFeatureNotAFeatureGroup) {
+                  var featureName = featureGroup.name;
 
-        /* Second column for the products */
-        var productsColumn = {
-            name: pcm.productsKey.name,
-            field: 'name',
-            cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
-                return 'productCell';
-            },
-            enableSorting: true,
-            enableHiding: false,
-            enableColumnMoving: false,
-            enableCellEdit: $scope.state.edit,
-            enableCellEditOnFocus: $scope.state.edit,
-            pinnedLeft:true,
-            allowCellFocus: true,
-            minWidth: 150,
-            width: 150,
-            menuItems: [
-                {
-                    title: 'Unhide everything',
-                    icon: 'fa fa-eye',
-                    action: function($event) {
-                        $scope.gridOptions.columnDefs.forEach(function(featureData) {
-                            featureData.visible = true;
-                        });
-                        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-                    }
-                }
-            ]
-        };
-
-        /* Specific filter for products */
-        productsColumn.filter = [];
-        productsColumn.filter.term = '';
-        productsColumn.filter.placeholder = 'Find';
-        productsColumn.filterHeaderTemplate="" +
-            "<div class='ui-grid-filter-container'>" +
-            "   <input type='text' class='form-control floating-label' ng-change='grid.appScope.applyProductFilter()' ng-model='grid.appScope.productFilter' placeholder='Find'"+
-            "</div>";
-        productsColumn.footerCellTemplate="" +
-            "<div class='ui-grid-cell-contents'>" +
-            "<span>{{grid.appScope.gridApi.core.getVisibleRows($scope.gridApi.grid).length}} / {{grid.appScope.pcmData.length}}</span>"+
-            "</div>";
+                  var newFeatureGroup = {
+                      name: featureName,
+                      displayName: featureName
+                  };
+                  $scope.gridOptions.superColDefs.splice(0, 0, newFeatureGroup);
+              }
+          });
+      }
 
 
+      if(metadata) {
+          columnDefs = editorUtil.sortFeatures(columnDefs, metadata.featurePositions);
+      }
+
+      /* Second column for the products */
+      var productsColumn = {
+          name: pcm.productsKey.name,
+          field: 'name',
+          cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+              return 'productCell';
+          },
+          enableSorting: true,
+          enableHiding: false,
+          enableColumnMoving: false,
+          enableCellEdit: $scope.state.edit,
+          enableCellEditOnFocus: $scope.state.edit,
+          pinnedLeft:true,
+          allowCellFocus: true,
+          minWidth: 150,
+          width: 150,
+          menuItems: [
+              {
+                  title: 'Unhide everything',
+                  icon: 'fa fa-eye',
+                  action: function($event) {
+                      $scope.gridOptions.columnDefs.forEach(function(featureData) {
+                          featureData.visible = true;
+                      });
+                      $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                  }
+              }
+          ]
+      };
+
+      /* Specific filter for products */
+      productsColumn.filter = [];
+      productsColumn.filter.term = '';
+      productsColumn.filter.placeholder = 'Find';
+      productsColumn.filterHeaderTemplate="" +
+          "<div class='ui-grid-filter-container'>" +
+          "   <input type='text' class='form-control floating-label' ng-change='grid.appScope.applyProductFilter()' ng-model='grid.appScope.productFilter' placeholder='Find'"+
+          "</div>";
+      productsColumn.footerCellTemplate="" +
+          "<div class='ui-grid-cell-contents'>" +
+          "<span>{{grid.appScope.gridApi.core.getVisibleRows($scope.gridApi.grid).length}} / {{grid.appScope.pcmData.length}}</span>"+
+          "</div>";
 
 
-        if($scope.gridOptions.superColDefs.length > 0) {
-            $scope.gridOptions.columnDefs = sortFeaturesService.sortByFeatureGroup(columnDefs, $scope.gridOptions.superColDefs);
-        }
-        else {
-            $scope.gridOptions.columnDefs = columnDefs;
-        }
+
+
+      if($scope.gridOptions.superColDefs.length > 0) {
+          $scope.gridOptions.columnDefs = sortFeaturesService.sortByFeatureGroup(columnDefs, $scope.gridOptions.superColDefs);
+      }
+      else {
+          $scope.gridOptions.columnDefs = columnDefs;
+      }
 
 
 

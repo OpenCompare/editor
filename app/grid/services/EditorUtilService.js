@@ -67,40 +67,6 @@ angular
 
     };
 
-    this.sortProducts = function(products, positions) {
-        var sortedProducts = [];
-        positions.sort(function (a, b) {
-            if(a.position == -1) {
-                return 1;
-            }
-            else if(b.position == -1) {
-                return -1;
-            }
-            else {
-                return a.position - b.position;
-            }
-        });
-        for(var i = 0; i < positions.length; i++) {
-            products.forEach(function (product) {
-                if(positions[i].product == product.name) {
-                    sortedProducts.push(product);
-                }
-            });
-        }
-        return sortedProducts;
-    };
-
-    this.sortRawProducts = function(rawProducts, products) {
-        var sortedProducts = [];
-        products.forEach(function (product) {
-            rawProducts.forEach(function (rawProduct) {
-                if (rawProduct.name == product.name) {
-                    sortedProducts.push(rawProduct);
-                }
-            });
-        });
-        return sortedProducts;
-    };
 
     this.convertStringToEditorFormat = function(name) {
 

@@ -7,13 +7,15 @@ angular
     var loader = this.factory.createJSONLoader();
     var serializer = this.factory.createJSONSerializer();
 
+    var api = this;
+
     /**
      * Sort two elements by their names (accessed with x.name)
      * @param a
      * @param b
      * @returns {number}
      */
-    this.sortByName = function (a, b) {
+    api.sortByName = function (a, b) {
         if (a.name < b.name) {
             return -1;
         } else if (a.name > b.name) {
@@ -24,7 +26,7 @@ angular
     };
 
 
-    this.createFeature = function (name, pcm, factory) {
+    api.createFeature = function (name, pcm, factory) {
         // Create feature
         var feature = factory.createFeature();
         feature.name = name;
@@ -41,7 +43,7 @@ angular
         return feature;
     };
 
-    this.getConcreteFeatures = function (pcm) {
+    api.getConcreteFeatures = function (pcm) {
 
       function getConcreteFeaturesRec(aFeature) {
           var features = [];
@@ -73,7 +75,7 @@ angular
       return features;
     };
 
-    this.findCell = function (product, feature) {
+    api.findCell = function (product, feature) {
         var cells = product.cells.array;
         for (var i = 0; i < cells.length; i++) {
             var cell = cells[i];
@@ -83,17 +85,17 @@ angular
         }
     };
 
-    this.encodePCM = function (pcm) {
+    api.encodePCM = function (pcm) {
         this.base64PCMVisitor(pcm, true);
         return pcm;
     };
 
-    this.decodePCM = function (pcm) {
+    api.decodePCM = function (pcm) {
         this.base64PCMVisitor(pcm, false);
         return pcm;
     };
 
-    this.base64PCMVisitor = function (pcm, encoding) {
+    api.base64PCMVisitor = function (pcm, encoding) {
         function encodeToBase64(str, encoding) {
             if (encoding) {
                 return base64.encode(str);
@@ -125,14 +127,44 @@ angular
         });
     };
 
-    this.loadPCMModelFromString = function(json) {
+    api.loadPCMModelFromString = function(json) {
       return loader.loadModelFromString(json).get(0);
     };
 
-    this.serializePCM = function(pcm) {
+    api.serializePCM = function(pcm) {
       return serializer.serialize(pcm);
     };
 
+
+    api.getSortedProducts = function(pcm, metadata) {
+
+      function getPosition(product) {
+        var position = 0;
+        for (var i = 0; i < metadata.productPositions.length; i++) {
+
+          var productName = api.findCell(product, pcm.productsKey);
+
+          if (metadata.productPositions[i].product == productName) {
+            position = metadata.productPositions[i];
+            break;
+          }
+        }
+      }
+
+      if (metadata) {
+        return pcm.products.array.sort(function (p1, p2) {
+
+          var p1Position = getPosition(p1);
+          var p2Position = getPosition(p2);
+
+
+          return p2Position - p1Position;
+        });
+      } else {
+        return pcm.products.array;
+      }
+
+    }
 
 });
 
