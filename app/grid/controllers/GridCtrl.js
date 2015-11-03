@@ -491,8 +491,8 @@ angular
               if(!feature.name){
                   featureName = " ";
               }
+
               var cell = pcmApi.findCell(product, feature);
-              productData.name = product.name; // FIXME : may conflict with feature name
               productData[featureName] = cell.content;
           });
           return productData;
@@ -507,12 +507,12 @@ angular
                   featureName = " ";
               }
               var cell = pcmApi.findCell(product, feature);
-              productDataRaw.name = product.name; // FIXME : may conflict with feature name
+
               if(cell.rawContent && cell.rawContent != "") {
                   productDataRaw[featureName] = cell.rawContent;
               }
               else {
-                  productDataRaw[featureName] = cell.content;// TODO: replace content with rawcontent when implemented
+                  productDataRaw[featureName] = cell.content;
               }
           });
           return productDataRaw;
@@ -542,23 +542,51 @@ angular
         /* Define columns */
         var columnDefs = [];
 
-        var colIndex = 0;
         var hasFeatureGroups = false;
+
+
+      var toolsColumn = {
+        name: ' ',
+        cellTemplate: "templates/toolCellTemplate.html",
+        enableCellEdit: false,
+        enableFiltering: false,
+        enableColumnResizing: false,
+        pinnedLeft:true,
+        enableSorting: false,
+        enableHiding: false,
+        enableColumnMenu: false,
+        allowCellFocus: false,
+        enableColumnMoving: false
+      };
+      switch($scope.state.edit) {
+        case true:
+          toolsColumn.width = 30;
+          break;
+        case false:
+          toolsColumn.width = 1;
+          break;
+      }
+      columnDefs.push(toolsColumn);
+
 
         features.map(function(feature) {
 
-            var featureName = feature.name;
-            if(!feature.name){
-                featureName = " ";
-            }
-            var featureGroupName = "emptyFeatureGroup";
-            if(feature.parentGroup) {
-                featureGroupName = feature.parentGroup.name;
-                hasFeatureGroups = true;
-            }
-            var colDef = $scope.newColumnDef(featureName, featureGroupName, typeService.getType(featureName, $scope.pcmData));
-            columnDefs.push(colDef);
-            colIndex++;
+          var featureName = feature.name;
+          if(!feature.name){
+              featureName = " ";
+          }
+          var featureGroupName = "emptyFeatureGroup";
+          if(feature.parentGroup) {
+              featureGroupName = feature.parentGroup.name;
+              hasFeatureGroups = true;
+          }
+          var colDef = $scope.newColumnDef(featureName, featureGroupName, typeService.getType(featureName, $scope.pcmData));
+
+          if (pcm.productsKey === feature) {
+            colDef.pinnedLeft = true;
+          }
+
+          columnDefs.push(colDef);
         });
 
         if(hasFeatureGroups && loadFeatureGroups) {
@@ -594,32 +622,10 @@ angular
             columnDefs = editorUtil.sortFeatures(columnDefs, metadata.featurePositions);
         }
 
-        var toolsColumn = {
-            name: ' ',
-            cellTemplate: "templates/toolCellTemplate.html",
-            enableCellEdit: false,
-            enableFiltering: false,
-            enableColumnResizing: false,
-            pinnedLeft:true,
-            enableSorting: false,
-            enableHiding: false,
-            enableColumnMenu: false,
-            allowCellFocus: false,
-            enableColumnMoving: false
-        };
-        switch($scope.state.edit) {
-            case true:
-                toolsColumn.width = 30;
-                break;
-            case false:
-                toolsColumn.width = 1;
-                break;
-        }
-
         /* Second column for the products */
         var productsColumn = {
-            name: 'Product',
-            field: "name",
+            name: pcm.productsKey.name,
+            field: 'name',
             cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
                 return 'productCell';
             },
@@ -658,8 +664,8 @@ angular
             "<div class='ui-grid-cell-contents'>" +
             "<span>{{grid.appScope.gridApi.core.getVisibleRows($scope.gridApi.grid).length}} / {{grid.appScope.pcmData.length}}</span>"+
             "</div>";
-        columnDefs.splice(0, 0, toolsColumn);
-        columnDefs.splice(1, 0, productsColumn);
+
+
 
 
         if($scope.gridOptions.superColDefs.length > 0) {
