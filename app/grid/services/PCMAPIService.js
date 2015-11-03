@@ -142,13 +142,15 @@ angular
         var position = 0;
         for (var i = 0; i < metadata.productPositions.length; i++) {
 
-          var productName = api.findCell(product, pcm.productsKey);
+          var productName = api.findCell(product, pcm.productsKey).content;
 
-          if (metadata.productPositions[i].product == productName) {
-            position = metadata.productPositions[i];
+          if (metadata.productPositions[i].product === productName) {
+            position = metadata.productPositions[i].position;
             break;
           }
         }
+
+        return position;
       }
 
       if (metadata) {
@@ -157,8 +159,7 @@ angular
           var p1Position = getPosition(p1);
           var p2Position = getPosition(p2);
 
-
-          return p2Position - p1Position;
+          return p1Position - p2Position;
         });
       } else {
         return pcm.products.array;
