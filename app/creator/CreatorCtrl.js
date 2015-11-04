@@ -27,12 +27,21 @@ angular
       var metadata = {};
 
 
+      // Create features
       metadata.featurePositions = [];
-      for(j = 0; j < $scope.columns; j++) {
+      for(j = 0; j < $scope.columns + 1; j++) {
         var feature = pcmApi.factory.createFeature();
-        feature.name = "Feature " + (j + 1);
+
+        if (j == 0) {
+          feature.name = "Products";
+          pcm.productsKey = feature;
+        } else {
+          feature.name = "Feature " + j;
+        }
+
         pcm.addFeatures(feature);
         features[feature.name] = feature;
+
         metadata.featurePositions.push({
           feature: feature.name,
           position: j
@@ -40,20 +49,31 @@ angular
       }
 
 
+      // Create products
       metadata.productPositions = [];
       for(i = 0; i < $scope.rows; i++) {
         var product = pcmApi.factory.createProduct();
-        product.name = "Product " + (i + 1);
         pcm.addProducts(product);
-        for(j = 0; j < $scope.columns; j++) {
+
+        var productName;
+
+        for(j = 0; j < $scope.columns + 1; j++) {
           var cell = pcmApi.factory.createCell();
-          cell.content = "";
-          cell.feature = features["Feature " + (j + 1)];
+
+          if (j == 0 ) {
+            productName = "Product " + (i + 1);
+            cell.content = productName;
+            cell.feature = features["Products"];
+
+          } else {
+            cell.content = "";
+            cell.feature = features["Feature " + j];
+          }
           product.addCells(cell);
         }
 
         metadata.productPositions.push({
-          product: product.name,
+          product: productName,
           position: i
         });
       }

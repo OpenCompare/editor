@@ -3112,7 +3112,7 @@ angular
     };
 
     $timeout(function() {
-      $scope.myPCMContainer.pcm = loadedPCM;
+      //$scope.myPCMContainer.pcm = loadedPCM;
     //  //$scope.csvApi.open();
     //  //$scope.htmlApi.open();
     //  //$scope.mediaWikiApi.open();
