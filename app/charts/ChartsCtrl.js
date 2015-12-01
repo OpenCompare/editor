@@ -4,7 +4,7 @@
 
 angular
   .module('openCompareEditor')
-  .controller("ChartsCtrl", function($rootScope, $scope, chartService, typeService, editorUtil) {
+  .controller("ChartsCtrl", function($rootScope, $scope, chartService, typeService, editorUtil, pcmApi) {
 
     $scope.showChartPanel = false;
 
@@ -92,8 +92,10 @@ angular
             chartService.addInLineChart(colName);
             var data = [];
             var labels = [];
+            var productsKey = $scope.pcm.productsKey;
+
             pcmData.forEach(function (product) {
-                labels.push(product.name);
+                labels.push(product[productsKey.name]);
                 data.push(parseInt(product[colName]) || 0);
             });
             $scope.lineData = [data];
@@ -153,8 +155,9 @@ angular
             chartService.addInBarChart(colName);
             var data = [];
             var labels = [];
+            var productsKey = $scope.pcm.productsKey;
             pcmData.forEach(function (product) {
-                labels.push(product.name);
+                labels.push(product[productsKey.name]);
                 data.push(parseInt(product[colName]) || 0);
             });
             $scope.barData = [data];
