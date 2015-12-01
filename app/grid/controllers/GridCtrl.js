@@ -587,6 +587,10 @@ angular
 
         if (pcm.productsKey === feature) {
           colDef.pinnedLeft = true;
+          colDef.footerCellTemplate="" +
+            "<div class='ui-grid-cell-contents'>" +
+            "<span>{{grid.appScope.gridApi.core.getVisibleRows($scope.gridApi.grid).length}} / {{grid.appScope.pcmData.length}}</span>"+
+            "</div>";
         }
 
         columnDefs.push(colDef);
