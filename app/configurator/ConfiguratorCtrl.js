@@ -140,7 +140,7 @@ angular
     $scope.isInFilter = function(product) {
         /* Check for product filter */
 
-        if($scope.productFilter && product.name.toLowerCase().indexOf($scope.productFilter.toLowerCase()) == -1) {
+        if($scope.productFilter && product[$scope.productsKey.name].toLowerCase().indexOf($scope.productFilter.toLowerCase()) == -1) {
             return false;
         }
         /* Check for boolean filters */

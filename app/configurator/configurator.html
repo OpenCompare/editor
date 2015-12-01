@@ -112,15 +112,15 @@
                 <div class="row-action-primary">
 
                 </div>
-                <div class="row-content  panel panel-default" ng-init="showProduct[product.name] = true">
+                <div class="row-content  panel panel-default" ng-init="showProduct[productsKey.name] = true">
                     <div class="panel-heading">
                         <div class="least-content">
-                            <button ng-show="!showProduct[product.name]" ng-click="showProduct[product.name] = true" class="btn btn-flat btn-primary btn-xs"><i class="mdi-navigation-expand-less"></i></button>
-                            <button ng-show="showProduct[product.name]" ng-click="showProduct[product.name] = false" class="btn btn-flat btn-primary btn-xs"><i class="mdi-navigation-expand-more"></i></button>
+                            <button ng-show="!showProduct[productsKey.name]" ng-click="showProduct[productsKey.name] = true" class="btn btn-flat btn-primary btn-xs"><i class="mdi-navigation-expand-less"></i></button>
+                            <button ng-show="showProduct[productsKey.name]" ng-click="showProduct[productsKey.name] = false" class="btn btn-flat btn-primary btn-xs"><i class="mdi-navigation-expand-more"></i></button>
                         </div>
-                        <h4 class="list-group-item-heading">{{product.name}}</h4>
+                        <h4 class="list-group-item-heading">{{product[productsKey.name]}}</h4>
                     </div>
-                    <div class="panel-body" ng-show="showProduct[product.name]">
+                    <div class="panel-body" ng-show="showProduct[productsKey.name]">
                         <p class="list-group-item-text">
 
                         <div class="row" ng-repeat="feature in stringFeatures" ng-if="product[feature.name] != ''">

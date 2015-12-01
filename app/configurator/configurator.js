@@ -17,6 +17,9 @@ angular
 
         $scope.$watch("pcmContainer.pcm", function(newVal) {
           $scope.pcm = ctrl.pcmContainer.pcm;
+          if (typeof $scope.pcm !== 'undefined') {
+            $scope.productsKey = ctrl.pcmContainer.pcm.productsKey;
+          }
           $scope.metadata = ctrl.pcmContainer.metadata;
           $scope.id = ctrl.pcmContainer.id;
         });
