@@ -92,7 +92,7 @@ angular
             chartService.addInLineChart(colName);
             var data = [];
             var labels = [];
-            var productsKey = $scope.pcm.productsKey;
+            var productsKey = $scope.productsKey;
 
             pcmData.forEach(function (product) {
                 labels.push(product[productsKey.name]);
@@ -155,7 +155,7 @@ angular
             chartService.addInBarChart(colName);
             var data = [];
             var labels = [];
-            var productsKey = $scope.pcm.productsKey;
+            var productsKey = $scope.productsKey;
             pcmData.forEach(function (product) {
                 labels.push(product[productsKey.name]);
                 data.push(parseInt(product[colName]) || 0);

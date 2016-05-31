@@ -12,18 +12,11 @@ angular
       templateUrl: 'configurator/configurator.html',
       controller: "ConfiguratorCtrl",
       link: function($scope, element, attrs, ctrl) {
+        $scope.pcmContainer = ctrl.pcmContainer;
 
-        $scope.$watch("pcmContainer", function(newVal) {
+        $scope.$watchCollection("pcmContainer", function(newVal) {
           if (typeof newVal !== "undefined") {
             $scope.pcmContainer = ctrl.pcmContainer;
-          }
-        });
-
-        $scope.config = ctrl.config;
-        $scope.state = ctrl.state;
-
-        $scope.$watch("pcmContainer.pcm", function(newVal) {
-          if (typeof newVal !== "undefined") {
             $scope.pcm = ctrl.pcmContainer.pcm;
             if (typeof $scope.pcm !== 'undefined') {
               $scope.productsKey = ctrl.pcmContainer.pcm.productsKey;
@@ -32,6 +25,9 @@ angular
             $scope.id = ctrl.pcmContainer.id;
           }
         });
+
+        $scope.config = ctrl.config;
+        $scope.state = ctrl.state;
 
         componentUtils.defineOption($scope.state, ["configurator"], false);
         componentUtils.defineOption($scope.state, ["lineView"], true);
