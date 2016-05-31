@@ -545,32 +545,6 @@ angular
 
       var hasFeatureGroups = false;
 
-      // Tools column
-      var toolsColumn = {
-        name: ' ',
-        cellTemplate: "templates/toolCellTemplate.html",
-        enableCellEdit: false,
-        enableFiltering: false,
-        enableColumnResizing: false,
-        pinnedLeft:true,
-        enableSorting: false,
-        enableHiding: false,
-        enableColumnMenu: false,
-        allowCellFocus: false,
-        enableColumnMoving: false
-      };
-
-      switch($scope.state.edit) {
-        case true:
-          toolsColumn.width = 30;
-          break;
-        case false:
-          toolsColumn.width = 1;
-          break;
-      }
-
-      columnDefs.push(toolsColumn);
-
       // Feature columns
       features.map(function(feature) {
 
@@ -671,7 +645,31 @@ angular
           "</div>";
 
 
+      // Tools column
+      var toolsColumn = {
+        name: ' ',
+        cellTemplate: "templates/toolCellTemplate.html",
+        enableCellEdit: false,
+        enableFiltering: false,
+        enableColumnResizing: false,
+        pinnedLeft:true,
+        enableSorting: false,
+        enableHiding: false,
+        enableColumnMenu: false,
+        allowCellFocus: false,
+        enableColumnMoving: false
+      };
 
+      switch($scope.state.edit) {
+        case true:
+          toolsColumn.width = 30;
+          break;
+        case false:
+          toolsColumn.width = 1;
+          break;
+      }
+
+      columnDefs.splice(0, 0, toolsColumn);
 
       if($scope.gridOptions.superColDefs.length > 0) {
           $scope.gridOptions.columnDefs = sortFeaturesService.sortByFeatureGroup(columnDefs, $scope.gridOptions.superColDefs);
@@ -679,6 +677,9 @@ angular
       else {
           $scope.gridOptions.columnDefs = columnDefs;
       }
+
+
+
 
 
 

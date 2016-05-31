@@ -10,17 +10,22 @@ angular
         state: "=?"
       },
       controller: function($scope) {
-        this.pcmContainer = $scope.pcmContainer;
+        var ctrl = this;
+        $scope.$watch("pcmContainer", function(newPcmContainer) {
+          if (typeof newPcmContainer !== 'undefined') {
+            ctrl.pcmContainer = newPcmContainer;
+          }
+        });
 
         if (typeof $scope.config === "undefined") {
           $scope.config = {};
         }
-        this.config = $scope.config;
+        ctrl.config = $scope.config;
 
         if (typeof $scope.state === "undefined") {
           $scope.state = {};
         }
-        this.state = $scope.state;
+        ctrl.state = $scope.state;
 
       },
       link : function($scope, element, attrs) {
