@@ -9107,10 +9107,10 @@ angular
     };
 
     $timeout(function() {
-      $scope.myPCMContainer = container;
-    //  //$scope.csvApi.open();
-    //  //$scope.htmlApi.open();
-    //  //$scope.mediaWikiApi.open();
+      $scope.myPCMContainer.pcm = container.pcm;
+     //$scope.csvApi.open();
+     //$scope.htmlApi.open();
+     //$scope.mediaWikiApi.open();
     }, 1000);
 
 
