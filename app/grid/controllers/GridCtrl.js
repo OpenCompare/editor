@@ -596,9 +596,8 @@ angular
           });
       }
 
-
       if(metadata) {
-          columnDefs = editorUtil.sortFeatures(columnDefs, metadata.featurePositions);
+          columnDefs = editorUtil.sortFeatures($scope.pcm.features.array, columnDefs, metadata.featurePositions);
       }
 
       /* Second column for the products */
