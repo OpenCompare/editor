@@ -30,7 +30,7 @@ angular
         if (mode !== client) {
           var requestAddress = address;
           if (mode === remote) {
-            requestAddress = remoteServerAddress + '/' + address
+            requestAddress = remoteServerAddress + address
           }
 
           if (type === "get") {

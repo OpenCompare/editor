@@ -11,7 +11,8 @@ angular
       },
       controller: function($scope) {
         var ctrl = this;
-        $scope.$watch("pcmContainer", function(newPcmContainer) {
+        ctrl.pcmContainer = $scope.pcmContainer;
+        $scope.$watchCollection("pcmContainer", function(newPcmContainer) {
           if (typeof newPcmContainer !== 'undefined') {
             ctrl.pcmContainer = newPcmContainer;
           }
@@ -29,10 +30,6 @@ angular
 
       },
       link : function($scope, element, attrs) {
-        //$scope.$watch("config", function(){
-        //  console.log($scope.config);
-        //});
-
         $scope.$watch("config.serverMode", function(newServerMode) {
           switch (newServerMode) {
             case "client":

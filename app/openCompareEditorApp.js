@@ -10,7 +10,7 @@
  */
 angular
   .module('openCompareEditorApp', ['openCompareEditor'])
-  .controller('TestCtrl', function($scope, pcmApi, $timeout) {
+  .controller('TestCtrl', function($scope, pcmApi, $timeout, openCompareServer) {
     var container = {
       "pcm" : {
         "class" : "org.opencompare.model.PCM@992787971449072738074",
@@ -9098,21 +9098,48 @@ angular
     };
 
     $scope.myConfig = {
-      serverMode: "client"
+      serverMode: "remote",
+      serverAddress: "http://localhost:9000"
     };
+    openCompareServer.useRemoteServer("http://localhost:9000");
 
     $scope.myState = {
       //edit: true,
       saved: true
     };
 
-    $timeout(function() {
-      $scope.myPCMContainer.pcm = container.pcm;
-     //$scope.csvApi.open();
-     //$scope.htmlApi.open();
-     //$scope.mediaWikiApi.open();
-    }, 1000);
+    // $timeout(function() {
+    //   $scope.myPCMContainer.pcm = container.pcm;
+    //  //$scope.csvApi.open();
+    //  //$scope.htmlApi.open();
+    //  //$scope.mediaWikiApi.open();
+    // }, 1000);
 
+    var id = "5667063678c2faf9781b6f64";
+    if (typeof id !== 'undefined') {
+      /* Load a PCM from database */
+      $scope.id = id;
+      $scope.loading = true;
+      //$scope.setEdit(false, false);
+      //$scope.updateShareLinks();
+      openCompareServer.get("/api/get/" + $scope.id).
+      then(function (response) {
+        var data = response.data;
+        var pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm));
+        pcmApi.decodePCM(pcm); // Decode PCM from Base64
+
+        $scope.myPCMContainer.pcm = pcm;
+        // $scope.myPCMContainer.metadata = data.metadata;
+        $scope.myPCMContainer.id = id;
+        $scope.myState.saved = true;
+
+      }, function(error) {
+        console.log(error);
+      })
+        .finally(function () {
+          $scope.loading = false;
+        })
+    }
 
 
 

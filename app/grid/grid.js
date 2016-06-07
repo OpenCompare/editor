@@ -1,7 +1,3 @@
-/**
- * Created by gbecan on 9/15/15.
- */
-
 angular
   .module('openCompareEditor')
   .directive('ocGrid', function(componentUtils) {
