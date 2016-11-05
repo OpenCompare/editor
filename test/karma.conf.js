@@ -37,9 +37,10 @@ module.exports = function(config) {
       'bower_components/angular-clipboard/angular-clipboard.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
+      'app/openCompareEditorApp.js',
       'app/editor/openCompareEditor.js',
       'app/**/*.js',
-      'test/mock/**/*.js',
+      //'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
 
@@ -48,7 +49,7 @@ module.exports = function(config) {
     ],
 
     // web server port
-    port: 8080,
+    port: 9001,
 
     // Start these browsers, currently available:
     // - Chrome
@@ -59,12 +60,14 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      'PhantomJS'
+	 'PhantomJS',
+	 'Chrome'
     ],
 
     // Which plugins to enable
     plugins: [
       'karma-phantomjs-launcher',
+      'karma-chrome-launcher',
       'karma-jasmine'
     ],
 
