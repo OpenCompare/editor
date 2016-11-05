@@ -7,20 +7,20 @@ describe('Controller: EditorCtrl', function () {
   // load the controller's module
   //beforeEach(module('openCompareEditor'));
 
-  beforeEach(module("openCompareEditorApp"));
+  beforeEach(module("openCompareEditor"));
 
-  var $controller;
-  //var $scope;
+  var controller;
+  var scope;
 
   // Initialize the controller and a mock scope
 
   beforeEach(inject(function (_$controller_) {
-    $controller = _$controller_;
+    controller = _$controller_;
     //$scope = $rootScope.$new();
-    /*$controller = $_controller_('EditorCtrl', {
-      $scope: $scope
+    //controller = $_controller_('TestCtrl', {
+      //scope: scope
       // place here mocked dependencies
-    });*/
+    //});
   }));
 
 
