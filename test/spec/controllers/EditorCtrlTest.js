@@ -23,6 +23,8 @@ describe('Controller: EditorCtrl', function () {
     //});
   }));
 
+  
+
 
   it('do nothing', inject(function ($timeout) {
     //expect(controller..length).toBe(3);
