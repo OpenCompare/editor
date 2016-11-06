@@ -9,36 +9,41 @@ describe('Controller: EditorCtrl', function () {
 
   beforeEach(module("openCompareEditorApp"));
 
-  var controller;
+
+ var controller;
 
 
   // Initialize the controller and a mock scope
 
-  beforeEach(inject(function (_$controller_) {
-    controller = _$controller_;
-    //$scope = $rootScope.$new();
+  beforeEach(inject(function ($injector) {
+
+    controller = $injector.get('$controller');
+    // scope = $injector.get('rootScope').$new();
     //controller = $_controller_('TestCtrl', {
       //scope: scope
       // place here mocked dependencies
     //});
   }));
 
-  
 
 
-  it('do nothing', inject(function ($timeout) {
+
+  it('do nothing', inject(function ($rootScope, $timeout) {
     //expect(controller..length).toBe(3);
-    console.log('Hello, world!');
-    var a = true;
 
+    console.log('Hello, world!');
+
+    var a = true;
     expect(a).toBe(true);
 
-    var scope = {};
-    var timeout = {};
+    var scope = $rootScope.$new();
     var controllerBis = controller('TestCtrl', { $scope: scope });
+
+    //  httpBackend.flush();
     console.log('State: ' + scope.myState.saved);
     // TODO: fix timeout issue
     $timeout.flush();
+
     console.log('PCM: ' + scope.myPCMContainer.pcm);
     console.log('PCM: ' + scope.myPCMContainer.pcm.name);
 

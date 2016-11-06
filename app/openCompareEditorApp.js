@@ -9125,7 +9125,7 @@ angular
 
     ////// With OpenCompare Server //////
 
-
+    //
     // $scope.myConfig = {
     //    serverMode: "remote",
     //    serverAddress: "http://localhost:9000" // cross-origin issue "https://opencompare.org"
