@@ -28,35 +28,27 @@ describe('Controller: EditorCtrl', function () {
 
 
 
-  it('do nothing', inject(function ($httpBackend, $timeout) {
+  it('do nothing', inject(function ($rootScope, $timeout) {
     //expect(controller..length).toBe(3);
 
+   //$httpBackend.whenGET("foopcm1.json").passThrough();
+   //    $httpBackend.flush();
 
+   console.log('Hello, world!');
 
-    console.log('Hello, world!');
+   var a = true;
+   expect(a).toBe(true);
 
-    var a = true;
-    expect(a).toBe(true);
+   var scope = $rootScope.$new();
+   var controllerBis = controller('TestCtrl', { $scope: scope });
 
-    var pcm = {};
-    //$httpBackend.whenGET("foopcm1.json").passThrough();
+   //  httpBackend.flush();
+   console.log('State: ' + scope.myState.saved);
+   // TODO: fix timeout issue
+   $timeout.flush();
 
-    var timeout = {};
-    var controllerBis = controller('TestCtrl', { $scope: scope });
-
-//    $httpBackend.flush();
-
-    console.log('State: ' + scope.myState.saved);
-    // TODO: fix timeout issue
-
-
-    console.log('PCM: ' + scope.myPCMContainer.pcm);
-    console.log('PCM: ' + scope.myPCMContainer.pcm.name);
-
-
-    $timeout.flush();
-
-
+   console.log('PCM: ' + scope.myPCMContainer.pcm);
+   console.log('PCM: ' + scope.myPCMContainer.pcm.name);
 
 
   }));
