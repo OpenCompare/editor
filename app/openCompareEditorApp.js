@@ -9101,7 +9101,7 @@ angular
       saved: true
     };
 
-    ////// With Local PCM //////
+    ////// With Local PCM in an external JSON //////
 
     $scope.myConfig = {
       serverMode: "local"
@@ -9140,7 +9140,6 @@ angular
      //$scope.htmlApi.open();
      //$scope.mediaWikiApi.open();
     }, 1000);
-
 
 
     ////// With OpenCompare Server //////
