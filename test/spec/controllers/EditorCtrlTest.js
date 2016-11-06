@@ -17,6 +17,7 @@ describe('Controller: EditorCtrl', function () {
 
   beforeEach(inject(function ($injector) {
 
+
     controller = $injector.get('$controller');
     //scope = $injector.get('rootScope').$new();
     //controller = $_controller_('TestCtrl', {
@@ -28,7 +29,7 @@ describe('Controller: EditorCtrl', function () {
 
 
 
-  it('do nothing', inject(function ($rootScope, $timeout) {
+  it('do nothing', inject(function ($rootScope, $httpBackend, $timeout) {
     //expect(controller..length).toBe(3);
 
    //$httpBackend.whenGET("foopcm1.json").passThrough();
@@ -39,16 +40,30 @@ describe('Controller: EditorCtrl', function () {
    var a = true;
    expect(a).toBe(true);
 
+
+   /*$httpBackend.whenGET("foopcm1.json").respond(function(method, url, data, headers, params) {
+          console.log('data ' + data);
+          return data;
+    });*/
+
+
+
    var scope = $rootScope.$new();
    var controllerBis = controller('TestCtrl', { $scope: scope });
 
-   //  httpBackend.flush();
+
    console.log('State: ' + scope.myState.saved);
+
    // TODO: fix timeout issue
+   //$httpBackend.flush();
    $timeout.flush();
 
+
+   console.log('PCM container: ' + scope.myPCMContainer);
    console.log('PCM: ' + scope.myPCMContainer.pcm);
    console.log('PCM: ' + scope.myPCMContainer.pcm.name);
+
+
 
 
   }));

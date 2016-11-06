@@ -9111,6 +9111,7 @@ angular
     // $http.get('foopcm1.json').success(function(data) {
     //     var myPcm = data.pcm;
     //     var container = {};
+    //     console.log('data: ' + data);
     //     console.log('myPCM: ' + myPcm);
     //     container.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(myPcm));
     //     // container.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(container.pcm));
