@@ -9104,6 +9104,8 @@ angular
       saved: true
     };
 
+    $scope.isComingFromTest = false;
+
   //  $scope.pcmLocation = ''; //'test/foopcm1.json';
 
     ////// With Local PCM in an external JSON //////
@@ -9114,8 +9116,10 @@ angular
 
 
     var pcmLocation = 'test/foopcm1.json';
-    if ($scope.pcmLocation !== undefined)
+    if ($scope.pcmLocation !== undefined) {
         pcmLocation = $scope.pcmLocation;
+        $scope.isComingFromTest = true;
+      }
 
     var canceler = $q.defer();
 

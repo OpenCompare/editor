@@ -24,7 +24,7 @@ describe('Controller: EditorCtrl', function () {
 
    // var scope = $rootScope.$new();
     scope.pcmLocation = pcmFileLocation;
-    scope.$apply();
+
     controller ('TestCtrl', { $scope: scope });
     //controller = $_controller_('TestCtrl', {
       //scope: scope
@@ -46,11 +46,10 @@ describe('Controller: EditorCtrl', function () {
    var a = true;
    expect(a).toBe(true);
 
-
    $httpBackend.whenGET("" + pcmFileLocation).respond(readJSON('app/' + pcmFileLocation));
 
-  // var controllerBis = controller('TestCtrl', { $scope: scope });
-
+   // var controllerBis = controller('TestCtrl', { $scope: scope });
+   expect(scope.isComingFromTest).toBe(true);
 
    console.log('State: ' + scope.myState.saved);
     console.log('pcmLocation: ' + scope.pcmLocation);
