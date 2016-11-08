@@ -21,7 +21,7 @@ describe('Controller: EditorCtrl', function () {
    var pcmFileLocation = 'test/foopcm2.json';
    var scope = $rootScope.$new();
    scope.pcmLocation = pcmFileLocation;
-   scope.myConfig.serveMode = "local";
+   scope.myConfig = {'serverMode': "local" };
 
    controller('TestCtrl', { $scope: scope });
 

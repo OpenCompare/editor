@@ -29,13 +29,14 @@ angular
 
   //  $scope.pcmLocation = ''; // 'test/foopcm1.json';
 
-    ////// With Local PCM in an external JSON //////
+
 
     $scope.myConfig = {
-      serverMode: "local"
+      serverMode: "local" // remote is the alternative 
     };
 
-    if ($scope.myConfig.serveMode == "local") {
+    ////// With Local PCM in an external JSON //////
+    if ($scope.myConfig.serverMode === "local") {
 
 
       var pcmLocation = 'test/foopcm1.json';
@@ -69,43 +70,43 @@ angular
      }
 
 
-    ////// With OpenCompare Server //////
-if ($scope.myConfig.serveMode == "server") {
-    //
-    // $scope.myConfig = {
-    //    serverMode: "remote",
-    //    serverAddress: "http://localhost:9000" // cross-origin issue "https://opencompare.org"
-    //  };
-    // openCompareServer.useRemoteServer("http://localhost:9000"); // cross-origin issue "https://opencompare.org"
-    //
-    //
-    // var id = "581b53b38d6a4d31e94f5d38"
-    // // var id = "5667063678c2faf9781b6f64";
-    // if (typeof id !== 'undefined') {
-    // //   /* Load a PCM from database */
-    //    $scope.id = id;
-    //    $scope.loading = true;
-    //    //$scope.setEdit(false, false);
-    //    //$scope.updateShareLinks();
-    //    openCompareServer.get("/api/get/" + $scope.id).
-    //    then(function (response) {
-    //      var data = response.data;
-    //      var pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm));
-    //      pcmApi.decodePCM(pcm); // Decode PCM from Base64
-    //
-    //      $scope.myPCMContainer.pcm = pcm;
-    //      $scope.myPCMContainer.metadata = data.metadata;
-    //      $scope.myPCMContainer.id = id;
-    //      $scope.myState.saved = true;
-    //
-    //    }, function(error) {
-    //      console.log(error);
-    //    })
-    //      .finally(function () {
-    //        $scope.loading = false;
-    //      })
-    //  }
-  }
+    ////// With OpenCompare Server (remote) //////
+    if ($scope.myConfig.serverMode === "remote") {
+        //
+        // $scope.myConfig = {
+        //    serverMode: "remote",
+        //    serverAddress: "http://localhost:9000" // cross-origin issue "https://opencompare.org"
+        //  };
+        // openCompareServer.useRemoteServer("http://localhost:9000"); // cross-origin issue "https://opencompare.org"
+        //
+        //
+        // var id = "581b53b38d6a4d31e94f5d38"
+        // // var id = "5667063678c2faf9781b6f64";
+        // if (typeof id !== 'undefined') {
+        // //   /* Load a PCM from database */
+        //    $scope.id = id;
+        //    $scope.loading = true;
+        //    //$scope.setEdit(false, false);
+        //    //$scope.updateShareLinks();
+        //    openCompareServer.get("/api/get/" + $scope.id).
+        //    then(function (response) {
+        //      var data = response.data;
+        //      var pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm));
+        //      pcmApi.decodePCM(pcm); // Decode PCM from Base64
+        //
+        //      $scope.myPCMContainer.pcm = pcm;
+        //      $scope.myPCMContainer.metadata = data.metadata;
+        //      $scope.myPCMContainer.id = id;
+        //      $scope.myState.saved = true;
+        //
+        //    }, function(error) {
+        //      console.log(error);
+        //    })
+        //      .finally(function () {
+        //        $scope.loading = false;
+        //      })
+        //  }
+      }
 
 
 
