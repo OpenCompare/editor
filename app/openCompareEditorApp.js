@@ -9106,7 +9106,7 @@ angular
 
     $scope.isComingFromTest = false;
 
-  //  $scope.pcmLocation = ''; //'test/foopcm1.json';
+  //  $scope.pcmLocation = ''; // 'test/foopcm1.json';
 
     ////// With Local PCM in an external JSON //////
 
@@ -9124,25 +9124,25 @@ angular
     var canceler = $q.defer();
 
 
+      $http.get(pcmLocation).success(function(data) {
+        console.log('data from GET foopcm', data);
+          var myPcm = data.pcm;
+          var container = {};
+          console.log('data: ' + data);
+          console.log('myPCM: ' + myPcm);
+          container.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(myPcm));
+          // container.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(container.pcm));
+          pcmApi.decodePCM(container.pcm);
 
-    $http.get(pcmLocation).success(function(data) {
-      console.log('data from GET foopcm', data);
-        var myPcm = data.pcm;
-        var container = {};
-        console.log('data: ' + data);
-        console.log('myPCM: ' + myPcm);
-        container.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(myPcm));
-        // container.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(container.pcm));
-        pcmApi.decodePCM(container.pcm);
-
-        $timeout(function() {
-          $scope.myPCMContainer.pcm = container.pcm;
-          $scope.myPCMContainer.metadata = container.metadata;
-         //$scope.csvApi.open();
-         //$scope.htmlApi.open();
-         //$scope.mediaWikiApi.open();
-       }, 1000);
-    });
+          $timeout(function() {
+            $scope.myPCMContainer.pcm = container.pcm;
+            $scope.myPCMContainer.metadata = container.metadata;
+           //$scope.csvApi.open();
+           //$scope.htmlApi.open();
+           //$scope.mediaWikiApi.open();
+         }, 1000);
+      });
+    
 
     ////// With local, hardcoded PCM //////
 
