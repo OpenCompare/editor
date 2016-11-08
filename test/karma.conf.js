@@ -36,12 +36,14 @@ module.exports = function(config) {
       'bower_components/arrive/src/arrive.js',
       'bower_components/angular-clipboard/angular-clipboard.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/karma-read-json/karma-read-json.js',
       // endbower
       'app/openCompareEditorApp.js',
       'app/editor/openCompareEditor.js',
       'app/**/*.js',
       //'test/mock/**/*.js',
-      {pattern: 'app/foopcm1.json', watched: true, served: true, included: false},
+      //{ pattern: 'test/spec/fixtures/foopcm1.json', watched: true, served: true, included: false },
+      { pattern: 'app/test/*.json', watched: true, served: true, included: false },
       'test/spec/**/*.js'
     ],
 
