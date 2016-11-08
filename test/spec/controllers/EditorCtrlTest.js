@@ -9,38 +9,34 @@ describe('Controller: EditorCtrl', function () {
   beforeEach(module("openCompareEditorApp"));
 
 
-  var controller;
-  var scope = {};
-  var pcmFileLocation = 'test/foopcm2.json'; // scope.myConfig.pcmlocation; 'test/foopcm2.json'
-
+  var $controller;
 
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($injector, $rootScope) {
-    controller = $injector.get('$controller');
-
-    //scope.pcmLocation = pcmFileLocation;
-    scope = $rootScope.$new();
-    scope.myConfig = {};
-    scope.myConfig.serverMode = "local";
-    // choose / FIX
-    scope.myConfig.pcmlocation = pcmFileLocation;
-    scope.pcmlocation = pcmFileLocation;
-
-    controller('TestCtrl', { $scope: scope });
-
-
+  beforeEach(inject(function (_$controller_) {
+    $controller = _$controller_;
   }));
 
 
 
   it('works for foopcm1', inject(function ($rootScope, $httpBackend, $timeout) {
 
+    var pcmFileLocation = 'test/foopcm2.json';
+    var scope = {}; //$rootScope.$new();
 
-    expect(scope.isComingFromTest).toBe(true);
 
     $httpBackend.whenGET("" + pcmFileLocation).respond(readJSON('app/' + pcmFileLocation));
+    var controller = $controller ('TestCtrl', { $scope: scope });
+    scope.myConfig = {};
+    scope.myConfig.serverMode = "local";
+    scope.myConfig.pcmlocation = pcmFileLocation;
 
+    scope.launchOCEditor();
+
+    expect(scope).toBeDefined();
+    expect(scope.myPCMContainer).toBeDefined();
+    expect(scope.myConfig.pcmlocation).toBeDefined();
+    expect(scope.myConfig.pcmlocation).toEqual(pcmFileLocation);
 
     console.log('State: ' + scope.myState.saved);
     console.log('pcmLocation: ' + pcmFileLocation);

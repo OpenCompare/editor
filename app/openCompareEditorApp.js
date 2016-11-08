@@ -23,15 +23,11 @@ angular
       saved: true
     };
 
-    $scope.isComingFromTest = false;
-
-//    $scope.pcmLocation = ''; // 'test/foopcm1.json';
-
 
 
     $scope.myConfig = {
       serverMode: 'local', // "remote" is the other mode
-      pcmlocation: 'test/foopcm1.json'
+      pcmlocation: 'test/foopcm1.json' // example
     };
 
 
@@ -43,17 +39,13 @@ angular
       id: "581b53b38d6a4d31e94f5d38";
     };*/
 
+
+  $scope.launchOCEditor = function() {
+
     ////// With Local PCM in an external JSON //////
     if ($scope.myConfig.serverMode === "local") {
 
-     var pcmLocation = $scope.myConfig.pcmlocation ; // '' ; // test/foopcm1.json';
-    // if ($scope.myConfig.pcmlocation !== undefined) {
-     if ($scope.pcmlocation !== undefined) {
-          pcmLocation = $scope.pcmlocation;
-          $scope.isComingFromTest = true;
-      }
-
-
+      var pcmLocation = $scope.myConfig.pcmlocation ; // '' ; // test/foopcm1.json';
       var canceler = $q.defer();
       if (pcmLocation.length > 0) {
         $http.get(pcmLocation).success(function(data) {
@@ -120,6 +112,7 @@ angular
              })
          }
       }
+    };
 
 
 
