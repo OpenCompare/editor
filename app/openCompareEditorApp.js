@@ -46,7 +46,7 @@ angular
     ////// With Local PCM in an external JSON //////
     if ($scope.myConfig.serverMode === "local") {
 
-     var pcmLocation = $scope.myConfig.pcmlocation ; //'' ; // test/foopcm1.json';
+     var pcmLocation = $scope.myConfig.pcmlocation ; // '' ; // test/foopcm1.json';
     // if ($scope.myConfig.pcmlocation !== undefined) {
      if ($scope.pcmlocation !== undefined) {
           pcmLocation = $scope.pcmlocation;

@@ -20,7 +20,8 @@ describe('Controller: EditorCtrl', function () {
     controller = $injector.get('$controller');
 
     //scope.pcmLocation = pcmFileLocation;
-    scope.myConfig = $rootScope.$new();
+    scope = $rootScope.$new();
+    scope.myConfig = {};
     scope.myConfig.serverMode = "local";
     // choose / FIX
     scope.myConfig.pcmlocation = pcmFileLocation;
