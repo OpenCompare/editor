@@ -21,6 +21,8 @@ describe('Controller: EditorCtrl', function () {
    var pcmFileLocation = 'test/foopcm2.json';
    var scope = $rootScope.$new();
    scope.pcmLocation = pcmFileLocation;
+   scope.myConfig.serveMode = "local";
+
    controller('TestCtrl', { $scope: scope });
 
    $httpBackend.whenGET("" + pcmFileLocation).respond(readJSON('app/' + pcmFileLocation));
@@ -39,8 +41,6 @@ describe('Controller: EditorCtrl', function () {
    console.log('PCM: ' + scope.myPCMContainer.pcm);
    console.log('PCM: ' + scope.myPCMContainer.pcm.name);
 
-
-
-
   }));
+
 });
