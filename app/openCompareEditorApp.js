@@ -64,18 +64,9 @@ angular
     ////// With OpenCompare Server (remote) //////
     if ($scope.myConfig.serverMode === "remote") {
 
-        console.log('after REMOTE');
-
-      /*  $scope.myConfig = {
-           serverMode: "remote",
-           serverAddress: "http://localhost:9000" // cross-origin issue "https://opencompare.org",
-           id: '' // PCM id
-         };*/
         openCompareServer.useRemoteServer($scope.myConfig.serverAddress);
 
-
-        var id = $scope.myConfig.id; //"581b53b38d6a4d31e94f5d38"
-        // var id = "5667063678c2faf9781b6f64";
+        var id = $scope.myConfig.id;
         if (typeof id !== 'undefined') {
         //   /* Load a PCM from database */
            $scope.id = id;
@@ -120,9 +111,8 @@ angular
           id: "57d95c75d4c6850adb590f06" //"581b53b38d6a4d31e94f5d38"
         };*/
 
-
-
-    $scope.launchOCEditor();
+    //$scope.launchOCEditor();
+    //$scope.htmlApi.open();
 
 
   });
