@@ -90,54 +90,44 @@ angular
       }
     };
 
+
+
+    $scope.fts = []; //  ['ft1', 'ft2'];
+    // cells of a given product
+    $scope.pcells = [];
+
+
     $scope.buildHTML = function(lpcm) {
 
-      // TODO: as a directive
-      // as a DOM
-      var html = "<table>";
 
       // we first print features (headers)
-      html += "<tr>";
       var nFts = lpcm.features.size();
       for (var i = 0; i < nFts; i++) {
           var ft = lpcm.features.get(i);
-          html += "<th>" + ft.name + "</th>";
+          $scope.fts.push(ft);
       }
-      html += "</tr>";
 
       // for each product, we print the row
       // we iterate over each features (same order) and seek product cells whose features correspond
-      // I think it would be nice to have an API facility like: p.cells(ftName)
+      // TODO I think it would be nice to have an API facility like: p.cells(ftName)
       for (var i = 0; i < lpcm.products.size(); i++) {
           var p = lpcm.products.get(i);
           var pCells = p.cells;
-      		html += "<tr>";
+          var cellsProduct = [];
     		  for (var j = 0; j < lpcm.features.size(); j++) {
             var f = lpcm.features.get(j);
             for (var k = 0; k < pCells.size(); k++) {
     			       var c = pCells.get(k);
                  if(c.feature.name === f.name) {
-                      //  console.log('same feature name: ' +  f.name + ' (cell: ' + c.content + ')');
-               					html += "<td>" + c.content + "</td>";
+                        cellsProduct.push(c);
                		}
     				}
           }
-          html += "</tr>";
+          $scope.pcells.push(cellsProduct);
       }
 
 
-
-    	html += "</table>";
-
-      console.log('HTML ' + html);
-    	$scope.misc = $sce.trustAsHtml(html);
-        // $("body").html(html);
-
     };
-
-
-
-
 
     /////////
     $scope.myConfig = {
@@ -159,9 +149,11 @@ angular
 
 
 
+
+
   }).directive('miscpcm', function() {
   return {
-    templateUrl: 'templates/sandbox.html'
+      templateUrl: 'templates/sandbox.html'
   };
   })
 

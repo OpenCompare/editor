@@ -1,1 +1,9 @@
-Name: {{customer.name}} Address: {{customer.address}}
+<table>
+<tr>
+  <th ng-repeat="ft in fts">{{ft.name}}</th>
+  <tr ng-repeat="pcell in pcells">
+    <td ng-repeat="cell in pcell">{{cell.content}}</td>
+  </tr>
+</tr>
+
+</table>

@@ -31,6 +31,7 @@
 
     <div class="container">
       <div class="row" ng-controller="TestCtrl">
+
         <oc-editor pcm-container="myPCMContainer" config="myConfig" state="myState">
             <!--<oc-creator></oc-creator>-->
             <oc-csv-importer api="csvApi"></oc-csv-importer>
@@ -43,12 +44,8 @@
 
             <oc-charts></oc-charts>
         </oc-editor>
+      
         <div miscpcm>
-        </div>
-        <div ng-bind-html="misc">
-          <h1>Misc</h1>
-          {{misc}}
-          {{myPCMContainer.metadata}}
         </div>
 
       </div>
