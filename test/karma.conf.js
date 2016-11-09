@@ -35,6 +35,10 @@ module.exports = function(config) {
       'bower_components/angular-ui-slider/src/slider.js',
       'bower_components/arrive/src/arrive.js',
       'bower_components/angular-clipboard/angular-clipboard.js',
+      'bower_components/angular-animate/angular-animate.js',
+      'bower_components/angular-aria/angular-aria.js',
+      'bower_components/angular-messages/angular-messages.js',
+      'bower_components/angular-material/angular-material.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/karma-read-json/karma-read-json.js',
       // endbower
@@ -64,7 +68,7 @@ module.exports = function(config) {
     // - IE (only Windows)
     browsers: [
 	 'PhantomJS',
-	 //'Chrome'
+	 'Chrome'
     ],
 
     // Which plugins to enable

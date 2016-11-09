@@ -1,24 +1,27 @@
 //app is the angular module
 app.controller('configuratorController', function($scope, $http, $q, $sce, pcmApi, $timeout, openCompareServer) { //Configurator controller ONLY for the directive configurator you never have to type ng-controller="configuratorController" anywhere
-	
-	$scope.loadPCM = function(pcmID = false){
+
+	$scope.loadPCM = function(pcmID) {
+
+		pcmID = pcmID || false;
+
 		/*
 		load pcm from api
 		pcmID is obtional if not specified it load $scope.pcmID
 		else it set $scope.pcmID with pcmID and load it
 		*/
-		if(pcmID){
+		if(pcmID) {
 			$scope.pcmID = pcmID;
 		}
-		
+
 		$http.get("https://opencompare.org/api/get/" + $scope.pcmID).success(function(data) {
 			metadata = data.metadata; //Get metadata
 			pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm)); //Load PCM
 			pcmApi.decodePCM(pcm); //Decode the PCM with KMF, require pcmApi
-			
+
 			$scope.metadata = metadata;
 			$scope.pcm = pcm;
-			
+
 			//Push all features in $scope.features
 			$scope.features = [];
 			for (var i = 0; i < pcm.features.size(); i++) {
@@ -27,7 +30,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 				console.log(feature.name);
 				console.log(feature);
 			}
-			
+
 			//TODO I think it would be nice to have an API facility like: p.cells(ftName)
 			$scope.productCells = [];
 			for (var i = 0; i < pcm.products.size(); i++) {
@@ -46,16 +49,16 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 				}
 				$scope.productCells.push(cellsProduct);
 			}
-			
+
 			/*console.log("PCM metadata :");
 			console.log($scope.metadata);
 			console.log("PCM :");
 			console.log($scope.pcm);*/
         });
-	}
-	
+	};
+
 	$scope.loadPCM(); //Load the pcm
-	
+
 }).directive('configurator', function() { //Configurator directive
 	/*
 	* HOW TO USE IT :

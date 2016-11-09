@@ -23,7 +23,7 @@ var app = angular
       saved: true
     };
 
-      $scope.misc = 'MISC';
+  $scope.misc = 'MISC';
 
 
   $scope.launchOCEditor = function() {
@@ -131,7 +131,7 @@ var app = angular
     // basic example with local files
     $scope.myConfig = {
       serverMode: 'local', // "remote" is the other mode
-      pcmlocation: 'test/foopcm2.json' // example
+      pcmlocation: 'test/foopcm1.json' // example
     };
 
     // example with remote mode
