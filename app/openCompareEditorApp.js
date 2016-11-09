@@ -94,8 +94,6 @@ angular
 
     $scope.fts = []; //  ['ft1', 'ft2'];
     $scope.pcells = [];   // products and cells of a given product (an array of array in fact)
-
-
     $scope.buildHTML = function(lpcm) {
 
       // we first print features (headers)
