@@ -1,0 +1,34 @@
+/* configurator */
+.configurator{
+	width: 100%;
+}
+
+/* container */
+.container{
+	width: 100%;
+}
+
+.configuratorPanel, .pcm{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.configuratorPanel{
+	width: 200px;
+	height: 100%;
+}
+
+.pcm{
+	width: calc(100% - 200px);
+	min-height: 100%;
+	overflow: auto;
+}
+
+/* Table */
+.configurator table, .configurator th, .configurator td{
+	border: 1px solid black;
+}
+
+.configurator th, .configurator td{
+	padding: 3px;
+}

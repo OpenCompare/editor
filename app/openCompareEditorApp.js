@@ -9,8 +9,8 @@
  *
  * Main module of the application.
  */
-angular
-  .module('openCompareEditorApp', ['openCompareEditor'])
+var app = angular
+  .module('openCompareEditorApp', ['ngMaterial', 'openCompareEditor'])
   // getPCM (service)
   .controller('TestCtrl', function($scope, $http, $q, $sce, pcmApi, $timeout, openCompareServer) {
 
@@ -145,7 +145,7 @@ angular
 
       ////// UNCOMMENT this line if you want to launch a demonstration
       ///// COMMENT it for testing with Karma
-      // $scope.launchOCEditor();
+      //$scope.launchOCEditor();
 
 
 

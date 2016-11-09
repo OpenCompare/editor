@@ -1,0 +1,23 @@
+<!-- Template of the configurator directive -->
+<div class="configurator">
+id : {{ pcmID }} <br>
+license : {{ metadata.license }} <br>
+source : {{ metadata.source }} <br>
+
+<div class="container">
+	<div class="configuratorPanel">
+		<div ng-repeat="feature in features">
+			{{ feature.name }}
+		</div>
+	</div><!-- close configuratorPanel
+
+	 --><table class="pcm">
+		<tr>
+			<th ng-repeat="feature in features">{{feature.name}}</th>
+		</tr>
+		<tr ng-repeat="productCell in productCells">
+			<td ng-repeat="cell in productCell">{{cell.content}}</td>
+		</tr>
+	</table>
+</div><!-- close container -->
+</div>
