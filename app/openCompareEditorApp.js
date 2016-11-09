@@ -129,6 +129,8 @@ angular
 
     ///////// CONFIGURATION
 
+
+    // basic example with local files
     $scope.myConfig = {
       serverMode: 'local', // "remote" is the other mode
       pcmlocation: 'test/foopcm2.json' // example
@@ -142,7 +144,10 @@ angular
           id: "57d95c75d4c6850adb590f06" //"581b53b38d6a4d31e94f5d38"
         };*/
 
-  // $scope.launchOCEditor();
+
+      ////// UNCOMMENT this line if you want to launch a demonstration
+      ///// COMMENT it for testing with Karma
+      // $scope.launchOCEditor();
 
 
 
