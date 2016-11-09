@@ -93,12 +93,10 @@ angular
 
 
     $scope.fts = []; //  ['ft1', 'ft2'];
-    // cells of a given product
-    $scope.pcells = [];
+    $scope.pcells = [];   // products and cells of a given product (an array of array in fact)
 
 
     $scope.buildHTML = function(lpcm) {
-
 
       // we first print features (headers)
       var nFts = lpcm.features.size();
@@ -129,7 +127,8 @@ angular
 
     };
 
-    /////////
+    ///////// CONFIGURATION
+
     $scope.myConfig = {
       serverMode: 'local', // "remote" is the other mode
       pcmlocation: 'test/foopcm2.json' // example
@@ -143,11 +142,7 @@ angular
           id: "57d95c75d4c6850adb590f06" //"581b53b38d6a4d31e94f5d38"
         };*/
 
-  //  $scope.launchOCEditor();
-    //$scope.htmlApi.open();
-
-
-
+  // $scope.launchOCEditor();
 
 
 
