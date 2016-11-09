@@ -143,7 +143,7 @@ angular
           id: "57d95c75d4c6850adb590f06" //"581b53b38d6a4d31e94f5d38"
         };*/
 
-    $scope.launchOCEditor();
+  //  $scope.launchOCEditor();
     //$scope.htmlApi.open();
 
 
