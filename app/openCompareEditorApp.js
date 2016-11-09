@@ -12,7 +12,7 @@
 angular
   .module('openCompareEditorApp', ['openCompareEditor'])
   // getPCM (service)
-  .controller('TestCtrl', function($scope, $http, $q, pcmApi, $timeout, openCompareServer) {
+  .controller('TestCtrl', function($scope, $http, $q, $sce, pcmApi, $timeout, openCompareServer) {
 
     $scope.myPCMContainer = {
 
@@ -23,10 +23,7 @@ angular
       saved: true
     };
 
-
-
-
-
+      $scope.misc = 'MISC';
 
 
   $scope.launchOCEditor = function() {
@@ -34,22 +31,23 @@ angular
     ////// With Local PCM in an external JSON //////
     if ($scope.myConfig.serverMode === "local") {
 
-      var pcmLocation = $scope.myConfig.pcmlocation ; // '' ; // test/foopcm1.json';
+      var pcmLocation = $scope.myConfig.pcmlocation ;
       var canceler = $q.defer();
       if (pcmLocation.length > 0) {
         $http.get(pcmLocation).success(function(data) {
-            console.log('data from GET foopcm', data);
               var myPcm = data.pcm;
               var container = {};
-              console.log('data: ' + data);
-              console.log('myPCM: ' + myPcm);
               container.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(myPcm));
+              container.metadata = data.metadata;
+
               // container.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(container.pcm));
               pcmApi.decodePCM(container.pcm);
 
               $timeout(function() {
                 $scope.myPCMContainer.pcm = container.pcm;
                 $scope.myPCMContainer.metadata = container.metadata;
+
+                $scope.buildHTML(container.pcm);
                //$scope.csvApi.open();
                //$scope.htmlApi.open();
                //$scope.mediaWikiApi.open();
@@ -58,8 +56,6 @@ angular
        }
 
      }
-
-    console.log('before REMOTE: ' + $scope.myConfig.serverMode);
 
     ////// With OpenCompare Server (remote) //////
     if ($scope.myConfig.serverMode === "remote") {
@@ -94,13 +90,59 @@ angular
       }
     };
 
+    $scope.buildHTML = function(lpcm) {
+
+      // TODO: as a directive
+      // as a DOM
+      var html = "<table>";
+
+      // we first print features (headers)
+      html += "<tr>";
+      var nFts = lpcm.features.size();
+      for (var i = 0; i < nFts; i++) {
+          var ft = lpcm.features.get(i);
+          html += "<th>" + ft.name + "</th>";
+      }
+      html += "</tr>";
+
+      // for each product, we print the row
+      // we iterate over each features (same order) and seek product cells whose features correspond
+      // I think it would be nice to have an API facility like: p.cells(ftName)
+      for (var i = 0; i < lpcm.products.size(); i++) {
+          var p = lpcm.products.get(i);
+          var pCells = p.cells;
+      		html += "<tr>";
+    		  for (var j = 0; j < lpcm.features.size(); j++) {
+            var f = lpcm.features.get(j);
+            for (var k = 0; k < pCells.size(); k++) {
+    			       var c = pCells.get(k);
+                 if(c.feature.name === f.name) {
+                      //  console.log('same feature name: ' +  f.name + ' (cell: ' + c.content + ')');
+               					html += "<td>" + c.content + "</td>";
+               		}
+    				}
+          }
+          html += "</tr>";
+      }
+
+
+
+    	html += "</table>";
+
+      console.log('HTML ' + html);
+    	$scope.misc = $sce.trustAsHtml(html);
+        // $("body").html(html);
+
+    };
+
+
+
+
 
     /////////
-
-
     $scope.myConfig = {
       serverMode: 'local', // "remote" is the other mode
-      pcmlocation: 'test/foopcm1.json' // example
+      pcmlocation: 'test/foopcm2.json' // example
     };
 
     // example with remote mode
@@ -111,8 +153,16 @@ angular
           id: "57d95c75d4c6850adb590f06" //"581b53b38d6a4d31e94f5d38"
         };*/
 
-    //$scope.launchOCEditor();
+    $scope.launchOCEditor();
     //$scope.htmlApi.open();
 
 
-  });
+
+
+  }).directive('miscpcm', function() {
+  return {
+    templateUrl: 'templates/sandbox.html'
+  };
+  })
+
+  ;
