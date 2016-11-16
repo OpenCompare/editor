@@ -7,7 +7,8 @@
 <div class="container">
 	<div class="configuratorPanel">
 		<div ng-repeat="feature in features">
-			{{ feature.name }}
+			<oc-checkbox feature="feature" ng-if="feature.filter.type=='string'"></oc-checkbox>
+			<oc-slider feature="feature" ng-if="feature.filter.type!='string'"></oc-slider>
 		</div>
 	</div><!-- close configuratorPanel
 
@@ -15,7 +16,7 @@
 		<tr>
 			<th ng-repeat="feature in features">{{ feature.name }}</th>
 		</tr>
-		<tr ng-repeat="product in displayedProducts">
+		<tr ng-repeat="product in products | productSearch:getCell:features">
 			<td ng-repeat="feature in features">{{ getCell(product, feature).content }}</td>
 		</tr>
 	</table>

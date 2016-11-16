@@ -10,7 +10,7 @@
  * Main module of the application.
  */
 var app = angular
-  .module('openCompareEditorApp', ['ngMaterial', 'openCompareEditor'])
+  .module('openCompareEditorApp', ['ngMaterial', 'mdRangeSlider', 'openCompareEditor'])
   // getPCM (service)
   .controller('TestCtrl', function($scope, $http, $q, $sce, pcmApi, $timeout, openCompareServer) {
 
