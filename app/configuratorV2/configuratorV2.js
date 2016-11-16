@@ -1,64 +1,60 @@
 //app is the angular module
 app.controller('configuratorController', function($scope, $http, $q, $sce, pcmApi, $timeout, openCompareServer) { //Configurator controller ONLY for the directive configurator you never have to type ng-controller="configuratorController" anywhere
-
-	$scope.loadPCM = function(pcmID) {
-
-		pcmID = pcmID || false;
-
+	
+	//Controller functions
+	$scope.getCell = function(product, feature){
+		//Return the cell from the product corresponding to the feature
+		var cell = false;
+		for(var i=0;i<product.cells.size();i++){
+			if(product.cells.get(i).feature.name == feature.name){
+				cell = product.cells.get(i);
+				break;
+			}
+		}
+		return cell;
+	}
+	
+	$scope.loadPCM = function(pcmID){
 		/*
 		load pcm from api
 		pcmID is obtional if not specified it load $scope.pcmID
 		else it set $scope.pcmID with pcmID and load it
 		*/
-		if(pcmID) {
+		pcmID = pcmID || false;
+		if(pcmID){
 			$scope.pcmID = pcmID;
 		}
-
+		
 		$http.get("https://opencompare.org/api/get/" + $scope.pcmID).success(function(data) {
 			metadata = data.metadata; //Get metadata
 			pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm)); //Load PCM
 			pcmApi.decodePCM(pcm); //Decode the PCM with KMF, require pcmApi
-
+			
 			$scope.metadata = metadata;
 			$scope.pcm = pcm;
-
+			
 			//Push all features in $scope.features
 			$scope.features = [];
 			for (var i = 0; i < pcm.features.size(); i++) {
-				var feature = pcm.features.get(i);
-				$scope.features.push(feature);
-				console.log(feature.name);
-				console.log(feature);
+				$scope.features.push(pcm.features.get(i));
 			}
-
-			//TODO I think it would be nice to have an API facility like: p.cells(ftName)
-			$scope.productCells = [];
+			
+			$scope.products = [];
+			$scope.displayedProducts = [];
 			for (var i = 0; i < pcm.products.size(); i++) {
-				var product = pcm.products.get(i);
-				var productCells = product.cells;
-				var cellsProduct = [];
-				for (var j = 0; j < pcm.features.size(); j++) {
-					var feature = pcm.features.get(j);
-					for (var k = 0; k < productCells.size(); k++) {
-						var cell = productCells.get(k);
-						if(cell.feature.name === feature.name) {
-							cellsProduct.push(cell);
-							break;
-						}
-					}
-				}
-				$scope.productCells.push(cellsProduct);
+				$scope.products.push(pcm.products.get(i));
+				$scope.displayedProducts.push(pcm.products.get(i));
 			}
-
+			
 			/*console.log("PCM metadata :");
 			console.log($scope.metadata);
 			console.log("PCM :");
 			console.log($scope.pcm);*/
         });
-	};
-
+	}
+	
 	$scope.loadPCM(); //Load the pcm
-
+	
 }).directive('configurator', function() { //Configurator directive
 	/*
 	* HOW TO USE IT :
