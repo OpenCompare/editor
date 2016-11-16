@@ -13,10 +13,10 @@
 
 	 --><table class="pcm">
 		<tr>
-			<th ng-repeat="feature in features">{{feature.name}}</th>
+			<th ng-repeat="feature in features">{{ feature.name }}</th>
 		</tr>
-		<tr ng-repeat="productCell in productCells">
-			<td ng-repeat="cell in productCell">{{cell.content}}</td>
+		<tr ng-repeat="product in displayedProducts">
+			<td ng-repeat="feature in features">{{ getCell(product, feature).content }}</td>
 		</tr>
 	</table>
 </div><!-- close container -->

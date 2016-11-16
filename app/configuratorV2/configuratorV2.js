@@ -1,6 +1,19 @@
 //app is the angular module
 app.controller('configuratorController', function($scope, $http, $q, $sce, pcmApi, $timeout, openCompareServer) { //Configurator controller ONLY for the directive configurator you never have to type ng-controller="configuratorController" anywhere
 	
+	//Controller functions
+	$scope.getCell = function(product, feature){
+		//Return the cell from the product corresponding to the feature
+		var cell = false;
+		for(var i=0;i<product.cells.size();i++){
+			if(product.cells.get(i).feature.name == feature.name){
+				cell = product.cells.get(i);
+				break;
+			}
+		}
+		return cell;
+	}
+	
 	$scope.loadPCM = function(pcmID = false){
 		/*
 		load pcm from api
@@ -22,29 +35,14 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 			//Push all features in $scope.features
 			$scope.features = [];
 			for (var i = 0; i < pcm.features.size(); i++) {
-				var feature = pcm.features.get(i);
-				$scope.features.push(feature);
-				console.log(feature.name);
-				console.log(feature);
+				$scope.features.push(pcm.features.get(i));
 			}
 			
-			//TODO I think it would be nice to have an API facility like: p.cells(ftName)
-			$scope.productCells = [];
+			$scope.products = [];
+			$scope.displayedProducts = [];
 			for (var i = 0; i < pcm.products.size(); i++) {
-				var product = pcm.products.get(i);
-				var productCells = product.cells;
-				var cellsProduct = [];
-				for (var j = 0; j < pcm.features.size(); j++) {
-					var feature = pcm.features.get(j);
-					for (var k = 0; k < productCells.size(); k++) {
-						var cell = productCells.get(k);
-						if(cell.feature.name === feature.name) {
-							cellsProduct.push(cell);
-							break;
-						}
-					}
-				}
-				$scope.productCells.push(cellsProduct);
+				$scope.products.push(pcm.products.get(i));
+				$scope.displayedProducts.push(pcm.products.get(i));
 			}
 			
 			/*console.log("PCM metadata :");
