@@ -131,7 +131,7 @@ var app = angular
     // basic example with local files
     $scope.myConfig = {
       serverMode: 'local', // "remote" is the other mode
-      pcmlocation: 'test/foopcm2.json' // example
+      pcmlocation: 'test/foopcm6.json' // example
     };
 
     // example with remote mode
@@ -145,7 +145,7 @@ var app = angular
 
       ////// UNCOMMENT this line if you want to launch a demonstration
       ///// COMMENT it for testing with Karma
-      $scope.launchOCEditor();
+      //$scope.launchOCEditor();
 
 
 
