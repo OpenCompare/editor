@@ -15,6 +15,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 		this.max = false; //Maximum value in all values
 		this.lower = false; //Minimum value which match filter
 		this.upper = false; //Maximum value which match filter
+		this.step = 1; //Step for the slider when feature is a numeric value
 		this.type = "undefined";
 		this.value = "";
 
@@ -70,6 +71,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 			}
 			this.lower = this.min;
 			this.upper = this.max;
+			this.step = 0.1;
 		}else{
 			this.type = "string";
 
@@ -198,7 +200,7 @@ app.directive('ocSlider', function() {
 			feature: "="
 		},
     //    template: '{{feature.name}}<div class="range-slider-display">{{feature.filter.lower}}</div><div style="display:inline-block;width: calc(100% - 100px);"><range-slider lower-value="{{feature.filter.lower}}" upper-value="{{feature.filter.upper}}" min-gap="1" step="1" min="{{feature.filter.min}}" max="{{feature.filter.max}}"></range-slider></div><div class="range-slider-display">{{feature.filter.upper}}</div>'
-				template: '{{feature.name}}<div class="range-slider-display">{{feature.filter.lower}}</div><div style="display:inline-block;width: calc(100% - 100px);"><range-slider lower-value="feature.filter.lower" upper-value="feature.filter.upper" min-gap="1" step="1" min="feature.filter.min" max="feature.filter.max" ></range-slider></div><div class="range-slider-display">{{feature.filter.upper}}</div>'
+				template: '{{feature.name}}<div class="range-slider-display">{{feature.filter.lower}}</div><div style="display:inline-block;width: calc(100% - 100px);"><range-slider lower-value="feature.filter.lower" upper-value="feature.filter.upper" min-gap="1" step="feature.filter.step" min="feature.filter.min" max="feature.filter.max" ></range-slider></div><div class="range-slider-display">{{feature.filter.upper}}</div>'
 
 		};
 });
