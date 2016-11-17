@@ -1,11 +1,11 @@
 //app is the angular module
 app.controller('configuratorController', function($scope, $http, $q, $sce, pcmApi, $timeout, openCompareServer) { //Configurator controller ONLY for the directive configurator you never have to type ng-controller="configuratorController" anywhere
-	
+
 	$scope.metadata = false; //Contains metadata about pcm (license, source)
 	$scope.pcm = false; //Contains the pcm
 	$scope.features = []; //Contains all features of the pcm
 	$scope.products = []; //Contains all products from the pcm
-	
+
 	//Controller objects
 	function Filter(feature, products){
 		this.feature = feature;
@@ -17,18 +17,18 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 		this.upper = false; //Maximum value which match filter
 		this.type = "undefined";
 		this.value = "";
-		
+
 		//Determine type of feature
 		var integer = 0;
 		var float = 0;
 		var string = 0;
 		for(var p=0; p<products.length; p++){
 			var content = $scope.getCell(products[p], feature).content;
-			
+
 			if($.inArray(content, this.values)==-1){
 				this.values.push(content);
 			}
-			
+
 			if(/^\d+$/.test(content)){
 				integer++;
 			}else if(/^\d+\.\d+$/.test(content)){
@@ -37,10 +37,10 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 				string++;
 			}
 		}
-		
+
 		if(float==0 && string==0){
 			this.type = "integer";
-			
+
 			for(var v in this.values){
 				var value = parseInt(this.values[v], 10);
 				if(!this.min && !this.max){
@@ -56,7 +56,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 			this.upper = this.max;
 		}else if(string==0){
 			this.type = "float";
-			
+
 			for(var v in this.values){
 				var value = parseFloat(this.values[v]);
 				if(!this.min && !this.max){
@@ -72,15 +72,15 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 			this.upper = this.max;
 		}else{
 			this.type = "string";
-			
+
 			for(var v in this.values){
 				this.matchValue[this.values[v]] = true;
 			}
 		}
-		
+
 		console.log("typeof "+this.feature.name+" = "+this.type);
 	}
-	
+
 	Filter.prototype.getHTML = function(){
 		var html = "";
 		if(this.type=="string"){
@@ -90,13 +90,13 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 		}
 		return $sce.trustAsHtml(html);
 	}
-	
+
 	Filter.prototype.match = function(cell){
 		return 	this.type=="integer" && parseInt(cell.content, 10)>=this.lower && parseInt(cell.content, 10)<=this.upper ||
 				this.type=="float" && parseFloat(cell.content)>=this.lower && parseFloat(cell.content)<=this.upper ||
 				this.type=="string" && this.matchValue[cell.content];
 	}
-	
+
 	//Controller functions
 	$scope.getCell = function(product, feature){
 		//Return the cell from the product corresponding to the feature
@@ -109,7 +109,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 		}
 		return cell;
 	}
-	
+
 	$scope.loadPCM = function(pcmID){
 		/*
 		load pcm from api
@@ -120,18 +120,18 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 		if(pcmID){
 			$scope.pcmID = pcmID;
 		}
-		
+
 		$http.get("https://opencompare.org/api/get/" + $scope.pcmID).success(function(data) {
 			$scope.metadata = data.metadata; //Get metadata
 			$scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm)); //Load PCM
 			pcmApi.decodePCM($scope.pcm); //Decode the PCM with KMF, require pcmApi
-			
+
 			//Push all products in $scope.products
 			$scope.products = [];
 			for (var i = 0; i < $scope.pcm.products.size(); i++) {
 				$scope.products.push($scope.pcm.products.get(i));
 			}
-			
+
 			//Push all features in $scope.features
 			$scope.features = [];
 			for (var i = 0; i < $scope.pcm.features.size(); i++) {
@@ -139,16 +139,16 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 				feature.filter = new Filter(feature, $scope.products); //filter is used to filter products on this feature
 				$scope.features.push(feature);
 			}
-			
+
 			/*console.log("PCM metadata :");
 			console.log($scope.metadata);
 			console.log("PCM :");
 			console.log($scope.pcm);*/
         });
 	}
-	
+
 	$scope.loadPCM(); //Load the pcm
-	
+
 }).filter("productSearch", function(){
 	//Return products matching filter of each features
 	//products : list of all products
@@ -156,7 +156,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 	//features : list of all features
 	return function(products, getCell, features){
 		var displayedProducts = []; //List of products matching filters
-		
+
 		for(var p=0; p<products.length; p++){
 			var match = true;
 			for(var f=0; f<features.length; f++){
@@ -165,7 +165,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 					break;
 				}
 			}
-			
+
 			if(match){
 				displayedProducts.push(products[p]);
 			}
@@ -197,8 +197,10 @@ app.directive('ocSlider', function() {
         scope: {
 			feature: "="
 		},
-        template: '{{feature.name}}<div class="range-slider-display">{{feature.filter.lower}}</div><div style="display:inline-block;width: calc(100% - 100px);"><range-slider lower-value="{{feature.filter.lower}}" upper-value="{{feature.filter.upper}}" min-gap="1" step="1" min="{{feature.filter.min}}" max="{{feature.filter.max}}" ></range-slider></div><div class="range-slider-display">{{feature.filter.upper}}</div>'
-    };
+    //    template: '{{feature.name}}<div class="range-slider-display">{{feature.filter.lower}}</div><div style="display:inline-block;width: calc(100% - 100px);"><range-slider lower-value="{{feature.filter.lower}}" upper-value="{{feature.filter.upper}}" min-gap="1" step="1" min="{{feature.filter.min}}" max="{{feature.filter.max}}"></range-slider></div><div class="range-slider-display">{{feature.filter.upper}}</div>'
+				template: '{{feature.name}}<div class="range-slider-display">{{feature.filter.lower}}</div><div style="display:inline-block;width: calc(100% - 100px);"><range-slider lower-value="feature.filter.lower" upper-value="feature.filter.upper" min-gap="1" step="1" min="feature.filter.min" max="feature.filter.max" ></range-slider></div><div class="range-slider-display">{{feature.filter.upper}}</div>'
+
+		};
 });
 
 
@@ -206,7 +208,7 @@ app.directive('ocCheckbox', function() {
     return {
 		restrict:"E",
         scope: {
-            feature: "="    
+            feature: "="
         },
         template: '{{feature.name}}<div flex-gt-sm="50" ng-repeat="n in feature.filter.values"><md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="feature.filter.matchValue[n]" class="md-primary">{{n}}</md-checkbox></div>'
     };
