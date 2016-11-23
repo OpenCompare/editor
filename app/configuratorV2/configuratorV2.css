@@ -1,38 +1,121 @@
+/**************************************************************************************************************************************************************************/
 /* configurator */
 .configurator{
 	width: 100%;
+	height: 100%;
 }
 
-/* container */
-.container{
+/**************************************************************************************************************************************************************************/
+/* header */
+.configurator-header{
+	box-sizing: border-box;
 	width: 100%;
+	height: 4.2em;
+	line-height: 1.4em;
+	border-bottom: 1px solid #BDBDBD;
+	background-color: #EEEEEE;
 }
 
-.configuratorPanel, .pcm{
+/**************************************************************************************************************************************************************************/
+/* content */
+.configurator-content{
+	width: 100%;
+	height: calc(100% - 4.2em);
+}
+
+.configurator-panel, .pcm{
 	display: inline-block;
 	vertical-align: top;
 }
 
-.configuratorPanel{
+.configurator-panel{
+	box-sizing: border-box;
 	width: 200px;
 	height: 100%;
+	overflow: auto;
+	border-right: 1px solid #BDBDBD;
+	background-color: #EEEEEE;
 }
 
 .pcm{
 	width: calc(100% - 200px);
-	min-height: 100%;
+	height: 100%;
 	overflow: auto;
 }
 
+/**************************************************************************************************************************************************************************/
 /* Table */
-.configurator table, .configurator th, .configurator td{
-	border: 1px solid black;
+.configurator tr{
+	border-bottom: 1px solid #BDBDBD;
 }
+
+/*.configurator tr:last-child{
+	border-bottom: none;
+}*/
 
 .configurator th, .configurator td{
 	padding: 3px;
+	border-right: 1px solid #BDBDBD;
 }
 
+/*.configurator th:last-child, .configurator td:last-child{
+	border-right: none;
+}*/
+
+.configurator th{
+	font-size: 1.2em;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+/**************************************************************************************************************************************************************************/
+/* Feature directive */
+.feature{
+	border-bottom: 1px solid #BDBDBD;
+}
+
+.feature-button{
+	box-sizing: border-box;
+	width: 100%;
+	padding: 3px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	border: none;
+	text-align: left;
+	font-size: 1.2em;
+	font-weight: 600;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.feature-button:hover{
+	background-color: #F5F5F5;
+}
+
+.feature-arrow{
+	transition: 0.2s;
+	display: inline-block;
+	position: relative;
+	top: -2px;
+	width: 0;
+	height: 0;
+	vertical-align: middle;
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+	border-left: 8px solid black;
+}
+
+.feature-arrow.bottom{
+	transform: rotate(90deg);
+}
+
+.feature-content{
+	box-sizing: border-box;
+	width: 100%;
+	padding: 3px;
+}
+
+/**************************************************************************************************************************************************************************/
 /* Slider */
 .range-slider-left md-slider,
 .range-slider-right md-slider {
@@ -56,12 +139,12 @@
 }
 
 .range-slider-left md-slider .md-track {
-   background-color: #3d4450 
+   background-color: #3d4450
 }
 
 .range-slider-left md-slider .md-track.md-track-fill,
 .range-slider-right md-slider .md-track-container .md-track {
-   background-color: #9e9e9e 
+   background-color: #9e9e9e
 }
 
 .range-slider-right {
@@ -76,7 +159,7 @@
 }
 
 .range-slider-right md-slider .md-track-container .md-track.md-track-fill {
-   background-color: #3d4450 
+   background-color: #3d4450
 }
 
 

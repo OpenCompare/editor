@@ -201,7 +201,7 @@ app.directive('ocSlider', function() {
 			feature: "="
 		},
     //    template: '{{feature.name}}<div class="range-slider-display">{{feature.filter.lower}}</div><div style="display:inline-block;width: calc(100% - 100px);"><range-slider lower-value="{{feature.filter.lower}}" upper-value="{{feature.filter.upper}}" min-gap="1" step="1" min="{{feature.filter.min}}" max="{{feature.filter.max}}"></range-slider></div><div class="range-slider-display">{{feature.filter.upper}}</div>'
-				template: '{{feature.name}}<div class="range-slider-display">{{feature.filter.lower}}</div><div style="display:inline-block;width: calc(100% - 100px);"><range-slider lower-value="feature.filter.lower" upper-value="feature.filter.upper" min-gap="1" step="feature.filter.step" min="feature.filter.min" max="feature.filter.max" ></range-slider></div><div class="range-slider-display">{{feature.filter.upper}}</div>'
+				template: '<div class="range-slider-display">{{feature.filter.lower}}</div><div style="display:inline-block;width: calc(100% - 100px);"><range-slider lower-value="feature.filter.lower" upper-value="feature.filter.upper" min-gap="1" step="feature.filter.step" min="feature.filter.min" max="feature.filter.max" ></range-slider></div><div class="range-slider-display">{{feature.filter.upper}}</div>'
 
 		};
 });
@@ -213,18 +213,37 @@ app.directive('ocCheckbox', function() {
         scope: {
             feature: "="
         },
-        template: '{{feature.name}}<div flex-gt-sm="50" ng-repeat="n in feature.filter.values"><md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="feature.filter.matchValue[n]" class="md-primary">{{n}}</md-checkbox></div>'
+        template: '<div flex-gt-sm="50" ng-repeat="n in feature.filter.values"><md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="feature.filter.matchValue[n]" class="md-primary">{{n}}</md-checkbox></div>'
     };
 });
 
-app.directive('ocButton' ,function() {
+//Feature controller and directive
+app.controller('ocFeatureController', function($scope) {
+	$scope.show = false;
+	$scope.arrow = "feature-arrow";
+	$scope.toggleShow = function(){
+		$scope.show = !$scope.show;
+		if($scope.show){
+			$scope.arrow = "feature-arrow bottom";
+		}else{
+			$scope.arrow = "feature-arrow";
+		}
+	}
+});
+
+app.directive('ocFeature' ,function() {
 	    return {
 			restrict:"E",
-			scope: {	
-				feature: "="    
+			controller: "ocFeatureController",
+			scope: {
+				feature: "="
 			},
-        template: '<md-button class ="md-button-toggle md-button md-ink-ripple" ng-click="{{feature.name}}=!{{feature.name}}" aria-controls="docs-menu-Demos" aria-expanded="false">Vodka</md-button></div></div>'+
-		'<div layout="column" style="padding-left:20px">'+
-     ' <div ng-show="{{feature.name}}"></div></div>'
+      template: '<div class="feature">'+
+				'<button class="feature-button" ng-click="toggleShow()"><div ng-class="arrow"></div> {{feature.name}}</button>'+ //Button to expand content
+				'<div class="feature-content" ng-show="show">'+ //Content
+					'<oc-checkbox feature="feature" ng-if="feature.filter.type==\'string\'"></oc-checkbox>'+ //Checkbox
+					'<oc-slider feature="feature" ng-if="feature.filter.type!=\'string\'"></oc-slider>'+ //Slider
+				'</div>'+ //Close content
+			'</div>' //Close feature
     };
 });
