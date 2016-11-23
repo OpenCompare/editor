@@ -6,7 +6,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 	$scope.features = []; //Contains all features of the pcm
 	$scope.products = []; //Contains all products from the pcm
 
-	//Controller objects
+	//Filter object
 	function Filter(feature, products){
 		this.feature = feature;
 		this.values = [];
@@ -30,16 +30,18 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 				this.values.push(content);
 			}
 
-			if(/^\d+$/.test(content)){
-				integer++;
-			}else if(/^\d+\.\d+$/.test(content)){
-				float++;
-			}else{
-				string++;
+			if(content.length>0){
+				if(/^\d+$/.test(content)){
+					integer++;
+				}else if(/^\d+\.\d+$/.test(content)){
+					float++;
+				}else{
+					string++;
+				}
 			}
 		}
 
-		if(float==0 && string==0){
+		if(integer>0 && float==0 && string==0){
 			this.type = "integer";
 
 			for(var v in this.values){
@@ -55,7 +57,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 			}
 			this.lower = this.min;
 			this.upper = this.max;
-		}else if(string==0){
+		}else if(float>0 && string==0){
 			this.type = "float";
 
 			for(var v in this.values){
@@ -126,7 +128,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 		$http.get("https://opencompare.org/api/get/" + $scope.pcmID).success(function(data) {
 			$scope.metadata = data.metadata; //Get metadata
 			$scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm)); //Load PCM
-			console.log($scope.pcm);
+			console.log(data);
 			pcmApi.decodePCM($scope.pcm); //Decode the PCM with KMF, require pcmApi
 
 			//Push all products in $scope.products
@@ -140,7 +142,11 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 			for (var i = 0; i < $scope.pcm.features.size(); i++) {
 				var feature = $scope.pcm.features.get(i);
 				feature.filter = new Filter(feature, $scope.products); //filter is used to filter products on this feature
-				$scope.features.push(feature);
+				if($scope.pcm.productsKey.generated_KMF_ID == feature.generated_KMF_ID){
+					$scope.features.splice(0, 0, feature);
+				}else{
+					$scope.features.push(feature);
+				}
 			}
 
 			/*console.log("PCM metadata :");
@@ -213,7 +219,7 @@ app.directive('ocCheckbox', function() {
         scope: {
             feature: "="
         },
-        template: '<div flex-gt-sm="50" ng-repeat="n in feature.filter.values"><md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="feature.filter.matchValue[n]" class="md-primary">{{n}}</md-checkbox></div>'
+        template: '<div flex-gt-sm="100" ng-repeat="n in feature.filter.values"><md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="feature.filter.matchValue[n]" class="md-primary">{{n}}</md-checkbox></div>'
     };
 });
 

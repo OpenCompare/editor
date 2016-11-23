@@ -1,9 +1,10 @@
 <!-- Template of the configurator directive -->
 <div class="configurator">
 	<div class="configurator-header">
-		<b>id :</b> {{ pcmID }} <br>
-		<b>license :</b> {{ metadata.license }} <br>
-		<b>source :</b> {{ metadata.source }} <br>
+		<div class="pcm-name">{{ pcm.name }}</div>
+		<div class="pcm-param">Id :</div> {{ pcmID }} <br>
+		<div class="pcm-param">License :</div> {{ metadata.license }} <br>
+		<div class="pcm-param">Source :</div> {{ metadata.source }} <br>
 	</div>
 
 	<div class="configurator-content">
