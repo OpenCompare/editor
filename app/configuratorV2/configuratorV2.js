@@ -126,6 +126,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 		$http.get("https://opencompare.org/api/get/" + $scope.pcmID).success(function(data) {
 			$scope.metadata = data.metadata; //Get metadata
 			$scope.pcm = pcmApi.loadPCMModelFromString(JSON.stringify(data.pcm)); //Load PCM
+			console.log($scope.pcm);
 			pcmApi.decodePCM($scope.pcm); //Decode the PCM with KMF, require pcmApi
 
 			//Push all products in $scope.products
@@ -213,5 +214,17 @@ app.directive('ocCheckbox', function() {
             feature: "="
         },
         template: '{{feature.name}}<div flex-gt-sm="50" ng-repeat="n in feature.filter.values"><md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="feature.filter.matchValue[n]" class="md-primary">{{n}}</md-checkbox></div>'
+    };
+});
+
+app.directive('ocButton' ,function() {
+	    return {
+			restrict:"E",
+			scope: {	
+				feature: "="    
+			},
+        template: '<md-button class ="md-button-toggle md-button md-ink-ripple" ng-click="{{feature.name}}=!{{feature.name}}" aria-controls="docs-menu-Demos" aria-expanded="false">Vodka</md-button></div></div>'+
+		'<div layout="column" style="padding-left:20px">'+
+     ' <div ng-show="{{feature.name}}"></div></div>'
     };
 });

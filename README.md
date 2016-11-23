@@ -16,9 +16,13 @@ On linux just open a terminal
 
 Go in the project directory and run : `npm install`
 
+Install bower : `npm install -g bower`
+
 Run bower : `bower install`
 
-Now grunt : `grunt`
+Install grunt : `npm install -g grunt-cli`
+
+Run grunt : `grunt`
 
 And start it with : `grunt serve`
 
