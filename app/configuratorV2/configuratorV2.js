@@ -226,12 +226,19 @@ app.directive('ocCheckbox', function() {
 //Feature controller and directive
 app.controller('ocFeatureController', function($scope) {
 	$scope.show = false;
+	$scope.contentHeight = 0;
+	$scope.style = {"height": $scope.contentHeight+"px"};
 	$scope.arrow = "feature-arrow";
+
 	$scope.toggleShow = function(){
 		$scope.show = !$scope.show;
 		if($scope.show){
+			$scope.contentHeight = $scope.element[0].querySelector('.feature-content').offsetHeight;
+			$scope.style = {"height": $scope.contentHeight+"px"};
 			$scope.arrow = "feature-arrow bottom";
 		}else{
+			$scope.contentHeight = 0;
+			$scope.style = {"height": $scope.contentHeight+"px"};
 			$scope.arrow = "feature-arrow";
 		}
 	}
@@ -246,10 +253,15 @@ app.directive('ocFeature' ,function() {
 			},
       template: '<div class="feature">'+
 				'<button class="feature-button" ng-click="toggleShow()"><div ng-class="arrow"></div> {{feature.name}}</button>'+ //Button to expand content
-				'<div class="feature-content" ng-show="show">'+ //Content
-					'<oc-checkbox feature="feature" ng-if="feature.filter.type==\'string\'"></oc-checkbox>'+ //Checkbox
-					'<oc-slider feature="feature" ng-if="feature.filter.type!=\'string\'"></oc-slider>'+ //Slider
-				'</div>'+ //Close content
-			'</div>' //Close feature
+				'<div class="feature-content-wrap" ng-style="style">' + //Content wrap
+					'<div class="feature-content">'+ //Content
+						'<oc-checkbox feature="feature" ng-if="feature.filter.type==\'string\'"></oc-checkbox>'+ //Checkbox
+						'<oc-slider feature="feature" ng-if="feature.filter.type!=\'string\'"></oc-slider>'+ //Slider
+					'</div>'+ //Close content
+				'</div>' + //Close content wrap
+			'</div>', //Close feature
+			link: function($scope, element, attrs){
+				$scope.element = element; //To access to the element inside the controller
+			}
     };
 });

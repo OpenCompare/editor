@@ -125,6 +125,12 @@
 	transform: rotate(90deg);
 }
 
+.feature-content-wrap{
+	transition: 0.2s;
+	width: 100%;
+	overflow: hidden;
+}
+
 .feature-content{
 	box-sizing: border-box;
 	width: 100%;
