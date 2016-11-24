@@ -9,15 +9,15 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 	//Filter object
 	function Filter(feature, products){
 		this.feature = feature;
-		this.values = [];
-		this.matchValue = {};
+		this.values = []; //Contains all values for this feature
+		this.matchValue = {}; //For each value associate a boolean that say if the value match the filter
 		this.min = false; //Minimum value in all values
 		this.max = false; //Maximum value in all values
 		this.lower = false; //Minimum value which match filter
 		this.upper = false; //Maximum value which match filter
 		this.step = 1; //Step for the slider when feature is a numeric value
-		this.type = "undefined";
-		this.value = "";
+		this.type = "undefined"; //Type of the values : Integer, Float, String
+		this.value = ""; //Will contain a regexp entered by the user in a search form, TODO
 
 		//Determine type of feature
 		var integer = 0;
@@ -41,7 +41,8 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 			}
 		}
 
-		if(integer>0 && float==0 && string==0){
+		//Determine the type of the feature
+		if(integer>0 && float==0 && string==0){ //Integer
 			this.type = "integer";
 
 			for(var v in this.values){
@@ -57,7 +58,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 			}
 			this.lower = this.min;
 			this.upper = this.max;
-		}else if(float>0 && string==0){
+		}else if(float>0 && string==0){ //Float
 			this.type = "float";
 
 			for(var v in this.values){
@@ -74,8 +75,10 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 			this.lower = this.min;
 			this.upper = this.max;
 			this.step = 0.1;
-		}else{
+		}else{ //Stirng
 			this.type = "string";
+
+			this.values.sort();
 
 			for(var v in this.values){
 				this.matchValue[this.values[v]] = true;
@@ -255,8 +258,9 @@ app.directive('ocFeature' ,function() {
 				'<button class="feature-button" ng-click="toggleShow()"><div ng-class="arrow"></div> {{feature.name}}</button>'+ //Button to expand content
 				'<div class="feature-content-wrap" ng-style="style">' + //Content wrap
 					'<div class="feature-content">'+ //Content
-						'<oc-checkbox feature="feature" ng-if="feature.filter.type==\'string\'"></oc-checkbox>'+ //Checkbox
-						'<oc-slider feature="feature" ng-if="feature.filter.type!=\'string\'"></oc-slider>'+ //Slider
+						'<div ng-if="feature.filter.values.length==1">There is only one value for this feature : {{ feature.filter.values[0] }}</div>'+ //Only one value
+						'<oc-checkbox feature="feature" ng-if="feature.filter.values.length>1 && feature.filter.type==\'string\'"></oc-checkbox>'+ //Checkbox
+						'<oc-slider feature="feature" ng-if="feature.filter.values.length>1 && feature.filter.type!=\'string\'"></oc-slider>'+ //Slider
 					'</div>'+ //Close content
 				'</div>' + //Close content wrap
 			'</div>', //Close feature
