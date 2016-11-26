@@ -189,7 +189,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 			console.log($scope.metadata);
 			console.log("PCM :");
 			console.log($scope.pcm);*/
-        });
+    });
 	}
 
 	$scope.loadPCM(); //Load the pcm
