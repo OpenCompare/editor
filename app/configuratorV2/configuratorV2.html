@@ -7,14 +7,18 @@
 		<div class="pcm-param">Source :</div> {{ metadata.source }} <br>
 	</div>
 
+	<div class="configurator-action-bar">
+		<button class="button" ng-click="configuratorHideShow()"><div ng-class="configuratorArrow"></div> {{ configuratorHideShowMessage }}</button>
+	</div>
+
 	<div class="configurator-content">
-		<div class="configurator-panel">
+		<div class="configurator-panel" ng-style="configuratorStyle">
 			<div ng-repeat="feature in features">
 				<oc-feature feature="feature"></oc-feature>
 			</div>
 		</div><!-- close configuratorPanel
 
-		 --><table class="pcm">
+		--><table class="pcm" ng-style="pcmStyle">
 			<tr>
 				<th ng-repeat="feature in features">{{ feature.name }}</th>
 			</tr>

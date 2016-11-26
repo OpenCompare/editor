@@ -15,8 +15,7 @@
 	padding-right: 3px;
 	line-height: 1.6em;
 	border-bottom: 1px solid #BDBDBD;
-	background-color: #EEEEEE;
-	box-shadow: 0 0 10px #BDBDBD;
+	background-color: white;
 }
 
 .pcm-name{
@@ -33,10 +32,53 @@
 }
 
 /**************************************************************************************************************************************************************************/
+/* action bar */
+.configurator-action-bar{
+	box-sizing: border-box;
+	width: 100%;
+	height: 35px;
+	line-height: 34px;
+	border-bottom: 1px solid #BDBDBD;
+	background-color: #EEEEEE;
+	box-shadow: 0 2px 4px #BDBDBD;
+}
+
+.configurator-action-bar .button{
+	box-sizing: border-box;
+	min-width: 25px;
+	height: 25px;
+	line-height: 23px;
+	padding: 0 3px 0 3px;
+	margin: 5px;
+	border: 1px solid #BDBDBD;
+	border-radius: 2px;
+	background-color: transparent;
+}
+.configurator-action-bar .button:hover{
+	background-color: #E0E0E0;
+}
+
+.configurator-arrow{
+	transition: 0.2s;
+	display: inline-block;
+	position: relative;
+	top: -1px;
+	width: 0;
+	height: 0;
+	vertical-align: middle;
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+	border-right: 8px solid black;
+}
+
+.configurator-arrow.right{
+	transform: rotate(180deg);
+}
+/**************************************************************************************************************************************************************************/
 /* content */
 .configurator-content{
 	width: 100%;
-	height: calc(100% - 7.8em); /* 100% - configurator-header height */
+	height: calc(100% - 7.8em - 35px); /* 100% - configurator-header.height - configurator-action-bar.height */
 }
 
 .configurator-panel, .pcm{
@@ -45,19 +87,29 @@
 }
 
 .configurator-panel{
+	transition: 0.2s;
 	box-sizing: border-box;
-	width: 200px;
+	/*width: 200px;*/
 	height: 100%;
 	overflow: auto;
 	border-right: 1px solid #BDBDBD;
 	background-color: #EEEEEE;
 }
 
+/*.configurator-panel.hidden{
+	width: 0;
+}*/
+
 .pcm{
-	width: calc(100% - 200px);
+	transition: 0.2s;
+	/*width: calc(100% - 200px);*/
 	height: 100%;
 	overflow: auto;
 }
+
+/*.pcm.full-width{
+	width: 100%;
+}*/
 
 /**************************************************************************************************************************************************************************/
 /* Table */

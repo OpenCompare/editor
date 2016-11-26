@@ -1,11 +1,21 @@
 //app is the angular module
 app.controller('configuratorController', function($scope, $http, $q, $sce, pcmApi, $timeout, openCompareServer) { //Configurator controller ONLY for the directive configurator you never have to type ng-controller="configuratorController" anywhere
 
+	//UI var
+	$scope.configuratorStyle = {"width": "200px"};
+	$scope.pcmStyle = {"width": "calc(100% - 200px)"};
+
+	$scope.configuratorShow = true;
+	$scope.configuratorArrow = "configurator-arrow"; //Class of the arrow on the hide/show configurator button
+	$scope.configuratorHideShowMessage = "Hide configurator"; //Display the actionof the hide/show configurator button
+
+	//datas
 	$scope.metadata = false; //Contains metadata about pcm (license, source)
 	$scope.pcm = false; //Contains the pcm
 	$scope.features = []; //Contains all features of the pcm
 	$scope.products = []; //Contains all products from the pcm
 
+	//********************************************************************************************************************************************************************
 	//Filter object
 	function Filter(feature, products){
 		this.feature = feature;
@@ -104,7 +114,28 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 				this.type=="string" && this.matchValue[cell.content];
 	}
 
-	//Controller functions
+	//********************************************************************************************************************************************************************
+	//UI functions
+	$scope.configuratorHideShow = function(){
+		// hide or show the cofigurator
+		$scope.configuratorShow = !$scope.configuratorShow;
+
+		if($scope.configuratorShow){
+			$scope.configuratorStyle = {"width": "200px"};
+			$scope.pcmStyle = {"width": "calc(100% - 200px)"};
+			$scope.configuratorArrow = "configurator-arrow";
+			$scope.configuratorHideShowMessage = "Hide configurator";
+		}else{
+			$scope.configuratorStyle = {"width": "0", "border-width": "0"};
+			$scope.pcmStyle = {"width": "100%"};
+			$scope.configuratorArrow = "configurator-arrow right";
+			$scope.configuratorHideShowMessage = "Show configurator";
+		}
+
+	}
+
+	//********************************************************************************************************************************************************************
+	//PCM functions
 	$scope.getCell = function(product, feature){
 		//Return the cell from the product corresponding to the feature
 		var cell = false;
@@ -202,6 +233,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 	};
 });
 
+//********************************************************************************************************************************************************************
 //Directives to select products to match
 app.directive('ocSlider', function() {
     return {
@@ -226,6 +258,7 @@ app.directive('ocCheckbox', function() {
     };
 });
 
+//********************************************************************************************************************************************************************
 //Feature controller and directive
 app.controller('ocFeatureController', function($scope) {
 	$scope.show = false;
@@ -258,7 +291,7 @@ app.directive('ocFeature' ,function() {
 				'<button class="feature-button" ng-click="toggleShow()"><div ng-class="arrow"></div> {{feature.name}}</button>'+ //Button to expand content
 				'<div class="feature-content-wrap" ng-style="style">' + //Content wrap
 					'<div class="feature-content">'+ //Content
-						'<div ng-if="feature.filter.values.length==1">There is only one value for this feature : {{ feature.filter.values[0] }}</div>'+ //Only one value
+						'<div ng-if="feature.filter.values.length==1">{{ feature.filter.values[0] }}</div>'+ //Only one value
 						'<oc-checkbox feature="feature" ng-if="feature.filter.values.length>1 && feature.filter.type==\'string\'"></oc-checkbox>'+ //Checkbox
 						'<oc-slider feature="feature" ng-if="feature.filter.values.length>1 && feature.filter.type!=\'string\'"></oc-slider>'+ //Slider
 					'</div>'+ //Close content
