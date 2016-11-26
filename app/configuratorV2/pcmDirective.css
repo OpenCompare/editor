@@ -1,0 +1,40 @@
+.pcm{
+  white-space: nowrap;
+}
+
+.pcm-column{
+  display: inline-block;
+}
+
+.integer, .float{
+  text-align: right;
+}
+
+.pcm-column-header, .pcm-cell{
+  box-sizing: border-box;
+  width: 100%;
+  border-bottom: 1px solid #BDBDBD;
+  padding: 0 12px 0 12px;
+}
+
+.pcm-column:first-child .pcm-column-header, .pcm-column:first-child .pcm-cell{
+  padding-left: 24px;
+}
+
+.pcm-column:last-child .pcm-column-header, .pcm-column:last-child .pcm-cell{
+  padding-right: 24px;
+}
+
+.pcm-column-header{
+  height: 56px;
+  line-height: 56px;
+  font-size: 1em;
+  color: #9E9E9E;
+}
+
+.pcm-cell{
+  height: 48px;
+  line-height: 48px;
+  font-size: 1.1em;
+  color: #212121;
+}

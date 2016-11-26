@@ -1,0 +1,6 @@
+<div class="pcm">
+  <div class="pcm-column" ng-repeat="feature in features" ng-class="feature.filter.type">
+    <div class="pcm-column-header">{{ feature.name }}</div>
+    <div class="pcm-cell" ng-repeat="product in products | productSearch:features">{{ product.getCell(feature).content }}</div>
+  </div>
+</div>

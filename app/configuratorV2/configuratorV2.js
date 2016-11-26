@@ -3,7 +3,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 
 	//UI var
 	$scope.configuratorStyle = {"width": "200px"};
-	$scope.pcmStyle = {"width": "calc(100% - 200px)"};
+	$scope.pcmWrapStyle = {"width": "calc(100% - 200px)"};
 
 	$scope.configuratorShow = true;
 	$scope.configuratorArrow = "configurator-arrow"; //Class of the arrow on the hide/show configurator button
@@ -34,7 +34,7 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 		var float = 0;
 		var string = 0;
 		for(var p=0; p<products.length; p++){
-			var content = $scope.getCell(products[p], feature).content;
+			var content = products[p].getCell(feature).content;
 
 			if($.inArray(content, this.values)==-1){
 				this.values.push(content);
@@ -122,12 +122,12 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 
 		if($scope.configuratorShow){
 			$scope.configuratorStyle = {"width": "200px"};
-			$scope.pcmStyle = {"width": "calc(100% - 200px)"};
+			$scope.pcmWrapStyle = {"width": "calc(100% - 200px)"};
 			$scope.configuratorArrow = "configurator-arrow";
 			$scope.configuratorHideShowMessage = "Hide configurator";
 		}else{
 			$scope.configuratorStyle = {"width": "0", "border-width": "0"};
-			$scope.pcmStyle = {"width": "100%"};
+			$scope.pcmWrapStyle = {"width": "100%"};
 			$scope.configuratorArrow = "configurator-arrow right";
 			$scope.configuratorHideShowMessage = "Show configurator";
 		}
@@ -136,18 +136,6 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 
 	//********************************************************************************************************************************************************************
 	//PCM functions
-	$scope.getCell = function(product, feature){
-		//Return the cell from the product corresponding to the feature
-		var cell = false;
-		for(var i=0;i<product.cells.size();i++){
-			if(product.cells.get(i).feature.name == feature.name){
-				cell = product.cells.get(i);
-				break;
-			}
-		}
-		return cell;
-	}
-
 	$scope.loadPCM = function(pcmID){
 		/*
 		load pcm from api
@@ -168,7 +156,21 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 			//Push all products in $scope.products
 			$scope.products = [];
 			for (var i = 0; i < $scope.pcm.products.size(); i++) {
-				$scope.products.push($scope.pcm.products.get(i));
+				var product = $scope.pcm.products.get(i);
+
+				product.getCell = function(feature){
+					//Return the cell corresponding to the feature
+					var cell = false;
+					for(var i=0;i<this.cells.size();i++){
+						if(this.cells.get(i).feature.name == feature.name){
+							cell = this.cells.get(i);
+							break;
+						}
+					}
+					return cell;
+				}
+
+				$scope.products.push(product);
 			}
 
 			//Push all features in $scope.features
@@ -195,15 +197,14 @@ app.controller('configuratorController', function($scope, $http, $q, $sce, pcmAp
 }).filter("productSearch", function(){
 	//Return products matching filter of each features
 	//products : list of all products
-	//getCell : function from configuratorController
 	//features : list of all features
-	return function(products, getCell, features){
+	return function(products, features){
 		var displayedProducts = []; //List of products matching filters
 
 		for(var p=0; p<products.length; p++){
 			var match = true;
 			for(var f=0; f<features.length; f++){
-				if(features[f].filter.match(getCell(products[p], features[f]))==false){
+				if(features[f].filter.match(products[p].getCell(features[f]))==false){
 					match = false; //If the product doesn't match the filter of one of the feature it isn't added to displayedProducts
 					break;
 				}
