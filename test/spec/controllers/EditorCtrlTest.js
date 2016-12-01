@@ -21,7 +21,7 @@ describe('Controller: EditorCtrl', function () {
 
   it('works for foopcm1', inject(function ($rootScope, $httpBackend, $timeout) {
 
-    var pcmFileLocation = 'test/foopcm5.json';
+    var pcmFileLocation = 'test/Comparison_of_programming_languages_0.json'; // 'test/foopcm5.json';
     var scope = {}; //$rootScope.$new();
 
     $httpBackend.whenGET("" + pcmFileLocation).respond(readJSON('app/' + pcmFileLocation));
